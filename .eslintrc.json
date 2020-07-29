@@ -17,6 +17,7 @@
     "no-unused-vars": "off",
     "global-require": "off",
     "arrow-parens": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off"
   }
 }

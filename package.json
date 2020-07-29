@@ -13,6 +13,7 @@
   "author": "Sandeep Raveesh",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.722.0",
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
     "evergreen-ui": "^4.29.1",

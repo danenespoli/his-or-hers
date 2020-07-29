@@ -1,18 +1,36 @@
 const express = require('express');
 const http = require('http');
+const AWS = require('aws-sdk');
 const webSocketMount = require('./WebSocketMount');
 
 const webServer = {
   enableRoutes(app) {
     app.use(express.static('dist'));
 
-    app.get('/api/getUsername', (req, res) => {
-      res.send({ username: '12345' });
+    app.get('/api/gameState', (req, res) => {
+      const state = webSocketMount.getGameState();
+      res.send(state);
     });
 
     app.post('/api/startGame', (req, res) => {
       webSocketMount.startGame();
       res.status(200);
+    });
+
+    app.post('/api/endGame', (req, res) => {
+      webSocketMount.endGame();
+      res.status(200);
+    });
+
+    app.post('/api/editQuestion', async (req, res) => {
+      const s3 = new AWS.S3();
+      const data = await s3.getObject({
+        Bucket: 'his-or-hers',
+        Key: 'questions.json',
+      }).promise();
+      const questions = JSON.parse(data.Body);
+
+      console.log(questions);
     });
   },
 

@@ -1,8 +1,14 @@
 let io;
 
-// Globals
-let question = 0;
-let timer;
+const MAX_TIME = 30;
+
+const gameState = {
+  started: false,
+  question: 0,
+  time: MAX_TIME,
+};
+let timer = null;
+
 
 const webSocketMount = {
   enableWebSockets(httpServer) {
@@ -29,31 +35,49 @@ const webSocketMount = {
   startGame() {
     console.log('Starting game!');
 
-    if (timer) {
-      clearInterval(timer);
-    }
+    this._resetGame();
+    gameState.started = true;
 
-    this.sendQuestion();
+    this.sendNextQuestion();
   },
 
-  sendQuestion() {
+  sendNextQuestion() {
     // Send first question!
     io.emit('question', 'This is the first question!');
 
     // Count down from 30!
-    let time = 30;
     timer = setInterval(() => {
-      io.emit('timer', time);
-      time--;
+      io.emit('timer', gameState.time);
+      gameState.time--;
 
-      if (time <= 0) {
+      if (gameState.time === 0) {
         clearInterval(timer);
       }
     }, 1000);
 
     // Send answer for question.
     io.emit('answer', 'his');
-  }
+  },
+
+  getGameState() {
+    return gameState;
+  },
+
+  endGame() {
+    console.log('Ending game!');
+
+    this._resetGame();
+  },
+
+  _resetGame() {
+    if (timer) {
+      clearInterval(timer);
+    }
+    gameState.question = 0;
+    gameState.started = false;
+    gameState.time = MAX_TIME;
+    timer = null;
+  },
 };
 
 module.exports = webSocketMount;
