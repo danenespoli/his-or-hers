@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './app.css';
+import './dashboard.css';
 
 export default class Home extends Component {
   state = { username: null };
