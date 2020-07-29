@@ -10,23 +10,24 @@ export default class Home extends Component {
 
   submitName() {
     const { name } = this.state;
-    const errorMsg = this.isValidName();
+    const errorMsg = this.validateName();
     this.setState({
       errorMsg,
     });
 
-    if (errorMsg !== null) {
+    if (errorMsg === null) {
       this.setState({
         errorMsg: null,
       });
+
       // TODO: send message over websocket.
       console.log(`Sending name: ${name}`);
     }
   }
 
-  isValidName() {
+  validateName() {
     const { name } = this.state;
-    if (name === '' || /\s*/.test(name)) {
+    if (name === '' || /^\s*$/.test(name)) {
       return 'Name cannot be empty!';
     }
     if (!/^[a-zA-Z0-9\s]*$/.test(name)) {
@@ -47,7 +48,9 @@ export default class Home extends Component {
             placeholder="Enter your name..."
             onChange={e => this.setState({ name: e.target.value })}
           />
-          <Button onChange={() => this.submitName()}>Play!</Button>
+          <Button onClick={() => this.submitName()}>
+            Play!
+          </Button>
         </div>
         <div className="home-error">
           {errorMsg}
