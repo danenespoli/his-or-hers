@@ -1,9 +1,27 @@
 const express = require('express');
+const http = require('http');
+const webSocketMount = require('./WebSocketMount');
 
-const app = express();
+const webServer = {
+  enableRoutes(app) {
+    app.use(express.static('dist'));
+    app.get('/api/getUsername', (req, res) => res.send({ username: '12345' }));
+  },
 
-app.use(express.static('dist'));
+  enableWebSockets(httpServer) {
+    webSocketMount.enableWebSockets(httpServer);
+  },
 
-app.get('/api/getUsername', (req, res) => res.send({ username: '12345' }));
+  startWebServer(PORT_NUMBER = process.env.PORT || 8080) {
+    const app = express();
+    const httpServer = http.Server(app);
 
-app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+    this.enableRoutes(app);
+    this.enableWebSockets(httpServer);
+
+    httpServer.listen(PORT_NUMBER);
+    console.log(`Web server started on port ${PORT_NUMBER}`);
+  },
+};
+
+webServer.startWebServer();

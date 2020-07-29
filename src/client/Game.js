@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './home.css';
 import { Button } from 'evergreen-ui';
+import socket from './socket';
 
-export default class Home extends Component {
+export default class Game extends Component {
   state = {
     question: 'There is currently no question!',
     timeLeft: 30,
