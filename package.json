@@ -13,11 +13,13 @@
   "author": "Sandeep Raveesh",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
     "evergreen-ui": "^4.29.1",
     "express": "^4.16.3",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
