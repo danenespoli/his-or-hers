@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './dashboard.css';
 
-export default class Home extends Component {
+export default class Dashboard extends Component {
   state = { username: null };
 
   render() {
