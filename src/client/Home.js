@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './home.css';
 import { TextInput, Button } from 'evergreen-ui';
+import { withRouter } from 'react-router-dom';
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     name: '',
     errorMsg: null,
@@ -22,6 +23,9 @@ export default class Home extends Component {
 
       // TODO: send message over websocket.
       console.log(`Sending name: ${name}`);
+
+      const { history } = this.props;
+      history.push('/game');
     }
   }
 
@@ -59,3 +63,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default withRouter(Home);

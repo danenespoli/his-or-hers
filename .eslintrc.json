@@ -8,6 +8,11 @@
   "rules": {
     "no-console": "off",
     "comma-dangle": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+
+    // My own additions.
+    "react/jsx-one-expression-per-line": "off",
+    "class-methods-use-this": "off",
+    "react/prop-types": "off"
   }
 }

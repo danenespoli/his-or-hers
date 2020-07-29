@@ -21,8 +21,7 @@ export default class Home extends Component {
           {question}
         </div>
         <div>
-          Time left:
-          {timeLeft}
+          Time left: {timeLeft}
         </div>
         <div>
           <Button onClick={() => this.submitGuess('his')}>

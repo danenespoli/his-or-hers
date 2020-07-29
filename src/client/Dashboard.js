@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import './dashboard.css';
+import { Button } from 'evergreen-ui';
 
 export default class Dashboard extends Component {
-  state = { username: null };
+  state = { };
+
+  startGame() {
+    // TODO: start game with API call.
+  }
 
   render() {
-    const { username } = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
+        <Button onClick={this.startGame}>
+          Start Game!
+        </Button>
       </div>
     );
   }

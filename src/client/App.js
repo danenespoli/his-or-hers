@@ -8,6 +8,7 @@ import './app.css';
 
 import Home from './Home';
 import Dashboard from './Dashboard';
+import Game from './Game';
 
 export default function App() {
   return (
@@ -15,6 +16,9 @@ export default function App() {
       <Switch>
         <Route path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route path="/game">
+          <Game />
         </Route>
         <Route path="/">
           <Home />
