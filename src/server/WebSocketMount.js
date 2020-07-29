@@ -1,5 +1,8 @@
 let io;
+
+// Globals
 let question = 0;
+let timer;
 
 const webSocketMount = {
   enableWebSockets(httpServer) {
@@ -26,6 +29,10 @@ const webSocketMount = {
   startGame() {
     console.log('Starting game!');
 
+    if (timer) {
+      clearInterval(timer);
+    }
+
     this.sendQuestion();
   },
 
@@ -35,7 +42,7 @@ const webSocketMount = {
 
     // Count down from 30!
     let time = 30;
-    const timer = setInterval(() => {
+    timer = setInterval(() => {
       io.emit('timer', time);
       time--;
 
