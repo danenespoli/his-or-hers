@@ -5,9 +5,20 @@ import socket from './socket';
 
 export default class Game extends Component {
   state = {
-    question: 'There is currently no question!',
+    question: null,
     timeLeft: 30,
   };
+
+  constructor() {
+    super();
+
+    socket.on('question', ({ question }) => {
+      console.log(question);
+      this.setState({
+        question,
+      });
+    });
+  }
 
   submitGuess(guess) {
     console.log(guess);
@@ -15,6 +26,16 @@ export default class Game extends Component {
 
   render() {
     const { question, timeLeft } = this.state;
+
+    if (question === null) {
+      return (
+        <div>
+          <div>
+            Waiting for the game to start...
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div>

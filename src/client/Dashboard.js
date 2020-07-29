@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './dashboard.css';
 import { Button } from 'evergreen-ui';
+import axios from 'axios';
 
 export default class Dashboard extends Component {
   state = { };
 
   startGame() {
-    // TODO: start game with API call.
+    console.log('POST /api/startGame');
+    axios.post('/api/startGame');
   }
 
   render() {

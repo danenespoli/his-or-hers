@@ -1,6 +1,9 @@
+let io;
+let question = 0;
+
 const webSocketMount = {
   enableWebSockets(httpServer) {
-    const io = require('socket.io')(httpServer);
+    io = require('socket.io')(httpServer);
 
     io.on('connection', socket => {
       console.log('User connected!');
@@ -15,6 +18,18 @@ const webSocketMount = {
       });
     });
   },
+
+  /*
+    All subsequent functions assume enableWebSockets has been called.
+  */
+
+  startGame() {
+    console.log('Starting game!');
+
+    io.emit('question', {
+      question: 'This is the first question!',
+    });
+  }
 };
 
 module.exports = webSocketMount;

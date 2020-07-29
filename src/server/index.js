@@ -5,7 +5,15 @@ const webSocketMount = require('./WebSocketMount');
 const webServer = {
   enableRoutes(app) {
     app.use(express.static('dist'));
-    app.get('/api/getUsername', (req, res) => res.send({ username: '12345' }));
+
+    app.get('/api/getUsername', (req, res) => {
+      res.send({ username: '12345' });
+    });
+
+    app.post('/api/startGame', (req, res) => {
+      webSocketMount.startGame();
+      res.status(200);
+    });
   },
 
   enableWebSockets(httpServer) {
