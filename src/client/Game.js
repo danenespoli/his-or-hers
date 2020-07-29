@@ -6,16 +6,24 @@ import socket from './socket';
 export default class Game extends Component {
   state = {
     question: null,
-    timeLeft: 30,
+    answer: null,
+    time: 30,
   };
 
   constructor() {
     super();
 
-    socket.on('question', ({ question }) => {
+    socket.on('question', (question) => {
       console.log(question);
       this.setState({
         question,
+      });
+    });
+
+    socket.on('timer', (time) => {
+      console.log(time);
+      this.setState({
+        time,
       });
     });
   }
@@ -25,8 +33,9 @@ export default class Game extends Component {
   }
 
   render() {
-    const { question, timeLeft } = this.state;
+    const { question, answer, time } = this.state;
 
+    // Waiting to start game.
     if (question === null) {
       return (
         <div>
@@ -37,23 +46,31 @@ export default class Game extends Component {
       );
     }
 
+    // User must now answer question!
+    if (answer === null) {
+      return (
+        <div>
+          <div>
+            {question}
+          </div>
+          <div>
+            Time left: {time}
+          </div>
+          <div>
+            <Button onClick={() => this.submitGuess('his')}>
+              His
+            </Button>
+            <Button onClick={() => this.submitGuess('hers')}>
+              Hers
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
+    // Display results with answer.
     return (
-      <div>
-        <div>
-          {question}
-        </div>
-        <div>
-          Time left: {timeLeft}
-        </div>
-        <div>
-          <Button onClick={() => this.submitGuess('his')}>
-            His
-          </Button>
-          <Button onClick={() => this.submitGuess('hers')}>
-            Hers
-          </Button>
-        </div>
-      </div>
+      <div></div>
     );
   }
 }

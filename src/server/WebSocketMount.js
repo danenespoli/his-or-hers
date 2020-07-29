@@ -26,9 +26,26 @@ const webSocketMount = {
   startGame() {
     console.log('Starting game!');
 
-    io.emit('question', {
-      question: 'This is the first question!',
-    });
+    this.sendQuestion();
+  },
+
+  sendQuestion() {
+    // Send first question!
+    io.emit('question', 'This is the first question!');
+
+    // Count down from 30!
+    let time = 30;
+    const timer = setInterval(() => {
+      io.emit('timer', time);
+      time--;
+
+      if (time <= 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    // Send answer for question.
+    io.emit('answer', 'his');
   }
 };
 
