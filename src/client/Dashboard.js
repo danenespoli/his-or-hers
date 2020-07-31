@@ -4,32 +4,12 @@ import { Button } from 'evergreen-ui';
 import axios from 'axios';
 
 export default class Dashboard extends Component {
-  state = {
-    gameState: null,
-  };
-
-  constructor() {
-    super();
-    this.updateGameState();
-  }
-
-  updateGameState() {
-    axios.get('/api/gameState').then(({ data }) => {
-      console.log(data);
-      this.setState({
-        gameState: data,
-      });
-    });
-  }
-
   startGame() {
     axios.post('/api/startGame');
-    this.updateGameState();
   }
 
   endGame() {
     axios.post('/api/endGame');
-    this.updateGameState();
   }
 
   editQuestion(index, newQuestion, newAnswer) {
@@ -37,14 +17,9 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { gameState } = this.state;
-    if (gameState === null) {
-      return (
-        <div>Loading...</div>
-      );
-    }
+    const { started } = this.props;
 
-    if (gameState.started) {
+    if (started) {
       return (
         <div>
           <Button onClick={() => this.endGame()}>

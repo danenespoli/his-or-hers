@@ -13,7 +13,6 @@ const gameState = {
 };
 let timer = null;
 let players = {};
-let scores = {};
 
 const webSocketMount = {
   enableWebSockets(httpServer) {
@@ -42,17 +41,18 @@ const webSocketMount = {
   */
 
   addPlayer(id, name) {
-    players[id] = name;
-    scores[id] = 0;
+    players[id] = {
+      name,
+      score: 0,
+    };
 
-    console.log(players, scores);
+    console.log(players);
   },
 
   removePlayer(id) {
     delete players[id];
-    delete scores[id];
 
-    console.log(players, scores);
+    console.log(players);
   },
 
   startGame() {
@@ -69,9 +69,9 @@ const webSocketMount = {
     io.emit('question', 'This is the first question!');
 
     // Count down from 30!
+    io.emit('timer', --gameState.time);
     timer = setInterval(() => {
-      io.emit('timer', gameState.time);
-      gameState.time--;
+      io.emit('timer', --gameState.time);
 
       if (gameState.time === 0) {
         clearInterval(timer);
@@ -88,6 +88,7 @@ const webSocketMount = {
 
   endGame() {
     console.log('Ending game!');
+    io.emit('end-game');
 
     this._resetGame();
   },
@@ -102,7 +103,6 @@ const webSocketMount = {
     }
     timer = null;
     players = {};
-    scores = {};
   },
 };
 

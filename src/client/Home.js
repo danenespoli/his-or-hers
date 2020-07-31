@@ -25,11 +25,10 @@ class Home extends Component {
       errorMsg: null,
     });
 
-
-    // TODO: send message over websocket.
     console.log(`Joining with name: ${name}`);
     joinGame(name);
 
+    // Go to game page.
     const { history } = this.props;
     history.push('/game');
   }

@@ -8,15 +8,27 @@ export default class Game extends Component {
   }
 
   render() {
-    const { question, answer, time } = this.state;
+    const {
+      joined,
+      question,
+      answer,
+      time
+    } = this.props;
+
+    // Failed to join.
+    if (!joined) {
+      return (
+        <div>
+          Failed to join :( try again.
+        </div>
+      );
+    }
 
     // Waiting to start game.
     if (question === null) {
       return (
         <div>
-          <div>
-            Waiting for the game to start...
-          </div>
+          Waiting for the game to start...
         </div>
       );
     }

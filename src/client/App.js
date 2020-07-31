@@ -15,10 +15,10 @@ const socket = require('socket.io-client')(process.env.WEBSOCKET_URL || 'localho
 
 export default class App extends Component {
   state = {
+    joined: false,
     question: null,
     answer: null,
     time: 30,
-    joined: false,
   };
 
   constructor() {
@@ -44,6 +44,17 @@ export default class App extends Component {
         time,
       });
     });
+
+    socket.on('end-game', () => {
+      console.log('Ending game!');
+      // Reset to initial state.
+      this.setState({
+        joined: false,
+        question: null,
+        answer: null,
+        time: 30,
+      });
+    });
   }
 
   joinGame(name) {
@@ -52,10 +63,10 @@ export default class App extends Component {
 
   render() {
     const {
+      joined,
       question,
       answer,
       time,
-      joined,
     } = this.state;
 
     return (
@@ -70,17 +81,14 @@ export default class App extends Component {
           </Route>
           <Route path="/game">
             <Game
+              joined={joined}
               question={question}
               answer={answer}
               time={time}
-              joined={joined}
             />
           </Route>
           <Route path="/">
             <Home
-              question={question}
-              answer={answer}
-              time={time}
               joinGame={(name) => this.joinGame(name)}
             />
           </Route>
