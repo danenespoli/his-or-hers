@@ -33,6 +33,10 @@ const webSocketMount = {
         }
       });
 
+      socket.on('guess', guess => {
+        this.acceptGuess(socket.id, guess);
+      });
+
       socket.on('disconnect', () => {
         console.log('User disconnected');
         this.removePlayer(socket.id);
@@ -95,6 +99,7 @@ const webSocketMount = {
     }
 
     console.log(`${players[id].name} guessed ${guess}!`);
+    // const question = questionData[gameState.question];
   },
 
   getGameState() {
@@ -113,8 +118,8 @@ const webSocketMount = {
       Bucket: 'his-or-hers',
       Key: 'questions.json',
     }).promise().then(data => {
-      console.log(data);
       questionData = JSON.parse(data.Body);
+      console.log(questionData);
     });
   },
 

@@ -5,6 +5,8 @@ import { Button } from 'evergreen-ui';
 export default class Game extends Component {
   submitGuess(guess) {
     console.log(guess);
+    const { makeGuess } = this.props;
+    makeGuess(guess);
   }
 
   render() {

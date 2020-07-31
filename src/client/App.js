@@ -61,6 +61,10 @@ export default class App extends Component {
     socket.emit('join', name);
   }
 
+  makeGuess(guess) {
+    socket.emit('guess', guess);
+  }
+
   render() {
     const {
       joined,
@@ -85,6 +89,7 @@ export default class App extends Component {
               question={question}
               answer={answer}
               time={time}
+              makeGuess={(guess) => this.makeGuess(guess)}
             />
           </Route>
           <Route path="/">
