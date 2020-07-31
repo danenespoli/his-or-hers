@@ -77,6 +77,11 @@ const gameManager = {
     this._sendQuestion();
   },
 
+  // This function handles the whole question flow.
+  // It does the following:
+  //    - Sends a question
+  //    - Counts down the timer
+  //    - Sends the answer after the timer expires
   _sendQuestion() {
     const q = questionData[gameState.question];
 
