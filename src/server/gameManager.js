@@ -151,7 +151,7 @@ const gameManager = {
       Bucket: 'his-or-hers',
       Key: 'questions.json',
       ContentType: 'application/json',
-      Body: body,
+      Body: JSON.stringify(body),
     }).promise();
     questionData = body;
     console.log(questionData);

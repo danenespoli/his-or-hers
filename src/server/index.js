@@ -30,8 +30,9 @@ const webServer = {
     });
 
     app.post('/api/questionData', async (req, res) => {
-      console.log(req.body);
-      // await gameManager.updateQuestionData(body);
+      const { body } = req;
+      console.log(body);
+      await gameManager.updateQuestionData(body);
       res.status(200);
     });
 

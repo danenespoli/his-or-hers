@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './dashboard.css';
-import { Button } from 'evergreen-ui';
+import { Button, TextInput, Select } from 'evergreen-ui';
 import axios from 'axios';
 
 export default class Dashboard extends Component {
@@ -21,13 +21,42 @@ export default class Dashboard extends Component {
     axios.post('/api/endGame');
   }
 
-  editQuestions(index, newQuestion, newAnswer) {
-    axios.post('/api/questionData', [
-      {
-        question: 'Who did blah blah first?',
-        answer: 'hers',
-      },
-    ]);
+  editQuestion(index, question, answer) {
+    const { questionData } = this.state;
+    questionData[index] = {
+      question,
+      answer,
+    };
+
+    this.setState({
+      questionData,
+    });
+  }
+
+  removeQuestion(index) {
+    const { questionData } = this.state;
+    questionData.splice(index, 1);
+
+    this.setState({
+      questionData,
+    });
+  }
+
+  addQuestion() {
+    const { questionData } = this.state;
+    questionData.push({
+      question: '',
+      answer: 'his',
+    });
+
+    this.setState({
+      questionData,
+    });
+  }
+
+  saveQuestions() {
+    const { questionData } = this.state;
+    axios.post('/api/questionData', questionData);
   }
 
   fetchQuestionData() {
@@ -70,9 +99,22 @@ export default class Dashboard extends Component {
         </div>
       );
     } else {
-      questionRows = questionData.map(q => (
+      questionRows = questionData.map((q, index) => (
         <div>
-          {q.question} {q.answer}
+          <TextInput
+            value={q.question}
+            onChange={e => this.editQuestion(index, e.target.value, q.answer)}
+          />
+          <Select
+            value={q.answer}
+            onChange={e => this.editQuestion(index, q.question, e.target.value)}
+          >
+            <option value="his">Dustin</option>
+            <option value="hers">Steph</option>
+          </Select>
+          <Button onClick={() => this.removeQuestion(index)}>
+            Remove
+          </Button>
         </div>
       ));
     }
@@ -82,7 +124,22 @@ export default class Dashboard extends Component {
         <Button onClick={() => this.setState({ editQuestionMode: false })}>
           Back
         </Button>
-        {questionRows}
+        <div>
+          {questionRows}
+        </div>
+        <div>
+        <Button onClick={() => this.addQuestion()}>
+            Add question
+          </Button>
+        </div>
+        <div>
+          <Button onClick={() => this.fetchQuestionData()}>
+            Cancel
+          </Button>
+          <Button onClick={() => this.saveQuestions()}>
+            Save
+          </Button>
+        </div>
       </div>
     );
   }
