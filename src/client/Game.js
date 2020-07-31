@@ -59,7 +59,7 @@ export default class Game extends Component {
 
     // Display results with answer.
     return (
-      <div></div>
+      <div>Answer is: {answer}</div>
     );
   }
 }

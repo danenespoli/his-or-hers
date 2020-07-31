@@ -17,6 +17,11 @@ const webServer = {
       res.status(200);
     });
 
+    app.post('/api/nextQuestion', (req, res) => {
+      webSocketMount.nextQuestion();
+      res.status(200);
+    });
+
     app.post('/api/endGame', (req, res) => {
       webSocketMount.endGame();
       res.status(200);

@@ -8,12 +8,16 @@ export default class Dashboard extends Component {
     axios.post('/api/startGame');
   }
 
+  nextQuestion() {
+    axios.post('/api/nextQuestion');
+  }
+
   endGame() {
     axios.post('/api/endGame');
   }
 
   editQuestions(index, newQuestion, newAnswer) {
-    
+
   }
 
   render() {
@@ -25,6 +29,9 @@ export default class Dashboard extends Component {
         <div>
           <Button onClick={() => this.endGame()}>
             End Game
+          </Button>
+          <Button onClick={() => this.nextQuestion()}>
+            Next Question
           </Button>
         </div>
       );

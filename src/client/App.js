@@ -35,6 +35,14 @@ export default class App extends Component {
       console.log(question);
       this.setState({
         question,
+        answer: null,
+      });
+    });
+
+    socket.on('answer', (answer) => {
+      console.log(answer);
+      this.setState({
+        answer,
       });
     });
 

@@ -69,10 +69,18 @@ const webSocketMount = {
     this._resetGame();
     gameState.started = true;
 
-    this.sendQuestion();
+    this._sendQuestion();
   },
 
-  sendQuestion() {
+  nextQuestion() {
+    gameState.question++;
+    this._sendQuestion();
+  },
+
+  _sendQuestion() {
+    // TODO: fix this terrible idle - not fetching from S3 because busy with this loop?
+    while (!questionData) {}
+
     const q = questionData[gameState.question];
 
     // Send question!
@@ -90,7 +98,7 @@ const webSocketMount = {
     }, 1000);
 
     // Send answer for question.
-    io.emit('answer', 'his');
+    io.emit('answer', q.answer);
   },
 
   acceptGuess(id, guess) {
