@@ -13,7 +13,7 @@ import Game from './Game';
 const socket = require('socket.io-client')(process.env.WEBSOCKET_URL || 'localhost:8080');
 
 
-class App extends Component {
+export default class App extends Component {
   state = {
     question: null,
     answer: null,
