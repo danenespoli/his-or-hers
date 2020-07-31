@@ -136,13 +136,14 @@ const gameManager = {
     players = {};
   },
 
-  async setQuestionData() {
+  async fetchQuestionData() {
     const data = await s3.getObject({
       Bucket: 'his-or-hers',
       Key: 'questions.json',
     }).promise();
     questionData = JSON.parse(data.Body);
     console.log(questionData);
+    return questionData;
   },
 
   async updateQuestionData(body) {
@@ -166,7 +167,7 @@ const gameManager = {
     }
     timer = null;
 
-    await this.setQuestionData();
+    await this.fetchQuestionData();
   },
 };
 

@@ -6,6 +6,7 @@ import axios from 'axios';
 export default class Dashboard extends Component {
   state = {
     editQuestionMode: false,
+    questionData: null,
   }
 
   startGame() {
@@ -21,12 +22,16 @@ export default class Dashboard extends Component {
   }
 
   editQuestions(index, newQuestion, newAnswer) {
-    axios.post('/api/editQuestions', [
+    axios.post('/api/questionData', [
       {
         question: 'Who did blah blah first?',
         answer: 'hers',
       },
     ]);
+  }
+
+  fetchQuestionData() {
+    axios.get('/api/questionData')
   }
 
   renderDefaultControls() {

@@ -29,9 +29,14 @@ const webServer = {
       res.status(200);
     });
 
-    app.post('/api/editQuestions', async (req, res) => {
+    app.post('/api/questionData', async (req, res) => {
       console.log(req.body);
       // await gameManager.updateQuestionData(body);
+      res.status(200);
+    });
+
+    app.get('/api/questionData', async (req, res) => {
+      const questionData = await gameManager.fetchQuestionData();
       res.status(200);
     });
   },
