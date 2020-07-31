@@ -74,7 +74,13 @@ const gameManager = {
 
   nextQuestion() {
     gameState.question++;
-    this._sendQuestion();
+    if (gameState.question < questionData.length) {
+      // Send the next question.
+      this._sendQuestion();
+    } else {
+      // Otherwise, all questions have been sent, so signal game to end.
+      io.emit('show-scores');
+    }
   },
 
   // This function handles the whole question flow.
@@ -96,11 +102,10 @@ const gameManager = {
 
       if (gameState.time < 0) {
         clearInterval(timer);
+        // Send answer for question.
+        io.emit('answer', q.answer);
       }
     }, 1000);
-
-    // Send answer for question.
-    io.emit('answer', q.answer);
   },
 
   acceptGuess(id, guess) {

@@ -53,6 +53,11 @@ export default class App extends Component {
       });
     });
 
+    socket.on('show-scores', () => {
+      console.log('Game has ended!');
+      // TODO: handle showing scores at the end.
+    });
+
     socket.on('end-game', () => {
       console.log('Ending game!');
       // Reset to initial state.
