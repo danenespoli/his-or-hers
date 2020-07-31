@@ -51,7 +51,7 @@ const webSocketMount = {
   addPlayer(id, name) {
     players[id] = {
       name,
-      score: 0,
+      guesses: [],
     };
 
     console.log(players);
@@ -69,12 +69,14 @@ const webSocketMount = {
     this._resetGame();
     gameState.started = true;
 
-    this.sendNextQuestion();
+    this.sendQuestion();
   },
 
-  sendNextQuestion() {
-    // Send first question!
-    io.emit('question', 'This is the first question!');
+  sendQuestion() {
+    const q = questionData[gameState.question];
+
+    // Send question!
+    io.emit('question', q.question);
 
     // Count down from 30!
     gameState.time = MAX_TIME;
@@ -98,8 +100,18 @@ const webSocketMount = {
       return;
     }
 
-    console.log(`${players[id].name} guessed ${guess}!`);
-    // const question = questionData[gameState.question];
+    const q = questionData[gameState.question];
+    const player = players[id];
+    console.log(`${player.name} guessed ${guess}!`);
+
+    const score = guess === q.answer ? 1 : 0;
+    if (player.guesses.length - 1 < gameState.question) {
+      player.guesses.push(score);
+    } else {
+      player.guesses[gameState.question] = score;
+    }
+
+    console.log(players);
   },
 
   getGameState() {
@@ -111,6 +123,7 @@ const webSocketMount = {
     io.emit('end-game');
 
     this._resetGame();
+    players = {};
   },
 
   setQuestionData() {
@@ -132,7 +145,6 @@ const webSocketMount = {
       clearInterval(timer);
     }
     timer = null;
-    players = {};
 
     this.setQuestionData();
   },
