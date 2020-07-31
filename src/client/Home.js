@@ -11,22 +11,27 @@ class Home extends Component {
 
   submitName() {
     const { name } = this.state;
+    const { joinGame } = this.props;
+
+    // Handle name validation errors.
     const errorMsg = this.validateName();
     this.setState({
       errorMsg,
     });
+    if (errorMsg !== null) return;
 
-    if (errorMsg === null) {
-      this.setState({
-        errorMsg: null,
-      });
+    // Join game.
+    this.setState({
+      errorMsg: null,
+    });
 
-      // TODO: send message over websocket.
-      console.log(`Sending name: ${name}`);
 
-      const { history } = this.props;
-      history.push('/game');
-    }
+    // TODO: send message over websocket.
+    console.log(`Joining with name: ${name}`);
+    joinGame(name);
+
+    const { history } = this.props;
+    history.push('/game');
   }
 
   validateName() {

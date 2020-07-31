@@ -1,33 +1,8 @@
 import React, { Component } from 'react';
 import './home.css';
 import { Button } from 'evergreen-ui';
-import socket from './socket';
 
 export default class Game extends Component {
-  state = {
-    question: null,
-    answer: null,
-    time: 30,
-  };
-
-  constructor() {
-    super();
-
-    socket.on('question', (question) => {
-      console.log(question);
-      this.setState({
-        question,
-      });
-    });
-
-    socket.on('timer', (time) => {
-      console.log(time);
-      this.setState({
-        time,
-      });
-    });
-  }
-
   submitGuess(guess) {
     console.log(guess);
   }

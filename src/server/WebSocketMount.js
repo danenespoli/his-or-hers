@@ -1,14 +1,19 @@
 let io;
 
+// * CONSTANTS *
 const MAX_TIME = 30;
 
+// * GLOBALS *
+// These variables are kept in process memory
+// throughout the duration of the game.
 const gameState = {
   started: false,
   question: 0,
   time: MAX_TIME,
 };
 let timer = null;
-
+let players = {};
+let scores = {};
 
 const webSocketMount = {
   enableWebSockets(httpServer) {
@@ -17,13 +22,19 @@ const webSocketMount = {
     io.on('connection', socket => {
       console.log('User connected!');
 
-      socket.on('message', message => {
-        console.log(`User sent: ${message}`);
-        io.emit('message', message);
+      
+
+      socket.on('join', name => {
+        console.log(`User "${name}" joining.`);
+        if (!gameState.started) {
+          this.addPlayer(socket.id, name);
+          socket.emit('join-success');
+        }
       });
 
       socket.on('disconnect', () => {
         console.log('User disconnected');
+        this.removePlayer(socket.id);
       });
     });
   },
@@ -31,6 +42,16 @@ const webSocketMount = {
   /*
     All subsequent functions assume enableWebSockets has been called.
   */
+
+  addPlayer(id, name) {
+    players[id] = name;
+    scores[id] = 0;
+  },
+
+  removePlayer(id) {
+    delete players[id];
+    delete scores[id];
+  },
 
   startGame() {
     console.log('Starting game!');
@@ -70,13 +91,16 @@ const webSocketMount = {
   },
 
   _resetGame() {
-    if (timer) {
-      clearInterval(timer);
-    }
     gameState.question = 0;
     gameState.started = false;
     gameState.time = MAX_TIME;
+
+    if (timer) {
+      clearInterval(timer);
+    }
     timer = null;
+    players = {};
+    scores = {};
   },
 };
 
