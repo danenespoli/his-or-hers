@@ -4,6 +4,10 @@ import { Button } from 'evergreen-ui';
 import axios from 'axios';
 
 export default class Dashboard extends Component {
+  state = {
+    editQuestionMode: false,
+  }
+
   startGame() {
     axios.post('/api/startGame');
   }
@@ -25,33 +29,58 @@ export default class Dashboard extends Component {
     ]);
   }
 
-  render() {
-    const { question } = this.props;
-
-    // If the game has started, show End Game options.
-    if (question !== null) {
-      return (
-        <div>
-          <Button onClick={() => this.endGame()}>
-            End Game
-          </Button>
-          <Button onClick={() => this.nextQuestion()}>
-            Next Question
-          </Button>
-        </div>
-      );
-    }
-
-    // Before the game starts.
+  renderDefaultControls() {
     return (
       <div>
         <Button onClick={() => this.startGame()}>
           Start Game!
         </Button>
-        <Button onClick={() => this.editQuestions()}>
+        <Button onClick={() => this.setState({ editQuestionMode: true })}>
           Edit Questions
         </Button>
       </div>
     );
+  }
+
+  renderEditQuestionMode() {
+    return (
+      <div>
+        <Button onClick={() => this.setState({ editQuestionMode: false })}>
+          Back
+        </Button>
+        {}
+      </div>
+    );
+  }
+
+  renderDuringGame() {
+    return (
+      <div>
+        <Button onClick={() => this.endGame()}>
+          End Game
+        </Button>
+        <Button onClick={() => this.nextQuestion()}>
+          Next Question
+        </Button>
+      </div>
+    );
+  }
+
+  render() {
+    const { question } = this.props;
+
+    // If the game has started, show End Game options.
+    if (question !== null) {
+      return this.renderDuringGame();
+    }
+
+    const { editQuestionMode } = this.state;
+
+    // Before the game starts.
+    if (editQuestionMode) {
+      return this.renderEditQuestionMode();
+    }
+
+    return this.renderDefaultControls();
   }
 }
