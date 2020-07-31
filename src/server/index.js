@@ -1,48 +1,43 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const http = require('http');
 const AWS = require('aws-sdk');
-const webSocketMount = require('./WebSocketMount');
+const gameManager = require('./gameManager');
 
 const webServer = {
   enableRoutes(app) {
+    app.use(bodyParser.json());
     app.use(express.static('dist'));
 
     app.get('/api/gameState', (req, res) => {
-      const state = webSocketMount.getGameState();
+      const state = gameManager.getGameState();
       res.send(state);
     });
 
-    app.post('/api/startGame', (req, res) => {
-      webSocketMount.startGame();
+    app.post('/api/startGame', async (req, res) => {
+      await gameManager.startGame();
       res.status(200);
     });
 
     app.post('/api/nextQuestion', (req, res) => {
-      webSocketMount.nextQuestion();
+      gameManager.nextQuestion();
       res.status(200);
     });
 
-    app.post('/api/endGame', (req, res) => {
-      webSocketMount.endGame();
+    app.post('/api/endGame', async (req, res) => {
+      await gameManager.endGame();
       res.status(200);
     });
 
     app.post('/api/editQuestions', async (req, res) => {
-      // const s3 = new AWS.S3();
-      // const data = await s3.getObject({
-      //   Bucket: 'his-or-hers',
-      //   Key: 'questions.json',
-      // }).promise();
-      // const questions = JSON.parse(data.Body);
-      // console.log(questions);
-
-      // TODO: edit questions in S3...
-      webSocketMount.setQuestionData();
+      console.log(req.body);
+      // await gameManager.updateQuestionData(body);
+      res.status(200);
     });
   },
 
   enableWebSockets(httpServer) {
-    webSocketMount.enableWebSockets(httpServer);
+    gameManager.enableWebSockets(httpServer);
   },
 
   startWebServer(PORT_NUMBER = process.env.PORT || 8080) {

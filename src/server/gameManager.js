@@ -18,7 +18,7 @@ let questionData = null;
 let players = {};
 
 
-const webSocketMount = {
+const gameManager = {
   enableWebSockets(httpServer) {
     io = require('socket.io')(httpServer);
 
@@ -63,10 +63,10 @@ const webSocketMount = {
     console.log(players);
   },
 
-  startGame() {
+  async startGame() {
     console.log('Starting game!');
 
-    this._resetGame();
+    await this._resetGame();
     gameState.started = true;
 
     this._sendQuestion();
@@ -78,9 +78,6 @@ const webSocketMount = {
   },
 
   _sendQuestion() {
-    // TODO: fix this terrible idle - not fetching from S3 because busy with this loop?
-    while (!questionData) {}
-
     const q = questionData[gameState.question];
 
     // Send question!
@@ -126,25 +123,35 @@ const webSocketMount = {
     return gameState;
   },
 
-  endGame() {
+  async endGame() {
     console.log('Ending game!');
     io.emit('end-game');
 
-    this._resetGame();
+    await this._resetGame();
     players = {};
   },
 
-  setQuestionData() {
-    s3.getObject({
+  async setQuestionData() {
+    const data = await s3.getObject({
       Bucket: 'his-or-hers',
       Key: 'questions.json',
-    }).promise().then(data => {
-      questionData = JSON.parse(data.Body);
-      console.log(questionData);
-    });
+    }).promise();
+    questionData = JSON.parse(data.Body);
+    console.log(questionData);
   },
 
-  _resetGame() {
+  async updateQuestionData(body) {
+    const data = await s3.putObject({
+      Bucket: 'his-or-hers',
+      Key: 'questions.json',
+      ContentType: 'application/json',
+      Body: body,
+    }).promise();
+    questionData = body;
+    console.log(questionData);
+  },
+
+  async _resetGame() {
     gameState.question = 0;
     gameState.started = false;
     gameState.time = MAX_TIME;
@@ -154,8 +161,8 @@ const webSocketMount = {
     }
     timer = null;
 
-    this.setQuestionData();
+    await this.setQuestionData();
   },
 };
 
-module.exports = webSocketMount;
+module.exports = gameManager;

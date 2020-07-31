@@ -16,6 +16,7 @@
     "aws-sdk": "^2.722.0",
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
     "evergreen-ui": "^4.29.1",
     "express": "^4.16.3",
     "react": "^16.5.2",

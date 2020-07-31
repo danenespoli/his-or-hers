@@ -17,7 +17,12 @@ export default class Dashboard extends Component {
   }
 
   editQuestions(index, newQuestion, newAnswer) {
-
+    axios.post('/api/editQuestions', [
+      {
+        question: 'Who did blah blah first?',
+        answer: 'hers',
+      },
+    ]);
   }
 
   render() {
