@@ -31,7 +31,19 @@ export default class Dashboard extends Component {
   }
 
   fetchQuestionData() {
-    axios.get('/api/questionData')
+    console.log('Fetching question data...');
+    axios.get('/api/questionData').then(({ data: questionData }) => {
+      this.setState({
+        questionData,
+      });
+    });
+  }
+
+  enterEditQuestionMode() {
+    this.setState({
+      editQuestionMode: true,
+    });
+    this.fetchQuestionData();
   }
 
   renderDefaultControls() {
@@ -40,7 +52,7 @@ export default class Dashboard extends Component {
         <Button onClick={() => this.startGame()}>
           Start Game!
         </Button>
-        <Button onClick={() => this.setState({ editQuestionMode: true })}>
+        <Button onClick={() => this.enterEditQuestionMode()}>
           Edit Questions
         </Button>
       </div>
@@ -48,12 +60,29 @@ export default class Dashboard extends Component {
   }
 
   renderEditQuestionMode() {
+    const { questionData } = this.state;
+
+    let questionRows;
+    if (!questionData) {
+      questionRows = (
+        <div>
+          Loading questions...
+        </div>
+      );
+    } else {
+      questionRows = questionData.map(q => (
+        <div>
+          {q.question} {q.answer}
+        </div>
+      ));
+    }
+
     return (
       <div>
         <Button onClick={() => this.setState({ editQuestionMode: false })}>
           Back
         </Button>
-        {}
+        {questionRows}
       </div>
     );
   }

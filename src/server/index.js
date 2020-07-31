@@ -37,7 +37,8 @@ const webServer = {
 
     app.get('/api/questionData', async (req, res) => {
       const questionData = await gameManager.fetchQuestionData();
-      res.status(200);
+      console.log(questionData);
+      res.send(questionData);
     });
   },
 
