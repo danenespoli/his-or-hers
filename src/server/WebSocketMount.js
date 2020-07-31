@@ -22,8 +22,6 @@ const webSocketMount = {
     io.on('connection', socket => {
       console.log('User connected!');
 
-      
-
       socket.on('join', name => {
         console.log(`User "${name}" joining.`);
         if (!gameState.started) {
@@ -46,11 +44,15 @@ const webSocketMount = {
   addPlayer(id, name) {
     players[id] = name;
     scores[id] = 0;
+
+    console.log(players, scores);
   },
 
   removePlayer(id) {
     delete players[id];
     delete scores[id];
+
+    console.log(players, scores);
   },
 
   startGame() {
