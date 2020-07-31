@@ -1,4 +1,4 @@
-let io;
+const AWS = require('aws-sdk');
 
 // * CONSTANTS *
 const MAX_TIME = 30;
@@ -6,13 +6,17 @@ const MAX_TIME = 30;
 // * GLOBALS *
 // These variables are kept in process memory
 // throughout the duration of the game.
+const s3 = new AWS.S3();
+let io;
 const gameState = {
   started: false,
   question: 0,
   time: MAX_TIME,
 };
 let timer = null;
+let questionData = null;
 let players = {};
+
 
 const webSocketMount = {
   enableWebSockets(httpServer) {
@@ -69,17 +73,28 @@ const webSocketMount = {
     io.emit('question', 'This is the first question!');
 
     // Count down from 30!
-    io.emit('timer', --gameState.time);
+    gameState.time = MAX_TIME;
+    io.emit('timer', gameState.time--);
     timer = setInterval(() => {
-      io.emit('timer', --gameState.time);
+      io.emit('timer', gameState.time--);
 
-      if (gameState.time === 0) {
+      if (gameState.time < 0) {
         clearInterval(timer);
       }
     }, 1000);
 
     // Send answer for question.
     io.emit('answer', 'his');
+  },
+
+  acceptGuess(id, guess) {
+    // Make sure user can still guess.
+    if (gameState.time <= 0) {
+      console.log('No time left to guess!');
+      return;
+    }
+
+    console.log(`${players[id].name} guessed ${guess}!`);
   },
 
   getGameState() {
@@ -93,6 +108,16 @@ const webSocketMount = {
     this._resetGame();
   },
 
+  setQuestionData() {
+    s3.getObject({
+      Bucket: 'his-or-hers',
+      Key: 'questions.json',
+    }).promise().then(data => {
+      console.log(data);
+      questionData = JSON.parse(data.Body);
+    });
+  },
+
   _resetGame() {
     gameState.question = 0;
     gameState.started = false;
@@ -103,6 +128,8 @@ const webSocketMount = {
     }
     timer = null;
     players = {};
+
+    this.setQuestionData();
   },
 };
 

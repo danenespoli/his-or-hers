@@ -22,15 +22,17 @@ const webServer = {
       res.status(200);
     });
 
-    app.post('/api/editQuestion', async (req, res) => {
-      const s3 = new AWS.S3();
-      const data = await s3.getObject({
-        Bucket: 'his-or-hers',
-        Key: 'questions.json',
-      }).promise();
-      const questions = JSON.parse(data.Body);
+    app.post('/api/editQuestions', async (req, res) => {
+      // const s3 = new AWS.S3();
+      // const data = await s3.getObject({
+      //   Bucket: 'his-or-hers',
+      //   Key: 'questions.json',
+      // }).promise();
+      // const questions = JSON.parse(data.Body);
+      // console.log(questions);
 
-      console.log(questions);
+      // TODO: edit questions in S3...
+      webSocketMount.setQuestionData();
     });
   },
 

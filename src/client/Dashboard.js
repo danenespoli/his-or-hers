@@ -12,14 +12,15 @@ export default class Dashboard extends Component {
     axios.post('/api/endGame');
   }
 
-  editQuestion(index, newQuestion, newAnswer) {
-
+  editQuestions(index, newQuestion, newAnswer) {
+    
   }
 
   render() {
-    const { started } = this.props;
+    const { question } = this.props;
 
-    if (started) {
+    // If the game has started, show End Game options.
+    if (question !== null) {
       return (
         <div>
           <Button onClick={() => this.endGame()}>
@@ -35,7 +36,7 @@ export default class Dashboard extends Component {
         <Button onClick={() => this.startGame()}>
           Start Game!
         </Button>
-        <Button onClick={() => this.editQuestion()}>
+        <Button onClick={() => this.editQuestions()}>
           Edit Questions
         </Button>
       </div>
