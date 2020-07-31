@@ -128,7 +128,7 @@ export default class Dashboard extends Component {
           {questionRows}
         </div>
         <div>
-        <Button onClick={() => this.addQuestion()}>
+          <Button onClick={() => this.addQuestion()}>
             Add question
           </Button>
         </div>
