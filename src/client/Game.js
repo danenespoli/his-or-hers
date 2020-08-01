@@ -19,9 +19,18 @@ export default class Game extends Component {
     } = this.props;
 
     if (scores) {
+      const scoreList = scores.topScores.map(s => (
+        <div>
+          {s.name}  {s.score}
+        </div>
+      ));
+
       return (
         <div>
-          Scores
+          <div>
+            Your score: {scores.ownScore.score}
+          </div>
+          {scoreList}
         </div>
       );
     }

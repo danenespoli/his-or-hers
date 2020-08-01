@@ -87,7 +87,8 @@ export default class App extends Component {
       question,
       answer,
       time,
-      ended
+      ended,
+      scores,
     } = this.state;
 
     return (
@@ -107,6 +108,7 @@ export default class App extends Component {
               answer={answer}
               time={time}
               ended={ended}
+              scores={scores}
               makeGuess={(guess) => this.makeGuess(guess)}
             />
           </Route>
