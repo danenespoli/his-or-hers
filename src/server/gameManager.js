@@ -97,6 +97,9 @@ const gameManager = {
     // Count down from 30!
     gameState.time = MAX_TIME;
     io.emit('timer', gameState.time--);
+    if (timer) {
+      clearInterval(timer);
+    }
     timer = setInterval(() => {
       io.emit('timer', gameState.time--);
 
