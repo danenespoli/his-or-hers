@@ -79,7 +79,7 @@ const gameManager = {
       this._sendQuestion();
     } else {
       // Otherwise, all questions have been sent, so signal game to end.
-      io.emit('show-scores');
+      this._computeAndEmitScores();
     }
   },
 
@@ -106,6 +106,42 @@ const gameManager = {
         io.emit('answer', q.answer);
       }
     }, 1000);
+  },
+
+  _computeAndEmitScores() {
+    const playerEntries = Object.entries(players);
+    const scores = {};
+
+    // Tally scores for all players.
+    for (let i = 0; i < playerEntries.length; i++) {
+      const [socketId, player] = playerEntries[i];
+
+      let score = 0;
+      for (let j = 0; j < player.guesses.length; j++) {
+        score += player.guesses[j];
+      }
+
+      scores[socketId] = {
+        id: socketId,
+        name: player.name,
+        score,
+      };
+    }
+
+    // Get top 5 scores.
+    const topScores = Object.values(scores).sort((a, b) => (
+      a.score > b.score
+    )).slice(0, 5);
+
+    // Emit own score and top 5 scores to each player.
+    for (let i = 0; i < playerEntries.length; i++) {
+      const [socketId, player] = playerEntries[i];
+      console.log(player);
+      io.to(socketId).emit('show-scores', {
+        topScores,
+        ownScore: scores[socketId],
+      });
+    }
   },
 
   acceptGuess(id, guess) {
@@ -138,7 +174,10 @@ const gameManager = {
     io.emit('end-game');
 
     await this._resetGame();
-    players = {};
+    for (let i = 0; i < Object.values(players).length; i++) {
+      const player = Object.values(players)[i];
+      player.guesses = [];
+    }
   },
 
   async fetchQuestionData() {

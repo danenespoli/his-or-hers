@@ -14,10 +14,20 @@ export default class Game extends Component {
       joined,
       question,
       answer,
-      time
+      time,
+      scores,
     } = this.props;
 
+    if (scores) {
+      return (
+        <div>
+          Scores
+        </div>
+      );
+    }
+
     // Failed to join.
+    // TODO: simply show the game but don't allow the user to play.
     if (!joined) {
       return (
         <div>

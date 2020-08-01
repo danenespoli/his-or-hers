@@ -19,6 +19,7 @@ export default class App extends Component {
     question: null,
     answer: null,
     time: 30,
+    scores: null,
   };
 
   constructor() {
@@ -53,19 +54,21 @@ export default class App extends Component {
       });
     });
 
-    socket.on('show-scores', () => {
+    socket.on('show-scores', scores => {
       console.log('Game has ended!');
-      // TODO: handle showing scores at the end.
+      this.setState({
+        scores,
+      });
     });
 
     socket.on('end-game', () => {
       console.log('Ending game!');
       // Reset to initial state.
       this.setState({
-        joined: false,
         question: null,
         answer: null,
         time: 30,
+        scores: null,
       });
     });
   }
@@ -84,6 +87,7 @@ export default class App extends Component {
       question,
       answer,
       time,
+      ended
     } = this.state;
 
     return (
@@ -102,6 +106,7 @@ export default class App extends Component {
               question={question}
               answer={answer}
               time={time}
+              ended={ended}
               makeGuess={(guess) => this.makeGuess(guess)}
             />
           </Route>

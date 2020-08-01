@@ -7,6 +7,11 @@ export default class Dashboard extends Component {
   state = {
     editQuestionMode: false,
     questionData: null,
+    modified: false,
+  }
+
+  componentDidMount() {
+    this.fetchQuestionData();
   }
 
   startGame() {
@@ -30,6 +35,7 @@ export default class Dashboard extends Component {
 
     this.setState({
       questionData,
+      modified: true,
     });
   }
 
@@ -39,6 +45,7 @@ export default class Dashboard extends Component {
 
     this.setState({
       questionData,
+      modified: true,
     });
   }
 
@@ -51,12 +58,19 @@ export default class Dashboard extends Component {
 
     this.setState({
       questionData,
+      modified: true,
     });
   }
 
   saveQuestions() {
     const { questionData } = this.state;
-    axios.post('/api/questionData', questionData);
+    console.log('Saving questions...');
+    axios.post('/api/questionData', questionData).then(() => {
+      console.log('Saved.');
+      this.setState({
+        modified: false,
+      });
+    });
   }
 
   fetchQuestionData() {
@@ -64,6 +78,7 @@ export default class Dashboard extends Component {
     axios.get('/api/questionData').then(({ data: questionData }) => {
       this.setState({
         questionData,
+        modified: false,
       });
     });
   }
@@ -72,7 +87,6 @@ export default class Dashboard extends Component {
     this.setState({
       editQuestionMode: true,
     });
-    this.fetchQuestionData();
   }
 
   renderDefaultControls() {
@@ -89,7 +103,7 @@ export default class Dashboard extends Component {
   }
 
   renderEditQuestionMode() {
-    const { questionData } = this.state;
+    const { questionData, modified } = this.state;
 
     let questionRows;
     if (!questionData) {
@@ -133,12 +147,16 @@ export default class Dashboard extends Component {
           </Button>
         </div>
         <div>
-          <Button onClick={() => this.fetchQuestionData()}>
-            Cancel
-          </Button>
-          <Button onClick={() => this.saveQuestions()}>
-            Save
-          </Button>
+          {modified && (
+            <>
+              <Button onClick={() => this.fetchQuestionData()}>
+                Cancel
+              </Button>
+              <Button onClick={() => this.saveQuestions()}>
+                Save
+              </Button>
+            </>
+          )}
         </div>
       </div>
     );

@@ -16,24 +16,24 @@ const webServer = {
 
     app.post('/api/startGame', async (req, res) => {
       await gameManager.startGame();
-      res.status(200);
+      res.sendStatus(200);
     });
 
     app.post('/api/nextQuestion', (req, res) => {
       gameManager.nextQuestion();
-      res.status(200);
+      res.sendStatus(200);
     });
 
     app.post('/api/endGame', async (req, res) => {
       await gameManager.endGame();
-      res.status(200);
+      res.sendStatus(200);
     });
 
     app.post('/api/questionData', async (req, res) => {
       const { body } = req;
       console.log(body);
       await gameManager.updateQuestionData(body);
-      res.status(200);
+      res.sendStatus(200);
     });
 
     app.get('/api/questionData', async (req, res) => {
