@@ -7,7 +7,24 @@ class Home extends Component {
   state = {
     name: '',
     errorMsg: null,
+    backgroundNum: 0,
   };
+
+  constructor() {
+    super();
+    // Background changes every 4 seconds.
+    setInterval(() => {
+      this.changeBackground();
+    }, 4000);
+  }
+
+  changeBackground() {
+    console.log('Changing');
+    const { backgroundNum } = this.state;
+    this.setState({
+      backgroundNum: (backgroundNum + 1) % 5,
+    });
+  }
 
   submitName() {
     const { name } = this.state;
@@ -46,12 +63,24 @@ class Home extends Component {
   }
 
   render() {
-    const { errorMsg } = this.state;
+    const { errorMsg, backgroundNum } = this.state;
 
     return (
-      <div>
-        Enter your name below:
-        <div>
+      <div className={`home-background home-background-${backgroundNum}`}>
+        <div className={`home-text home-text-${backgroundNum}`}>
+          Steph or Dustin
+        </div>
+        <div className="home-controls">
+          <div className="home-controls-name">
+
+          </div>
+          <div className={`home-controls-join home-controls-join-${backgroundNum}`}>
+            <div className="home-controls-join-text">
+              Join
+            </div>
+          </div>
+        </div>
+        {/* <div className="home-controls">
           <TextInput
             placeholder="Enter your name..."
             onChange={e => this.setState({ name: e.target.value })}
@@ -59,7 +88,7 @@ class Home extends Component {
           <Button onClick={() => this.submitName()}>
             Play!
           </Button>
-        </div>
+        </div> */}
         <div className="home-error">
           {errorMsg}
         </div>
