@@ -12,10 +12,10 @@ class Home extends Component {
 
   constructor() {
     super();
-    // Background changes every 4 seconds.
+    // Background changes every 5 seconds.
     setInterval(() => {
       this.changeBackground();
-    }, 4000);
+    }, 5000);
   }
 
   changeBackground() {
@@ -63,7 +63,7 @@ class Home extends Component {
   }
 
   render() {
-    const { errorMsg, backgroundNum } = this.state;
+    const { name, errorMsg, backgroundNum } = this.state;
 
     return (
       <div className={`home-background home-background-${backgroundNum}`}>
@@ -72,23 +72,23 @@ class Home extends Component {
         </div>
         <div className="home-controls">
           <div className="home-controls-name">
-
+            <input
+              className="home-controls-name-input"
+              type="text"
+              value={name}
+              placeholder="Enter your name..."
+              onChange={e => this.setState({ name: e.target.value })}
+            />
           </div>
-          <div className={`home-controls-join home-controls-join-${backgroundNum}`}>
+          <div
+            className={`home-controls-join home-controls-join-${backgroundNum}`}
+            onClick={() => this.submitName()}
+          >
             <div className="home-controls-join-text">
               Join
             </div>
           </div>
         </div>
-        {/* <div className="home-controls">
-          <TextInput
-            placeholder="Enter your name..."
-            onChange={e => this.setState({ name: e.target.value })}
-          />
-          <Button onClick={() => this.submitName()}>
-            Play!
-          </Button>
-        </div> */}
         <div className="home-error">
           {errorMsg}
         </div>
