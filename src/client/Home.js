@@ -15,7 +15,7 @@ class Home extends Component {
     // Background changes every 5 seconds.
     setInterval(() => {
       this.changeBackground();
-    }, 6000);
+    }, 2500);
   }
 
   changeBackground() {

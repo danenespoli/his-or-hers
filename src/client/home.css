@@ -153,6 +153,7 @@
   cursor: url('cursor-pointer.png'), pointer;
   font-family: 'Recursive', sans-serif;
   font-size: 18px;
+  user-select: none;
 }
 
 .home-controls-join {
@@ -188,6 +189,7 @@
   color: #FFFFFF;
   font-size: 16px;
   text-align: center;
+  user-select: none;
 }
 
 
