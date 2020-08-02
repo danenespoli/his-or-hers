@@ -23,7 +23,6 @@ class Home extends Component {
   }
 
   changeBackground() {
-    console.log('Changing');
     const { backgroundNum } = this.state;
     this.setState({
       backgroundNum: (backgroundNum + 1) % 6,
