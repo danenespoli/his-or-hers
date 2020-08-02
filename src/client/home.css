@@ -23,7 +23,7 @@
 
   font-size: 96px;
 
-  transition: background-color 100ms;
+  transition: background-color 500ms ease-out;
 }
 
 .home-background-0 {
@@ -164,7 +164,7 @@
   height: 40px;
   box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.25);
   cursor: url('cursor-pointer.png'), pointer;
-  transition: background-color 15ms;
+  transition: background-color 500ms ease-out;
 }
 
 .home-controls-join:hover {

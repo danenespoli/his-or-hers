@@ -18,6 +18,10 @@ class Home extends Component {
     }, 2500);
   }
 
+  componentDidMount() {
+    this.textInput.focus();
+  }
+
   changeBackground() {
     console.log('Changing');
     const { backgroundNum } = this.state;
@@ -73,6 +77,7 @@ class Home extends Component {
         <div className="home-controls">
           <div className="home-controls-name">
             <input
+              ref={elem => { this.textInput = elem; }}
               className="home-controls-name-input"
               type="text"
               value={name}
