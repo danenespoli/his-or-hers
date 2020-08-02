@@ -138,12 +138,13 @@
   outline: none;
   color: black;
   font-family: 'Recursive', sans-serif;
-  font-size: 18px;
+  font-size: 22px;
+  text-align: center;
 }
 
 .home-controls-name-input::placeholder {
   color: black;
-  opacity: 0.3;
+  opacity: 0.15;
 }
 
 .home-controls-join-text {
