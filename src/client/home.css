@@ -143,6 +143,7 @@
 
 .home-controls-name-input::placeholder {
   color: black;
+  opacity: 0.3;
 }
 
 .home-controls-join-text {
@@ -176,11 +177,15 @@
 }
 
 .home-error {
-  position: relative;
+  position: absolute;
+  top: 475px;
+  margin: 0 auto auto;
+  width: 100%;
+
   width: 100%;
   margin: 10px auto auto;
 
-  color: #B92637;
+  color: #FFFFFF;
   font-size: 16px;
   text-align: center;
 }
