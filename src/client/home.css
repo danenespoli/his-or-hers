@@ -1,11 +1,3 @@
-.home-error {
-  color: #B92637;
-}
-
-
-/*
-  Background Animations!
-*/
 .home-background {
   position: absolute;
   top: 0;
@@ -22,84 +14,25 @@
   flex-direction: column;
 
   font-size: 96px;
+  overflow: hidden;
 
   transition: background-color 500ms ease-out;
 }
 
-.home-background-0 {
-  background-color: #FFE974;
-}
-.home-text-0 {
-  top: 232px;
-  font-family: 'Red Rose', sans-serif;
-  letter-spacing: -0.04em;
-}
-.home-controls-join-0 {
-  background-color: #E9CF48;
-}
 
-.home-background-1 {
-  background-color: #D274FF;
-}
-.home-text-1 {
-  top: 233px;
-  font-family: 'Redressed', sans-serif;
-  letter-spacing: -0.06em;
-}
-.home-controls-join-1 {
-  background-color: #AE62D2;
-}
+.home-text-container {
+  position: relative;
+  margin: auto auto 0;
+  width: 100%;
+  text-align: center;
+  min-height: 160px;
 
-.home-background-2 {
-  background-color: #FF7474;
-}
-.home-text-2 {
-  top: 232px;
-  font-family: 'Recursive', sans-serif;
-}
-.home-controls-join-2 {
-  background-color: #DB6565;
-}
-
-.home-background-3 {
-  background-color: #ACEF8C;
-}
-.home-text-3 {
-  top: 230px;
-  font-family: 'Indie Flower', sans-serif;
-}
-.home-controls-join-3 {
-  background-color: #95CA7C;
-}
-
-.home-background-4 {
-  background-color: #74B4FF;
-}
-.home-text-4 {
-  top: 230px;
-  font-family: 'Fjalla One', sans-serif;
-  font-size: 96px;
-}
-.home-controls-join-4 {
-  background-color: #679FE1;
-}
-
-.home-background-5 {
-  background-color: #8C96EF;
-}
-.home-text-5 {
-  top: 241px;
-  font-family: 'Great Vibes', sans-serif;
-}
-.home-controls-join-5 {
-  background-color: #7780CB;
+  display: flex;
+  justify-content: center;
 }
 
 .home-text {
-  position: absolute;
-  margin: auto;
-  width: 100%;
-  text-align: center;
+  position: relative;
   user-select: none;
 
   color: #FFFFFF;
@@ -107,9 +40,8 @@
 }
 
 .home-controls {
-  position: absolute;
-  top: 380px;
-  margin: 10px auto auto;
+  position: relative;
+  margin: 0 auto 20px;
   width: 100%;
 
   display: flex;
@@ -147,16 +79,6 @@
   opacity: 0.15;
 }
 
-.home-controls-join-text {
-  text-align: center;
-  letter-spacing: 0.2em;
-  margin: auto;
-  cursor: url('cursor-pointer.png'), pointer;
-  font-family: 'Recursive', sans-serif;
-  font-size: 18px;
-  user-select: none;
-}
-
 .home-controls-join {
   display: flex;
   align-items: center;
@@ -179,14 +101,21 @@
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
-.home-error {
-  position: absolute;
-  top: 475px;
-  margin: 0 auto auto;
-  width: 100%;
+.home-controls-join-text {
+  text-align: center;
+  letter-spacing: 0.2em;
+  margin: auto;
+  cursor: url('cursor-pointer.png'), pointer;
+  font-family: 'Recursive', sans-serif;
+  font-size: 18px;
+  user-select: none;
+}
 
+.home-error {
+  position: relative;
+  margin: 0 auto auto;
+  height: 100px;
   width: 100%;
-  margin: 10px auto auto;
 
   color: #FFFFFF;
   font-size: 16px;
@@ -195,3 +124,74 @@
 }
 
 
+/*
+  Background Animations!
+*/
+.home-background-0 {
+  background-color: #FFE974;
+}
+.home-text-0 {
+  top: 2px;
+  font-family: 'Red Rose', sans-serif;
+  letter-spacing: -0.04em;
+}
+.home-controls-join-0 {
+  background-color: #E9CF48;
+}
+
+.home-background-1 {
+  background-color: #D274FF;
+}
+.home-text-1 {
+  top: 3px;
+  font-family: 'Redressed', sans-serif;
+  letter-spacing: -0.06em;
+}
+.home-controls-join-1 {
+  background-color: #AE62D2;
+}
+
+.home-background-2 {
+  background-color: #FF7474;
+}
+.home-text-2 {
+  top: 2px;
+  font-family: 'Recursive', sans-serif;
+}
+.home-controls-join-2 {
+  background-color: #DB6565;
+}
+
+.home-background-3 {
+  background-color: #ACEF8C;
+}
+.home-text-3 {
+  top: 0;
+  font-family: 'Indie Flower', sans-serif;
+}
+.home-controls-join-3 {
+  background-color: #95CA7C;
+}
+
+.home-background-4 {
+  background-color: #74B4FF;
+}
+.home-text-4 {
+  top: 0;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 96px;
+}
+.home-controls-join-4 {
+  background-color: #679FE1;
+}
+
+.home-background-5 {
+  background-color: #8C96EF;
+}
+.home-text-5 {
+  top: 11px;
+  font-family: 'Great Vibes', sans-serif;
+}
+.home-controls-join-5 {
+  background-color: #7780CB;
+}
