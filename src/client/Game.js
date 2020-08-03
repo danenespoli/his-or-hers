@@ -9,6 +9,61 @@ export default class Game extends Component {
     makeGuess(guess);
   }
 
+  renderNotJoined() {
+    return (
+      <div>
+        Failed to join :( try again.
+      </div>
+    );
+  }
+
+  renderWaitingToStart() {
+    return (
+      <div>
+        Waiting for the game to start...
+      </div>
+    );
+  }
+
+  renderGameView() {
+    const {
+      question,
+      time,
+    } = this.props;
+
+    return (
+      <div>
+        <div>
+          {question}
+        </div>
+        <div>
+          Time left: {time}
+        </div>
+        <div>
+          <Button onClick={() => this.submitGuess('his')}>
+            His
+          </Button>
+          <Button onClick={() => this.submitGuess('hers')}>
+            Hers
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  renderAnswerView() {
+    const {
+      question,
+      answer,
+      time,
+    } = this.props;
+
+    return (
+      <div>Answer is: {answer}</div>
+    );
+  }
+
+
   render() {
     const {
       joined,
@@ -38,47 +93,20 @@ export default class Game extends Component {
     // Failed to join.
     // TODO: simply show the game but don't allow the user to play.
     if (!joined) {
-      return (
-        <div>
-          Failed to join :( try again.
-        </div>
-      );
+      return this.renderNotJoined();
     }
 
     // Waiting to start game.
     if (question === null) {
-      return (
-        <div>
-          Waiting for the game to start...
-        </div>
-      );
+      return this.renderWaitingToStart();
     }
 
     // User must now answer question!
     if (answer === null) {
-      return (
-        <div>
-          <div>
-            {question}
-          </div>
-          <div>
-            Time left: {time}
-          </div>
-          <div>
-            <Button onClick={() => this.submitGuess('his')}>
-              His
-            </Button>
-            <Button onClick={() => this.submitGuess('hers')}>
-              Hers
-            </Button>
-          </div>
-        </div>
-      );
+      return this.renderGameView();
     }
 
     // Display results with answer.
-    return (
-      <div>Answer is: {answer}</div>
-    );
+    return this.renderAnswerView();
   }
 }
