@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './home.css';
-import { TextInput, Button } from 'evergreen-ui';
 import { withRouter } from 'react-router-dom';
+import { TextInput, Button } from 'evergreen-ui';
+import './home.css';
 
 class Home extends Component {
   state = {

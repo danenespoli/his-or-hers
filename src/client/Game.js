@@ -1,8 +1,44 @@
 import React, { Component } from 'react';
-import './home.css';
 import { Button } from 'evergreen-ui';
+import './game.css';
+
+const NUM_BACKGROUNDS = 6;
 
 export default class Game extends Component {
+  state = {
+    background: null,
+    backgroundHistory: new Set(),
+  }
+
+  componentDidMount() {
+    this.setNextBackgroundNumber();
+  }
+
+  setNextBackgroundNumber() {
+    const { backgroundHistory } = this.state;
+    const allOptions = [0, 1, 2, 3, 4, 5];
+    let currentOptions = allOptions.filter(o => (
+      backgroundHistory.has(o)
+    ));
+
+    // Already used all options, so reset the history.
+    if (currentOptions.length === 0) {
+      currentOptions = allOptions;
+      backgroundHistory.clear();
+    }
+
+    // Random number out of available numbers.
+    const randomIndex = Math.floor(Math.random() * Math.floor(currentOptions.length));
+    const bgNum = currentOptions[randomIndex];
+
+    backgroundHistory.add(bgNum);
+
+    this.setState({
+      background: bgNum,
+      backgroundHistory,
+    });
+  }
+
   submitGuess(guess) {
     console.log(guess);
     const { makeGuess } = this.props;
@@ -10,8 +46,9 @@ export default class Game extends Component {
   }
 
   renderNotJoined() {
+    const { background } = this.state;
     return (
-      <div>
+      <div className={`game-background game-background-5 game-background-${background}`}>
         Failed to join :( try again.
       </div>
     );

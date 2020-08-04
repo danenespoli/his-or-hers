@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './dashboard.css';
 import { Button, TextInput, Select } from 'evergreen-ui';
 import axios from 'axios';
+import './dashboard.css';
 
 export default class Dashboard extends Component {
   state = {

@@ -1,4 +1,31 @@
+.game-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
+  display: flex;
+  flex-direction: column;
+
+  font-size: 96px;
+  overflow: hidden;
+
+  transition: background-color 500ms ease-out;
+}
+
+.game-background-5 {
+  background-color: #8C96EF;
+}
+.home-text-5 {
+  top: 11px;
+  font-family: 'Great Vibes', sans-serif;
+}
 
 .game-face {
   display: flex;
