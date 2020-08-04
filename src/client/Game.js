@@ -9,12 +9,19 @@ class Game extends Component {
   state = {
     background: null,
     backgroundHistory: new Set(),
+    waitingNum: 0,
   }
 
   componentDidMount() {
     this.setNextBackgroundNumber();
+
+    setInterval(() => {
+      this.cycleWaitingNum();
+    }, 1000);
   }
 
+  // This function will randomly select a theme for each question, but will also
+  // ensure that all 5 themes are used before the same theme is selected again.
   setNextBackgroundNumber() {
     const { backgroundHistory } = this.state;
     const allOptions = [0, 1, 2, 3, 4, 5];
@@ -37,6 +44,13 @@ class Game extends Component {
     this.setState({
       background: bgNum,
       backgroundHistory,
+    });
+  }
+
+  cycleWaitingNum() {
+    const { waitingNum } = this.state;
+    this.setState({
+      waitingNum: (waitingNum + 1) % 4,
     });
   }
 
@@ -69,16 +83,28 @@ class Game extends Component {
   }
 
   renderWaitingToStart() {
-    const { background } = this.state;
+    const { background, waitingNum } = this.state;
+    let ellipsis;
+    switch (waitingNum) {
+      case 0:
+        ellipsis = '..';
+        break;
+      case 1:
+      case 3:
+        ellipsis = '...';
+        break;
+      case 4:
+      default:
+        ellipsis = '....';
+    }
+
     return (
       <div className={`game-background game-background-5 game-background-${background}`}>
         <div className="game-msg-text">
-          Waiting for Jess to start the game...
+          You're in!
         </div>
-        <div className="game-button-container">
-          <div className="game-button game-button-5" onClick={() => this.navigateHome()}>
-            <div className="game-button-text">Try again?</div>
-          </div>
+        <div className="game-msg-small-text game-msg-text-small">
+          Waiting for game to start{ellipsis}
         </div>
       </div>
     );
