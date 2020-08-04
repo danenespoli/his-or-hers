@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Spinner } from 'evergreen-ui';
+import Timer from './Timer';
 import './game.css';
 
 const NUM_BACKGROUNDS = 6;
@@ -95,12 +96,26 @@ class Game extends Component {
 
     return (
       <div className={`game-background game-background-5 game-background-${background}`}>
-        <div className="game-msg-text">
-          Failed to join :(
+        <div className="game-block game-guess-buttons">
+          <div className="game-button game-button-5" onClick={() => this.submitGuess('hers')}>
+            <div className="game-button-text">Steph</div>
+          </div>
+          <div className="game-button game-button-5" onClick={() => this.submitGuess('his')}>
+            <div className="game-button-text">Dustin</div>
+          </div>
         </div>
-        <div className="game-button-container">
-          <div className="game-button game-button-5" onClick={() => this.navigateHome()}>
-            <div className="game-button-text">Try again?</div>
+        <div className="game-question-text game-question-text-5">
+          {question}
+        </div>
+        <div className="game-block game-timer">
+          <Timer time={time} />
+        </div>
+        <div className="game-block game-hud">
+          <div className="game-msg-text game-score">
+            Score: 1
+          </div>
+          <div className="game-msg-text game-qnumber">
+            1 / 12
           </div>
         </div>
       </div>
@@ -138,31 +153,37 @@ class Game extends Component {
     );
   }
 
+  renderScoresView() {
+    const {
+      scores,
+    } = this.props;
+
+    const scoreList = scores.topScores.map(s => (
+      <div>
+        {s.name}  {s.score}
+      </div>
+    ));
+
+    return (
+      <div>
+        <div>
+          Your score: {scores.ownScore.score}
+        </div>
+        {scoreList}
+      </div>
+    );
+  }
 
   render() {
     const {
       joined,
       question,
       answer,
-      time,
       scores,
     } = this.props;
 
     if (scores) {
-      const scoreList = scores.topScores.map(s => (
-        <div>
-          {s.name}  {s.score}
-        </div>
-      ));
-
-      return (
-        <div>
-          <div>
-            Your score: {scores.ownScore.score}
-          </div>
-          {scoreList}
-        </div>
-      );
+      return this.renderScoresView();
     }
 
     // Failed to join.
@@ -178,9 +199,10 @@ class Game extends Component {
     }
 
     // User must now answer question!
-    if (answer === null) {
+    // TODO: uncomment if statement!
+    // if (answer === null) {
       return this.renderGameView();
-    }
+    // }
 
     // Display results with answer.
     return this.renderAnswerView();

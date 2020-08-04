@@ -20,19 +20,8 @@
   transition: background-color 500ms ease-out;
 }
 
-.game-background-5 {
-  background-color: #8C96EF;
-}
-.game-question-text-5 {
-  top: 11px;
-  font-family: 'Great Vibes', sans-serif;
-}
-.game-button-5 {
-  background-color: #7780CB;
-}
 
-
-
+/* FAILED TO JOIN / WAITING FOR GAME TO START */
 .game-msg-text {
   font-family: 'Recursive', sans-serif;
   font-size: 50px;
@@ -46,7 +35,6 @@
 }
 
 .game-button-container {
-  
 }
 
 .game-button {
@@ -86,12 +74,55 @@
 }
 
 
+/* GAME VIEW */
+.game-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.game-guess-buttons {
+  margin: 20px;
+}
+
+.game-question-text {
+  font-size: 76px;
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.game-timer {
+  margin: auto;
+}
+
+.game-hud {
+  margin-bottom: 0;
+  width: 100%;
+}
+.game-score {
+  margin: auto auto 50px 50px;
+}
+.game-qnumber {
+  margin: auto 50px 50px auto;
+}
+
+
+/* THEME-DEPENDENT PROPERTIES */
+.game-background-5 {
+  background-color: #8C96EF;
+}
+.game-question-text-5 {
+  font-family: 'Great Vibes', sans-serif;
+}
+.game-button-5 {
+  background-color: #7780CB;
+}
 
 
 
 
-
-
+/* UNUSED CURRENTLY */
 .game-face {
   display: flex;
   align-items: center;
