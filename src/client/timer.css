@@ -1,0 +1,29 @@
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 250px;
+}
+
+.timer-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #7780CB;
+
+  transition: height 200ms ease, width 200ms ease;
+}
+
+.timer-text {
+  color: #FFFFFF;
+  font-family: 'Recursive', sans-serif;
+  font-size: 64px;
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+  user-select: none;
+}
+
+.timer-danger {
+  color: #FF7474;
+}

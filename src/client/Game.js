@@ -97,25 +97,26 @@ class Game extends Component {
     return (
       <div className={`game-background game-background-5 game-background-${background}`}>
         <div className="game-block game-guess-buttons">
-          <div className="game-button game-button-5" onClick={() => this.submitGuess('hers')}>
-            <div className="game-button-text">Steph</div>
+          <div className="game-button game-guess-button game-button-5" onClick={() => this.submitGuess('hers')}>
+            <div className="game-button-text game-guess-button-text">Steph</div>
           </div>
-          <div className="game-button game-button-5" onClick={() => this.submitGuess('his')}>
-            <div className="game-button-text">Dustin</div>
+          <div className="game-button game-guess-button game-button-5" onClick={() => this.submitGuess('his')}>
+            <div className="game-button-text game-guess-button-text">Dustin</div>
           </div>
         </div>
         <div className="game-question-text game-question-text-5">
           {question}
         </div>
-        <div className="game-block game-timer">
-          <Timer time={time} />
-        </div>
         <div className="game-block game-hud">
           <div className="game-msg-text game-score">
             Score: 1
           </div>
+          <div className="game-block game-timer">
+            <Timer time={time} />
+          </div>
           <div className="game-msg-text game-qnumber">
-            1 / 12
+            <span>1</span>
+            <span className="game-qdenominator"> / 12</span>
           </div>
         </div>
       </div>

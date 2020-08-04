@@ -85,26 +85,46 @@
 }
 
 .game-guess-buttons {
-  margin: 20px;
+  margin-bottom: 45px;
+}
+
+.game-guess-button {
+  width: 200px;
+  height: 75px;
+}
+
+.game-guess-button-text {
+  font-size: 25px;
 }
 
 .game-question-text {
   font-size: 76px;
   text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+  margin: 20px auto auto;
 }
 
 .game-timer {
-  margin: auto;
+  margin: auto auto 100px;
+  width: 200px;
 }
 
 .game-hud {
-  margin-bottom: 0;
+  margin: 0;
 }
 .game-score {
   margin: auto auto 50px 50px;
+  text-align: left;
+  width: 250px;
+  width: 250px;
 }
 .game-qnumber {
   margin: auto 50px 50px auto;
+  text-align: right;
+  width: 250px;
+  width: 250px;
+}
+.game-qdenominator {
+  opacity: 0.5;
 }
 
 

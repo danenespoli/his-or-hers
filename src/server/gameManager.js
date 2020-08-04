@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 
 // * CONSTANTS *
+// *** IF THIS VALUE CHANGES, MUST UPDATE TIMER.JS ***
 const MAX_TIME = 30;
 
 // * GLOBALS *
