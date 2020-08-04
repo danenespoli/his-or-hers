@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button } from 'evergreen-ui';
+import { Spinner } from 'evergreen-ui';
 import './game.css';
 
 const NUM_BACKGROUNDS = 6;
@@ -9,15 +9,10 @@ class Game extends Component {
   state = {
     background: null,
     backgroundHistory: new Set(),
-    waitingNum: 0,
   }
 
   componentDidMount() {
     this.setNextBackgroundNumber();
-
-    setInterval(() => {
-      this.cycleWaitingNum();
-    }, 1000);
   }
 
   // This function will randomly select a theme for each question, but will also
@@ -44,13 +39,6 @@ class Game extends Component {
     this.setState({
       background: bgNum,
       backgroundHistory,
-    });
-  }
-
-  cycleWaitingNum() {
-    const { waitingNum } = this.state;
-    this.setState({
-      waitingNum: (waitingNum + 1) % 4,
     });
   }
 
@@ -83,20 +71,7 @@ class Game extends Component {
   }
 
   renderWaitingToStart() {
-    const { background, waitingNum } = this.state;
-    let ellipsis;
-    switch (waitingNum) {
-      case 0:
-        ellipsis = '..';
-        break;
-      case 1:
-      case 3:
-        ellipsis = '...';
-        break;
-      case 4:
-      default:
-        ellipsis = '....';
-    }
+    const { background } = this.state;
 
     return (
       <div className={`game-background game-background-5 game-background-${background}`}>
@@ -104,8 +79,9 @@ class Game extends Component {
           You're in!
         </div>
         <div className="game-msg-small-text game-msg-text-small">
-          Waiting for game to start{ellipsis}
+          Waiting for game to start...
         </div>
+        <Spinner size={24} />
       </div>
     );
   }
