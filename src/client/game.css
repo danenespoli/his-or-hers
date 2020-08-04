@@ -115,12 +115,10 @@
   margin: auto auto 50px 50px;
   text-align: left;
   width: 250px;
-  width: 250px;
 }
 .game-qnumber {
   margin: auto 50px 50px auto;
   text-align: right;
-  width: 250px;
   width: 250px;
 }
 .game-qdenominator {
