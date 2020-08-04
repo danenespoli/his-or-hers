@@ -167,9 +167,10 @@ class Game extends Component {
 
     // Failed to join.
     // TODO: simply show the game but don't allow the user to play.
-    if (!joined) {
-      return this.renderNotJoined();
-    }
+    // TODO: uncomment
+    // if (!joined) {
+    //   return this.renderNotJoined();
+    // }
 
     // Waiting to start game.
     if (question === null) {
