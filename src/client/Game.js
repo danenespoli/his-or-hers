@@ -56,7 +56,7 @@ class Game extends Component {
     const { background } = this.state;
     return (
       <div className={`game-background game-background-5 game-background-${background}`}>
-        <div className="game-error-text">
+        <div className="game-msg-text">
           Failed to join :(
         </div>
         <div className="game-button-container">
@@ -69,37 +69,59 @@ class Game extends Component {
   }
 
   renderWaitingToStart() {
+    const { background } = this.state;
     return (
-      <div>
-        Waiting for the game to start...
+      <div className={`game-background game-background-5 game-background-${background}`}>
+        <div className="game-msg-text">
+          Waiting for Jess to start the game...
+        </div>
+        <div className="game-button-container">
+          <div className="game-button game-button-5" onClick={() => this.navigateHome()}>
+            <div className="game-button-text">Try again?</div>
+          </div>
+        </div>
       </div>
     );
   }
 
   renderGameView() {
+    const { background } = this.state;
     const {
       question,
       time,
     } = this.props;
 
     return (
-      <div>
-        <div>
-          {question}
+      <div className={`game-background game-background-5 game-background-${background}`}>
+        <div className="game-msg-text">
+          Failed to join :(
         </div>
-        <div>
-          Time left: {time}
-        </div>
-        <div>
-          <Button onClick={() => this.submitGuess('his')}>
-            His
-          </Button>
-          <Button onClick={() => this.submitGuess('hers')}>
-            Hers
-          </Button>
+        <div className="game-button-container">
+          <div className="game-button game-button-5" onClick={() => this.navigateHome()}>
+            <div className="game-button-text">Try again?</div>
+          </div>
         </div>
       </div>
     );
+
+    // return (
+    //   <div>
+    //     <div>
+    //       {question}
+    //     </div>
+    //     <div>
+    //       Time left: {time}
+    //     </div>
+    //     <div>
+    //       <Button onClick={() => this.submitGuess('his')}>
+    //         His
+    //       </Button>
+    //       <Button onClick={() => this.submitGuess('hers')}>
+    //         Hers
+    //       </Button>
+    //     </div>
+    //   </div>
+    // );
   }
 
   renderAnswerView() {

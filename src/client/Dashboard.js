@@ -91,13 +91,18 @@ export default class Dashboard extends Component {
 
   renderDefaultControls() {
     return (
-      <div>
-        <Button onClick={() => this.startGame()}>
-          Start Game!
-        </Button>
-        <Button onClick={() => this.enterEditQuestionMode()}>
-          Edit Questions
-        </Button>
+      <div className="dash-background">
+        <span className="dash-element">
+          Wait until you're sure everyone has joined before starting the game. They won't be able to join once it's started!
+        </span>
+        <div className="dash-element">
+          <Button onClick={() => this.startGame()}>
+            Start Game!
+          </Button>
+          <Button onClick={() => this.enterEditQuestionMode()}>
+            Edit Questions
+          </Button>
+        </div>
       </div>
     );
   }
@@ -134,7 +139,7 @@ export default class Dashboard extends Component {
     }
 
     return (
-      <div>
+      <div className="dash-background">
         <Button onClick={() => this.setState({ editQuestionMode: false })}>
           Back
         </Button>
@@ -164,7 +169,7 @@ export default class Dashboard extends Component {
 
   renderDuringGame() {
     return (
-      <div>
+      <div className="dash-background">
         <Button onClick={() => this.endGame()}>
           End Game
         </Button>

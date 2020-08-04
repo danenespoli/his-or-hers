@@ -1,0 +1,26 @@
+.dash-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background-color: #8C96EF;
+}
+
+.dash-element {
+  margin: 20px;
+}
+
