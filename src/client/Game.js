@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Button } from 'evergreen-ui';
 import './game.css';
 
 const NUM_BACKGROUNDS = 6;
 
-export default class Game extends Component {
+class Game extends Component {
   state = {
     background: null,
     backgroundHistory: new Set(),
@@ -45,11 +46,24 @@ export default class Game extends Component {
     makeGuess(guess);
   }
 
+  navigateHome() {
+    // Go to game page.
+    const { history } = this.props;
+    history.push('/');
+  }
+
   renderNotJoined() {
     const { background } = this.state;
     return (
       <div className={`game-background game-background-5 game-background-${background}`}>
-        Failed to join :( try again.
+        <div className="game-error-text">
+          Failed to join :(
+        </div>
+        <div className="game-button-container">
+          <div className="game-button game-button-5" onClick={() => this.navigateHome()}>
+            <div className="game-button-text">Try again?</div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -147,3 +161,5 @@ export default class Game extends Component {
     return this.renderAnswerView();
   }
 }
+
+export default withRouter(Game);
