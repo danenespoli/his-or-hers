@@ -193,7 +193,7 @@ const gameManager = {
     const q = questionData[gameState.question];
     const player = players[id];
     if (!player) {
-      // TODO: handle error.
+      // TODO: handle error - add the player anyways, with a bunch of 0s for their previous guesses!
     }
 
     const score = guess === q.answer ? 1 : 0;
