@@ -17,6 +17,7 @@ const gameState = {
 const players = {};
 let timer = null;
 let questionData = null;
+let theme = null;
 const themeHistory = new Set();
 
 
@@ -97,8 +98,8 @@ const gameManager = {
     // Send a new theme for this question.
     this._setNextTheme();
 
-    // Send question, question number, and total number of questions.
-    io.emit('question', q.question, gameState.question + 1, questionData.length);
+    // Send question, question number, total number of questions, and theme.
+    io.emit('question', q.question, gameState.question + 1, questionData.length, theme);
 
     // Count down from 30!
     gameState.time = MAX_TIME;
@@ -135,10 +136,8 @@ const gameManager = {
 
     // Random number out of available numbers.
     const randomIndex = Math.floor(Math.random() * Math.floor(currentOptions.length));
-    const theme = currentOptions[randomIndex];
+    theme = currentOptions[randomIndex];
     themeHistory.add(theme);
-
-    io.emit('theme', theme);
   },
 
   _sendIndividualScores() {
@@ -251,6 +250,7 @@ const gameManager = {
       clearInterval(timer);
     }
     timer = null;
+    theme = null;
     themeHistory.clear();
 
     await this.fetchQuestionData();

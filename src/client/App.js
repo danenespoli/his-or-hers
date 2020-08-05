@@ -41,12 +41,13 @@ export default class App extends Component {
       });
     });
 
-    socket.on('question', (question, questionNum, questionTotal) => {
+    socket.on('question', (question, questionNum, questionTotal, theme) => {
       console.log(question);
       this.setState({
         question,
         questionNum,
         questionTotal,
+        theme,
         answer: null,
         guess: null,
       });
@@ -67,12 +68,6 @@ export default class App extends Component {
     socket.on('timer', (time) => {
       this.setState({
         time,
-      });
-    });
-
-    socket.on('theme', (theme) => {
-      this.setState({
-        theme,
       });
     });
 
