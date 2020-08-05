@@ -44,7 +44,6 @@ class Game extends Component {
   }
 
   submitGuess(guess) {
-    console.log(guess);
     const { makeGuess } = this.props;
     makeGuess(guess);
   }
@@ -80,7 +79,7 @@ class Game extends Component {
           You're in!
         </div>
         <div className="game-msg-small-text game-msg-text-small">
-          Waiting for game to start...
+          The game will be starting shortly...
         </div>
         <Spinner size={24} />
       </div>
@@ -92,15 +91,16 @@ class Game extends Component {
     const {
       question,
       time,
+      guess,
     } = this.props;
 
     return (
       <div className={`game-background game-background-5 game-background-${background}`}>
         <div className="game-block game-guess-buttons">
-          <div className="game-button game-guess-button game-button-5" onClick={() => this.submitGuess('hers')}>
+          <div className={`game-button game-guess-button game-button-5 ${guess === 'hers' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('hers')}>
             <div className="game-button-text game-guess-button-text">Steph</div>
           </div>
-          <div className="game-button game-guess-button game-button-5" onClick={() => this.submitGuess('his')}>
+          <div className={`game-button game-guess-button game-button-5 ${guess === 'his' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('his')}>
             <div className="game-button-text game-guess-button-text">Dustin</div>
           </div>
         </div>
@@ -109,7 +109,7 @@ class Game extends Component {
         </div>
         <div className="game-block game-hud">
           <div className="game-msg-text game-score">
-            Score: 1
+            Score: 0
           </div>
           <div className="game-block game-timer">
             <Timer time={time} />

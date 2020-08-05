@@ -10,7 +10,7 @@ import Home from './Home';
 import Dashboard from './Dashboard';
 import Game from './Game';
 
-const socket = require('socket.io-client')(process.env.WEBSOCKET_URL || 'localhost:8080');
+const socket = require('socket.io-client')(process.env.WEBSOCKET_URL || 'localhost:8081');
 
 
 export default class App extends Component {
@@ -18,7 +18,9 @@ export default class App extends Component {
     joined: false,
     question: null,
     answer: null,
+    guess: null,
     time: 30,
+    score: 0,
     scores: null,
   };
 
@@ -37,6 +39,7 @@ export default class App extends Component {
       this.setState({
         question,
         answer: null,
+        guess: null,
       });
     });
 
@@ -79,6 +82,9 @@ export default class App extends Component {
 
   makeGuess(guess) {
     socket.emit('guess', guess);
+    this.setState({
+      guess,
+    });
   }
 
   render() {
@@ -86,6 +92,7 @@ export default class App extends Component {
       joined,
       question,
       answer,
+      guess,
       time,
       ended,
       scores,
@@ -106,10 +113,11 @@ export default class App extends Component {
               joined={joined}
               question={question}
               answer={answer}
+              guess={guess}
               time={time}
               ended={ended}
               scores={scores}
-              makeGuess={(guess) => this.makeGuess(guess)}
+              makeGuess={(g) => this.makeGuess(g)}
             />
           </Route>
           <Route path="/">

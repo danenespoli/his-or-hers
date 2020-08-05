@@ -13,7 +13,7 @@
   border-radius: 50%;
   background-color: #7780CB;
 
-  transition: height 200ms ease, width 200ms ease;
+  transition: height 300ms ease-in-out, width 300ms ease-in-out;
 }
 
 .timer-text {

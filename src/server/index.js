@@ -47,7 +47,7 @@ const webServer = {
     gameManager.enableWebSockets(httpServer);
   },
 
-  startWebServer(PORT_NUMBER = process.env.PORT || 8080) {
+  startWebServer(PORT_NUMBER = process.env.PORT || 8081) {
     const app = express();
     const httpServer = http.Server(app);
 
