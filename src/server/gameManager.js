@@ -14,9 +14,9 @@ const gameState = {
   question: 0,
   time: MAX_TIME,
 };
+const players = {};
 let timer = null;
 let questionData = null;
-let players = {};
 
 
 const gameManager = {
@@ -78,6 +78,7 @@ const gameManager = {
     if (gameState.question < questionData.length) {
       // Send the next question.
       this._sendQuestion();
+      this._sendIndividualScores();
     } else {
       // Otherwise, all questions have been sent, so signal game to end.
       this._computeAndEmitScores();
@@ -92,8 +93,8 @@ const gameManager = {
   _sendQuestion() {
     const q = questionData[gameState.question];
 
-    // Send question!
-    io.emit('question', q.question);
+    // Send question, question number, and total number of questions.
+    io.emit('question', q.question, gameState.question + 1, questionData.length);
 
     // Count down from 30!
     gameState.time = MAX_TIME;
@@ -108,8 +109,26 @@ const gameManager = {
         clearInterval(timer);
         // Send answer for question.
         io.emit('answer', q.answer);
+        // Send each player their updated score.
+        this._sendIndividualScores();
       }
     }, 1000);
+  },
+
+  _sendIndividualScores() {
+    for (let i = 0; i < Object.entries(players).length; i++) {
+      const [socketId, player] = Object.entries(players)[i];
+      const score = this._getScoreForPlayer(player);
+      io.to(socketId).emit('score', score);
+    }
+  },
+
+  _getScoreForPlayer(player) {
+    let score = 0;
+    for (let j = 0; j < player.guesses.length; j++) {
+      score += player.guesses[j];
+    }
+    return score;
   },
 
   _computeAndEmitScores() {
@@ -119,11 +138,7 @@ const gameManager = {
     // Tally scores for all players.
     for (let i = 0; i < playerEntries.length; i++) {
       const [socketId, player] = playerEntries[i];
-
-      let score = 0;
-      for (let j = 0; j < player.guesses.length; j++) {
-        score += player.guesses[j];
-      }
+      const score = this._getScoreForPlayer(player);
 
       scores[socketId] = {
         id: socketId,
@@ -138,14 +153,8 @@ const gameManager = {
     )).slice(0, 5);
 
     // Emit own score and top 5 scores to each player.
-    for (let i = 0; i < playerEntries.length; i++) {
-      const [socketId, player] = playerEntries[i];
-      console.log(player);
-      io.to(socketId).emit('show-scores', {
-        topScores,
-        ownScore: scores[socketId],
-      });
-    }
+    io.emit('top-scores', topScores);
+    this._sendIndividualScores();
   },
 
   acceptGuess(id, guess) {

@@ -92,6 +92,9 @@ class Game extends Component {
       question,
       time,
       guess,
+      score,
+      questionNum,
+      questionTotal,
     } = this.props;
 
     return (
@@ -109,14 +112,14 @@ class Game extends Component {
         </div>
         <div className="game-block game-hud">
           <div className="game-msg-text game-score">
-            Score: 0
+            Score: {score}
           </div>
           <div className="game-block game-timer">
             <Timer time={time} />
           </div>
           <div className="game-msg-text game-qnumber">
-            <span>1</span>
-            <span className="game-qdenominator"> / 12</span>
+            <span>{questionNum}</span>
+            <span className="game-qdenominator"> / {questionTotal}</span>
           </div>
         </div>
       </div>

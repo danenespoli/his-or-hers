@@ -12,16 +12,22 @@ import Game from './Game';
 
 const socket = require('socket.io-client')(process.env.WEBSOCKET_URL || 'localhost:8081');
 
+const initialAppState = {
+  joined: false,
+  question: null,
+  questionNum: 1,
+  questionTotal: 1,
+  answer: null,
+  guess: null,
+  time: 30,
+  score: 0,
+  topScores: null,
+};
+
 
 export default class App extends Component {
   state = {
-    joined: false,
-    question: null,
-    answer: null,
-    guess: null,
-    time: 30,
-    score: 0,
-    scores: null,
+    ...initialAppState,
   };
 
   constructor() {
@@ -34,33 +40,39 @@ export default class App extends Component {
       });
     });
 
-    socket.on('question', (question) => {
+    socket.on('question', (question, questionNum, questionTotal) => {
       console.log(question);
       this.setState({
         question,
+        questionNum,
+        questionTotal,
         answer: null,
         guess: null,
       });
     });
 
     socket.on('answer', (answer) => {
-      console.log(answer);
       this.setState({
         answer,
       });
     });
 
+    socket.on('score', (score) => {
+      this.setState({
+        score,
+      });
+    });
+
     socket.on('timer', (time) => {
-      console.log(time);
       this.setState({
         time,
       });
     });
 
-    socket.on('show-scores', scores => {
+    socket.on('top-scores', topScores => {
       console.log('Game has ended!');
       this.setState({
-        scores,
+        topScores,
       });
     });
 
@@ -68,10 +80,7 @@ export default class App extends Component {
       console.log('Ending game!');
       // Reset to initial state.
       this.setState({
-        question: null,
-        answer: null,
-        time: 30,
-        scores: null,
+        ...initialAppState,
       });
     });
   }
@@ -91,11 +100,14 @@ export default class App extends Component {
     const {
       joined,
       question,
+      questionNum,
+      questionTotal,
       answer,
       guess,
       time,
       ended,
-      scores,
+      score,
+      topScores,
     } = this.state;
 
     return (
@@ -116,7 +128,10 @@ export default class App extends Component {
               guess={guess}
               time={time}
               ended={ended}
-              scores={scores}
+              score={score}
+              questionNum={questionNum}
+              questionTotal={questionTotal}
+              topScores={topScores}
               makeGuess={(g) => this.makeGuess(g)}
             />
           </Route>
