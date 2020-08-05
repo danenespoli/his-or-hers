@@ -11,7 +11,6 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: #7780CB;
 
   transition: height 300ms ease-in-out, width 300ms ease-in-out;
 }
@@ -26,4 +25,24 @@
 
 .timer-danger {
   color: #FF7474;
+}
+
+/* THEME DEPENDENT PROPERTIES */
+.timer-circle-0 {
+  background-color: #E9CF48;
+}
+.timer-circle-1 {
+  background-color: #AE62D2;
+}
+.timer-circle-2 {
+  background-color: #DB6565;
+}
+.timer-circle-3 {
+  background-color: #95CA7C;
+}
+.timer-circle-4 {
+  background-color: #679FE1;
+}
+.timer-circle-5 {
+  background-color: #7780CB;
 }

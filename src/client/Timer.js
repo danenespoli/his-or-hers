@@ -9,7 +9,7 @@ const MIN_SIZE = 60;
 const MAX_TIME = 30;
 
 export default function Timer(props) {
-  const { time } = props;
+  const { time, theme } = props;
   const size = (MAX_SIZE - MIN_SIZE) * (time / MAX_TIME) + MIN_SIZE;
 
   const dangerClass = time <= 5 ? 'timer-danger' : '';
@@ -17,7 +17,7 @@ export default function Timer(props) {
   return (
     <div className="timer">
       <div
-        className="timer-circle"
+        className={`timer-circle timer-circle-${theme}`}
         style={{
           height: `${size}px`,
           width: `${size}px`,

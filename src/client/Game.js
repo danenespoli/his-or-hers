@@ -7,42 +7,6 @@ import './game.css';
 const NUM_BACKGROUNDS = 6;
 
 class Game extends Component {
-  state = {
-    background: null,
-    backgroundHistory: new Set(),
-  }
-
-  componentDidMount() {
-    this.setNextBackgroundNumber();
-  }
-
-  // This function will randomly select a theme for each question, but will also
-  // ensure that all 5 themes are used before the same theme is selected again.
-  setNextBackgroundNumber() {
-    const { backgroundHistory } = this.state;
-    const allOptions = [0, 1, 2, 3, 4, 5];
-    let currentOptions = allOptions.filter(o => (
-      backgroundHistory.has(o)
-    ));
-
-    // Already used all options, so reset the history.
-    if (currentOptions.length === 0) {
-      currentOptions = allOptions;
-      backgroundHistory.clear();
-    }
-
-    // Random number out of available numbers.
-    const randomIndex = Math.floor(Math.random() * Math.floor(currentOptions.length));
-    const bgNum = currentOptions[randomIndex];
-
-    backgroundHistory.add(bgNum);
-
-    this.setState({
-      background: bgNum,
-      backgroundHistory,
-    });
-  }
-
   submitGuess(guess) {
     const { makeGuess } = this.props;
     makeGuess(guess);
@@ -55,14 +19,15 @@ class Game extends Component {
   }
 
   renderNotJoined() {
-    const { background } = this.state;
+    const { theme } = this.props;
+
     return (
-      <div className={`game-background game-background-5 game-background-${background}`}>
+      <div className={`game-background game-background-${theme}`}>
         <div className="game-msg-text">
           Failed to join :(
         </div>
         <div className="game-button-container">
-          <div className="game-button game-button-5" onClick={() => this.navigateHome()}>
+          <div className={`game-button game-button-${theme}`} onClick={() => this.navigateHome()}>
             <div className="game-button-text">Try again?</div>
           </div>
         </div>
@@ -71,10 +36,10 @@ class Game extends Component {
   }
 
   renderWaitingToStart() {
-    const { background } = this.state;
+    const { theme } = this.props;
 
     return (
-      <div className={`game-background game-background-5 game-background-${background}`}>
+      <div className={`game-background game-background-${theme}`}>
         <div className="game-msg-text">
           You're in!
         </div>
@@ -87,7 +52,6 @@ class Game extends Component {
   }
 
   renderGameView() {
-    const { background } = this.state;
     const {
       question,
       time,
@@ -95,19 +59,20 @@ class Game extends Component {
       score,
       questionNum,
       questionTotal,
+      theme,
     } = this.props;
 
     return (
-      <div className={`game-background game-background-5 game-background-${background}`}>
+      <div className={`game-background game-background-${theme}`}>
         <div className="game-block game-guess-buttons">
-          <div className={`game-button game-guess-button game-button-5 ${guess === 'hers' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('hers')}>
+          <div className={`game-button game-guess-button game-button-${theme} ${guess === 'hers' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('hers')}>
             <div className="game-button-text game-guess-button-text">Steph</div>
           </div>
-          <div className={`game-button game-guess-button game-button-5 ${guess === 'his' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('his')}>
+          <div className={`game-button game-guess-button game-button-${theme} ${guess === 'his' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('his')}>
             <div className="game-button-text game-guess-button-text">Dustin</div>
           </div>
         </div>
-        <div className="game-question-text game-question-text-5">
+        <div className={`game-question-text game-question-text-${theme}`}>
           {question}
         </div>
         <div className="game-block game-hud">
@@ -115,7 +80,10 @@ class Game extends Component {
             Score: {score}
           </div>
           <div className="game-block game-timer">
-            <Timer time={time} />
+            <Timer
+              time={time}
+              theme={theme}
+            />
           </div>
           <div className="game-msg-text game-qnumber">
             <span>{questionNum}</span>
@@ -124,25 +92,6 @@ class Game extends Component {
         </div>
       </div>
     );
-
-    // return (
-    //   <div>
-    //     <div>
-    //       {question}
-    //     </div>
-    //     <div>
-    //       Time left: {time}
-    //     </div>
-    //     <div>
-    //       <Button onClick={() => this.submitGuess('his')}>
-    //         His
-    //       </Button>
-    //       <Button onClick={() => this.submitGuess('hers')}>
-    //         Hers
-    //       </Button>
-    //     </div>
-    //   </div>
-    // );
   }
 
   renderAnswerView() {

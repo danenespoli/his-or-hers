@@ -21,6 +21,7 @@ const initialAppState = {
   guess: null,
   time: 30,
   score: 0,
+  theme: 4,
   topScores: null,
 };
 
@@ -69,6 +70,12 @@ export default class App extends Component {
       });
     });
 
+    socket.on('theme', (theme) => {
+      this.setState({
+        theme,
+      });
+    });
+
     socket.on('top-scores', topScores => {
       console.log('Game has ended!');
       this.setState({
@@ -107,6 +114,7 @@ export default class App extends Component {
       time,
       ended,
       score,
+      theme,
       topScores,
     } = this.state;
 
@@ -129,6 +137,7 @@ export default class App extends Component {
               time={time}
               ended={ended}
               score={score}
+              theme={theme}
               questionNum={questionNum}
               questionTotal={questionTotal}
               topScores={topScores}

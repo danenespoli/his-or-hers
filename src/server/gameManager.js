@@ -17,6 +17,7 @@ const gameState = {
 const players = {};
 let timer = null;
 let questionData = null;
+const themeHistory = new Set();
 
 
 const gameManager = {
@@ -93,6 +94,9 @@ const gameManager = {
   _sendQuestion() {
     const q = questionData[gameState.question];
 
+    // Send a new theme for this question.
+    this._setNextTheme();
+
     // Send question, question number, and total number of questions.
     io.emit('question', q.question, gameState.question + 1, questionData.length);
 
@@ -113,6 +117,28 @@ const gameManager = {
         this._sendIndividualScores();
       }
     }, 1000);
+  },
+
+  // This function will randomly select a theme for each question, but will also
+  // ensure that all 5 themes are used before the same theme is selected again.
+  _setNextTheme() {
+    const allOptions = [0, 1, 2, 3, 4, 5];
+    let currentOptions = allOptions.filter(o => (
+      !themeHistory.has(o)
+    ));
+
+    // Already used all options, so reset the history.
+    if (currentOptions.length === 0) {
+      currentOptions = allOptions;
+      themeHistory.clear();
+    }
+
+    // Random number out of available numbers.
+    const randomIndex = Math.floor(Math.random() * Math.floor(currentOptions.length));
+    const theme = currentOptions[randomIndex];
+    themeHistory.add(theme);
+
+    io.emit('theme', theme);
   },
 
   _sendIndividualScores() {
@@ -166,7 +192,9 @@ const gameManager = {
 
     const q = questionData[gameState.question];
     const player = players[id];
-    console.log(`${player.name} guessed ${guess}!`);
+    if (!player) {
+      // TODO: handle error.
+    }
 
     const score = guess === q.answer ? 1 : 0;
     if (player.guesses.length - 1 < gameState.question) {
@@ -223,6 +251,7 @@ const gameManager = {
       clearInterval(timer);
     }
     timer = null;
+    themeHistory.clear();
 
     await this.fetchQuestionData();
   },
