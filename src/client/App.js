@@ -37,6 +37,7 @@ export default class App extends Component {
     socket.on('join-success', () => {
       console.log('Joined game!');
       this.setState({
+        ...initialAppState,
         joined: true,
       });
     });
