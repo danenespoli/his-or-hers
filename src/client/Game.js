@@ -8,8 +8,8 @@ const NUM_BACKGROUNDS = 6;
 
 class Game extends Component {
   submitGuess(guess) {
-    const { makeGuess } = this.props;
-    makeGuess(guess);
+    const { makeGuess, name } = this.props;
+    makeGuess(guess, name);
   }
 
   _navigateHome() {
@@ -89,6 +89,9 @@ class Game extends Component {
 
     return (
       <div className={`game-background game-background-${theme}`}>
+        <div className="game-block game-correct-text">
+          {(guess === answer && guess !== null) ? 'Correct!' : ''}
+        </div>
         <div className="game-block game-guess-buttons">
           <div className={`game-button game-guess-button game-button-${theme} ${hersButtonClasses.join(' ')}`} onClick={() => this.submitGuess('hers')}>
             <div className="game-button-text game-guess-button-text">Steph</div>

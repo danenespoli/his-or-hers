@@ -14,6 +14,7 @@ const socket = require('socket.io-client')(process.env.WEBSOCKET_URL || 'localho
 
 const initialAppState = {
   joined: false,
+  name: null,
   question: null,
   questionNum: 1,
   questionTotal: 1,
@@ -90,10 +91,13 @@ export default class App extends Component {
 
   joinGame(name) {
     socket.emit('join', name);
+    this.setState({
+      name,
+    });
   }
 
-  makeGuess(guess) {
-    socket.emit('guess', guess);
+  makeGuess(guess, name) {
+    socket.emit('guess', guess, name);
     this.setState({
       guess,
     });
@@ -102,6 +106,7 @@ export default class App extends Component {
   render() {
     const {
       joined,
+      name,
       question,
       questionNum,
       questionTotal,
@@ -127,6 +132,7 @@ export default class App extends Component {
           <Route path="/game">
             <Game
               joined={joined}
+              name={name}
               question={question}
               answer={answer}
               guess={guess}
@@ -137,12 +143,12 @@ export default class App extends Component {
               questionNum={questionNum}
               questionTotal={questionTotal}
               topScores={topScores}
-              makeGuess={(g) => this.makeGuess(g)}
+              makeGuess={(g, n) => this.makeGuess(g, n)}
             />
           </Route>
           <Route path="/">
             <Home
-              joinGame={(name) => this.joinGame(name)}
+              joinGame={(n) => this.joinGame(n)}
             />
           </Route>
         </Switch>

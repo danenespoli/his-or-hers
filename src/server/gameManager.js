@@ -36,8 +36,8 @@ const gameManager = {
         }
       });
 
-      socket.on('guess', guess => {
-        this.acceptGuess(socket.id, guess);
+      socket.on('guess', (guess, name) => {
+        this.acceptGuess(socket.id, guess, name);
       });
 
       socket.on('disconnect', () => {
@@ -52,9 +52,17 @@ const gameManager = {
   */
 
   addPlayer(id, name) {
+    const guesses = [];
+    const didGuess = [];
+    for (let i = 0; i < questionData.length; i++) {
+      guesses.push(0);
+      didGuess.push(false);
+    }
+
     players[id] = {
       name,
-      guesses: [],
+      guesses,
+      didGuess,
     };
 
     console.log(players);
@@ -110,7 +118,7 @@ const gameManager = {
     timer = setInterval(() => {
       io.emit('timer', gameState.time--);
 
-      if (gameState.time < 0) {
+      if (gameState.time < 0 || this._allPlayersAnswered()) {
         clearInterval(timer);
         // Send answer for question.
         io.emit('answer', q.answer);
@@ -118,6 +126,10 @@ const gameManager = {
         this._sendIndividualScores();
       }
     }, 1000);
+  },
+
+  _allPlayersAnswered() {
+    return false;
   },
 
   // This function will randomly select a theme for each question, but will also
@@ -182,7 +194,7 @@ const gameManager = {
     this._sendIndividualScores();
   },
 
-  acceptGuess(id, guess) {
+  acceptGuess(id, guess, name) {
     // Make sure user can still guess.
     if (gameState.time <= 0) {
       console.log('No time left to guess!');
@@ -192,7 +204,14 @@ const gameManager = {
     const q = questionData[gameState.question];
     const player = players[id];
     if (!player) {
-      // TODO: handle error - add the player anyways, with a bunch of 0s for their previous guesses!
+      // Handle error - add the player anyways, with a bunch of 0s for their previous guesses!
+      this.addPlayer(id, name);
+    }
+
+    // Update name if this websocket changed theirs.
+    if (player.name !== name) {
+      console.log(`Updating player name from ${player.name} to ${name}`);
+      player.name = name;
     }
 
     const score = guess === q.answer ? 1 : 0;

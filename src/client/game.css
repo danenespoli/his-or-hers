@@ -77,6 +77,13 @@
   width: 100%;
 }
 
+.game-correct-text {
+  height: 100px;
+  margin-top: 50px;
+  font-size: 15px;
+  font-family: 'Recursive', sans-serif;
+}
+
 .game-guess-buttons {
   margin-bottom: 45px;
 }
