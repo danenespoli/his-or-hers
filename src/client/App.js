@@ -10,7 +10,7 @@ import Home from './Home';
 import Dashboard from './Dashboard';
 import Game from './Game';
 
-const socket = require('socket.io-client')(process.env.WEBSOCKET_URL || 'localhost:8081');
+const socket = require('socket.io-client')();
 
 const initialAppState = {
   joined: false,
