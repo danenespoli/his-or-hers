@@ -99,9 +99,11 @@
 
 .game-guess-button-correct {
   background-color: #95CA7C;
+  opacity: 1;
 }
 .game-guess-button-wrong {
   background-color: #DB6565;
+  opacity: 1;
 }
 
 .game-guess-button-text {
