@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
-const AWS = require('aws-sdk');
 const gameManager = require('./gameManager');
 
 const webServer = {
