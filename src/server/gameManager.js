@@ -22,7 +22,8 @@ const themeHistory = new Set();
 
 
 const gameManager = {
-  enableWebSockets(httpServer) {
+  async enableWebSockets(httpServer) {
+    await this.fetchQuestionData();
     io = require('socket.io')(httpServer);
 
     io.on('connection', socket => {
@@ -30,10 +31,8 @@ const gameManager = {
 
       socket.on('join', name => {
         console.log(`User "${name}" joining.`);
-        if (!gameState.started) {
-          this.addPlayer(socket.id, name);
-          socket.emit('join-success');
-        }
+        this.addPlayer(socket.id, name);
+        socket.emit('join-success');
       });
 
       socket.on('guess', (guess, name) => {
@@ -129,7 +128,14 @@ const gameManager = {
   },
 
   _allPlayersAnswered() {
-    return false;
+    const playerValues = Object.values(players);
+    for (let i = 0; i < playerValues.length; i++) {
+      const player = playerValues[i];
+      if (!player.didGuess[gameState.question]) {
+        return false;
+      }
+    }
+    return true;
   },
 
   // This function will randomly select a theme for each question, but will also
@@ -214,12 +220,10 @@ const gameManager = {
       player.name = name;
     }
 
+    // Figure out if the guess is correct.
     const score = guess === q.answer ? 1 : 0;
-    if (player.guesses.length - 1 < gameState.question) {
-      player.guesses.push(score);
-    } else {
-      player.guesses[gameState.question] = score;
-    }
+    player.guesses[gameState.question] = score;
+    player.didGuess[gameState.question] = true;
 
     console.log(players);
   },

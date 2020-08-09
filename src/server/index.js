@@ -43,16 +43,16 @@ const webServer = {
     });
   },
 
-  enableWebSockets(httpServer) {
-    gameManager.enableWebSockets(httpServer);
+  async enableWebSockets(httpServer) {
+    await gameManager.enableWebSockets(httpServer);
   },
 
-  startWebServer(PORT_NUMBER = process.env.PORT || 8081) {
+  async startWebServer(PORT_NUMBER = process.env.PORT || 8081) {
     const app = express();
     const httpServer = http.Server(app);
 
     this.enableRoutes(app);
-    this.enableWebSockets(httpServer);
+    await this.enableWebSockets(httpServer);
 
     httpServer.listen(PORT_NUMBER);
     console.log(`Web server started on port ${PORT_NUMBER}`);
