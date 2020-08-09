@@ -78,13 +78,14 @@
 }
 
 .game-correct-text {
-  height: 100px;
-  margin-top: 50px;
-  font-size: 15px;
+  height: 50px;
+  margin-bottom: 0;
+  font-size: 30px;
   font-family: 'Recursive', sans-serif;
 }
 
 .game-guess-buttons {
+  margin-top: 0;
   margin-bottom: 45px;
 }
 
