@@ -1,7 +1,7 @@
 {
-  "name": "simple-react-full-stack",
-  "version": "1.0.0",
-  "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
+  "name": "his-or-hers",
+  "version": "0.2.0",
+  "description": "His or hers trivia game",
   "main": "src/server/index.js",
   "scripts": {
     "build": "webpack --mode production",
