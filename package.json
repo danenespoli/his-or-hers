@@ -4,6 +4,7 @@
   "description": "His or hers trivia game",
   "main": "src/server/index.js",
   "scripts": {
+    "heroku-prebuild": "npm install --dev",
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
@@ -13,7 +14,7 @@
   "engines": {
     "node": "14.6.0"
   },
-  "author": "Sandeep Raveesh",
+  "author": "Dane Nespoli",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.722.0",
