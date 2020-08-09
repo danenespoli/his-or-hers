@@ -10,6 +10,9 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
+  "engines": {
+    "node": "14.6.0"
+  },
   "author": "Sandeep Raveesh",
   "license": "ISC",
   "dependencies": {
