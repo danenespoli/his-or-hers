@@ -12,10 +12,31 @@ class Game extends Component {
     makeGuess(guess);
   }
 
-  navigateHome() {
+  _navigateHome() {
     // Go to game page.
     const { history } = this.props;
     history.push('/');
+  }
+
+  _getGuessButtonClasses(guess, answer) {
+    const hisButtonClasses = [];
+    const hersButtonClasses = [];
+
+    if (answer === 'his') {
+      hisButtonClasses.push('game-guess-button-correct');
+      hersButtonClasses.push('game-guess-button-wrong');
+    } else if (answer === 'hers') {
+      hisButtonClasses.push('game-guess-button-wrong');
+      hersButtonClasses.push('game-guess-button-correct');
+    }
+
+    if (guess === 'his') {
+      hisButtonClasses.push('game-guess-button-active');
+    } else if (guess === 'hers') {
+      hersButtonClasses.push('game-guess-button-active');
+    }
+
+    return [hisButtonClasses, hersButtonClasses];
   }
 
   renderNotJoined() {
@@ -27,7 +48,7 @@ class Game extends Component {
           Failed to join :(
         </div>
         <div className="game-button-container">
-          <div className={`game-button game-button-${theme}`} onClick={() => this.navigateHome()}>
+          <div className={`game-button game-button-${theme}`} onClick={() => this._navigateHome()}>
             <div className="game-button-text">Try again?</div>
           </div>
         </div>
@@ -54,6 +75,7 @@ class Game extends Component {
   renderGameView() {
     const {
       question,
+      answer,
       time,
       guess,
       score,
@@ -62,13 +84,16 @@ class Game extends Component {
       theme,
     } = this.props;
 
+
+    const [hisButtonClasses, hersButtonClasses] = this._getGuessButtonClasses(guess, answer);
+
     return (
       <div className={`game-background game-background-${theme}`}>
         <div className="game-block game-guess-buttons">
-          <div className={`game-button game-guess-button game-button-${theme} ${guess === 'hers' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('hers')}>
+          <div className={`game-button game-guess-button game-button-${theme} ${hersButtonClasses.join(' ')}`} onClick={() => this.submitGuess('hers')}>
             <div className="game-button-text game-guess-button-text">Steph</div>
           </div>
-          <div className={`game-button game-guess-button game-button-${theme} ${guess === 'his' ? 'game-guess-button-active' : ''}`} onClick={() => this.submitGuess('his')}>
+          <div className={`game-button game-guess-button game-button-${theme} ${hisButtonClasses.join(' ')}`} onClick={() => this.submitGuess('his')}>
             <div className="game-button-text game-guess-button-text">Dustin</div>
           </div>
         </div>
@@ -91,18 +116,6 @@ class Game extends Component {
           </div>
         </div>
       </div>
-    );
-  }
-
-  renderAnswerView() {
-    const {
-      question,
-      answer,
-      time,
-    } = this.props;
-
-    return (
-      <div>Answer is: {answer}</div>
     );
   }
 
@@ -151,14 +164,8 @@ class Game extends Component {
       return this.renderWaitingToStart();
     }
 
-    // User must now answer question!
-    // TODO: uncomment if statement!
-    // if (answer === null) {
-      return this.renderGameView();
-    // }
-
-    // Display results with answer.
-    return this.renderAnswerView();
+    // Main question/answer view.
+    return this.renderGameView();
   }
 }
 
