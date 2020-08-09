@@ -1,12 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
+const path = require('path');
 const gameManager = require('./gameManager');
 
 const webServer = {
   enableRoutes(app) {
     app.use(bodyParser.json());
     app.use(express.static('dist'));
+    app.use('/', express.static('dist'));
+    app.use('/game', express.static('dist'));
+    app.use('/dashboard', express.static('dist'));
 
     app.get('/api/gameState', (req, res) => {
       const state = gameManager.getGameState();
