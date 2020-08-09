@@ -1,1 +1,1 @@
-web: npm run heroku-prebuild && npm start
+web: node src/server/index.js
