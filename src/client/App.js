@@ -13,7 +13,7 @@ import Game from './Game';
 const io = require('socket.io-client');
 
 let socket;
-if (process.env.PORT) {
+if (process.env.NODE_ENV === 'production') {
   console.log('PROD SOCKET.IO');
   socket = io();
 } else {
