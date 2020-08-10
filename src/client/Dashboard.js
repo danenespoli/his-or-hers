@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Button, TextInput, Select } from 'evergreen-ui';
+import {
+  Button,
+  IconButton,
+  TextInput,
+  Select,
+  ArrowUpIcon,
+  ArrowDownIcon
+} from 'evergreen-ui';
 import axios from 'axios';
 import './dashboard.css';
 
@@ -28,6 +35,7 @@ export default class Dashboard extends Component {
 
   editQuestion(index, question, answer) {
     const { questionData } = this.state;
+
     questionData[index] = {
       question,
       answer,
@@ -41,6 +49,7 @@ export default class Dashboard extends Component {
 
   removeQuestion(index) {
     const { questionData } = this.state;
+
     questionData.splice(index, 1);
 
     this.setState({
@@ -51,10 +60,47 @@ export default class Dashboard extends Component {
 
   addQuestion() {
     const { questionData } = this.state;
+
     questionData.push({
       question: '',
       answer: 'his',
     });
+
+    this.setState({
+      questionData,
+      modified: true,
+    });
+  }
+
+  _swap(arr, i, j) {
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+
+  moveQuestionUp(index) {
+    const { questionData } = this.state;
+
+    if (index === 0) {
+      return;
+    }
+
+    this._swap(questionData, index, index - 1);
+
+    this.setState({
+      questionData,
+      modified: true,
+    });
+  }
+
+  moveQuestionDown(index) {
+    const { questionData } = this.state;
+
+    if (index === questionData.length - 1) {
+      return;
+    }
+
+    this._swap(questionData, index, index + 1);
 
     this.setState({
       questionData,
@@ -134,6 +180,18 @@ export default class Dashboard extends Component {
           <Button onClick={() => this.removeQuestion(index)}>
             Remove
           </Button>
+          <IconButton
+            style={{ display: 'inline-block' }}
+            icon={ArrowUpIcon}
+            onClick={() => this.moveQuestionUp(index)}
+            disabled={index === 0}
+          />
+          <IconButton
+            style={{ display: 'inline-block' }}
+            icon={ArrowDownIcon}
+            onClick={() => this.moveQuestionDown(index)}
+            disabled={index === questionData.length - 1}
+          />
         </div>
       ));
     }
@@ -151,7 +209,7 @@ export default class Dashboard extends Component {
             Add question
           </Button>
         </div>
-        <div>
+        <div className="dash-element">
           {modified && (
             <>
               <Button onClick={() => this.fetchQuestionData()}>
