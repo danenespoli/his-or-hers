@@ -10,7 +10,16 @@ import Home from './Home';
 import Dashboard from './Dashboard';
 import Game from './Game';
 
-const socket = require('socket.io-client')();
+const io = require('socket.io-client');
+
+let socket;
+if (process.env.PORT) {
+  console.log('PROD SOCKET.IO');
+  socket = io();
+} else {
+  console.log('DEV SOCKET.IO');
+  socket = io('localhost:8081');
+}
 
 const initialAppState = {
   joined: false,
