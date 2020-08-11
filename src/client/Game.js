@@ -123,22 +123,27 @@ class Game extends Component {
   }
 
   renderScoresView() {
-    const {
-      scores,
-    } = this.props;
-
-    const scoreList = scores.topScores.map(s => (
-      <div>
-        {s.name}  {s.score}
-      </div>
-    ));
-
     return (
-      <div>
-        <div>
-          Your score: {scores.ownScore.score}
-        </div>
-        {scoreList}
+      <div className={`game-background game-background-${theme}`}>
+        <Scoreboard
+          scores={[
+            {
+              id: '12345',
+              name: 'Jess',
+              score: '10',
+            },
+            {
+              id: '12346',
+              name: 'Dane',
+              score: '7',
+            },
+            {
+              id: '12347',
+              name: 'Myla',
+              score: '5',
+            },
+          ]}
+        />
       </div>
     );
   }
@@ -148,10 +153,13 @@ class Game extends Component {
       joined,
       question,
       answer,
-      scores,
+      topScores,
     } = this.props;
 
-    if (scores) {
+    // TODO: remove this line!
+    return this.renderScoresView();
+
+    if (topScores) {
       return this.renderScoresView();
     }
 

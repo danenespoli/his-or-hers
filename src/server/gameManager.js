@@ -176,18 +176,18 @@ const gameManager = {
 
   _computeAndEmitScores() {
     const playerEntries = Object.entries(players);
-    const scores = {};
+    const scores = [];
 
     // Tally scores for all players.
     for (let i = 0; i < playerEntries.length; i++) {
       const [socketId, player] = playerEntries[i];
       const score = this._getScoreForPlayer(player);
 
-      scores[socketId] = {
+      scores.push({
         id: socketId,
         name: player.name,
         score,
-      };
+      });
     }
 
     // Get top 5 scores.
