@@ -1,3 +1,18 @@
+/* SCOREBOARD */
 .scoreboard {
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 500;
+}
+
+
+/* SCORE TILE */
+.scoretile {
   
+}
+
+
+/* SCORE HEADER */
+.scoreheader {
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 700;
 }

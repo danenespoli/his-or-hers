@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, TextInput, Select } from 'evergreen-ui';
+import './scoreboard.css';
 
 export default function Scoreboard(props) {
   const { topScores } = props;
