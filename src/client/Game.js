@@ -137,12 +137,12 @@ class Game extends Component {
             },
             {
               id: '12346',
-              name: 'Dane',
+              name: 'Dane Nespoli',
               score: '7',
             },
             {
               id: '12347',
-              name: 'Myla',
+              name: 'Myla Boneses Bognar',
               score: '5',
             },
             {

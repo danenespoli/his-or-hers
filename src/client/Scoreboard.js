@@ -30,7 +30,7 @@ export default function Scoreboard(props) {
 function ScoreHeader() {
   return (
     <tr className="scoreheader">
-      <th>RANK</th>
+      <th className="scoreheader-rank">RANK</th>
       <th>NAME</th>
       <th>SCORE</th>
     </tr>
@@ -38,13 +38,18 @@ function ScoreHeader() {
 }
 
 function ScoreTile(props) {
-  const { rank, name, score, greyed } = props;
+  const {
+    rank,
+    name,
+    score,
+    greyed
+  } = props;
 
   return (
     <tr className={`scoretile ${greyed ? 'scoretile-greyed' : ''}`}>
-      <td>{rank}</td>
+      <td className="scoretile-rank">{rank}</td>
       <td>{name}</td>
       <td>{score}</td>
     </tr>
-  )
+  );
 }

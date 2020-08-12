@@ -22,10 +22,15 @@
 .scoretile td {
   color: #000000;
   border: none;
+  padding: 0 20px 0;
 
   font-family: 'Red Hat Display', sans-serif;
   font-weight: 500;
   font-size: 24px;
+}
+
+.scoretile-rank {
+  width: 30px;
 }
 
 
@@ -36,7 +41,12 @@
 }
 
 .scoreheader th {
+  padding: 0 20px 0;
   font-family: 'Red Hat Display', sans-serif;
   font-weight: 700;
   font-size: 18px;
+}
+
+.scoreheader-rank {
+  width: 30px;
 }
