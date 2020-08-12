@@ -124,41 +124,102 @@ class Game extends Component {
   }
 
   renderScoresView() {
-    const { theme } = this.props;
+    const {
+      topScores,
+      score,
+      name,
+      theme
+    } = this.props;
 
     return (
       <div className={`game-background game-background-${theme}`}>
-        <Scoreboard
-          topScores={[
-            {
-              id: '12345',
-              name: 'Jess',
-              score: '10',
-            },
-            {
-              id: '12346',
-              name: 'Dane Nespoli',
-              score: '7',
-            },
-            {
-              id: '12347',
-              name: 'Myla Boneses Bognar',
-              score: '5',
-            },
-            {
-              id: '12348',
-              name: 'Alice',
-              score: '3',
-            },
-            {
-              id: '12349',
-              name: 'Bob',
-              score: '2',
-            },
-          ]}
-        />
+        <div className={`game-block game-thanks-text game-question-text-${theme}`}>
+          Thanks for playing!
+        </div>
+        <div className="game-block game-scoreboard-text">
+          Scoreboard
+        </div>
+        <div className="game-block game-scoreboard">
+          <Scoreboard
+            scores={[
+              {
+                id: '12345',
+                name: 'Jess',
+                score: '10',
+              },
+              {
+                id: '12346',
+                name: 'Dane Nespoli',
+                score: '7',
+              },
+              {
+                id: '12347',
+                name: 'Myla Boneses Bognar',
+                score: '5',
+              },
+              {
+                id: '12348',
+                name: 'Alice',
+                score: '3',
+              },
+              {
+                id: '12349',
+                name: 'Bob',
+                score: '2',
+              },
+            ]}
+          />
+        </div>
+        <div className="game-block game-scoreboard-text game-scoreboard-text-small">
+          Your Score
+        </div>
+        <div className="game-block game-scoreboard">
+          <Scoreboard
+            scores={[
+              {
+                id: 0,
+                name,
+                score,
+              },
+            ]}
+          />
+        </div>
       </div>
     );
+
+    // return (
+    //   <div className={`game-background game-background-${theme}`}>
+    //     <Scoreboard
+    //       topScores={[
+    //         {
+    //           id: '12345',
+    //           name: 'Jess',
+    //           score: '10',
+    //         },
+    //         {
+    //           id: '12346',
+    //           name: 'Dane Nespoli',
+    //           score: '7',
+    //         },
+    //         {
+    //           id: '12347',
+    //           name: 'Myla Boneses Bognar',
+    //           score: '5',
+    //         },
+    //         {
+    //           id: '12348',
+    //           name: 'Alice',
+    //           score: '3',
+    //         },
+    //         {
+    //           id: '12349',
+    //           name: 'Bob',
+    //           score: '2',
+    //         },
+    //       ]}
+    //     />
+    //   </div>
+    // );
   }
 
   render() {

@@ -8,18 +8,32 @@ class Home extends Component {
     name: '',
     errorMsg: null,
     backgroundNum: 0,
+    interval: null,
   };
 
-  constructor() {
-    super();
+  componentWillMount() {
     // Background changes every 5 seconds.
-    setInterval(() => {
+    const interval = setInterval(() => {
       this.changeBackground();
     }, 3000);
+    this.setState({
+      interval,
+    });
   }
 
   componentDidMount() {
     this.textInput.focus();
+  }
+
+  componentWillUnmount() {
+    const { interval } = this.state;
+
+    if (interval) {
+      clearInterval(interval);
+      this.setState({
+        interval: null,
+      });
+    }
   }
 
   changeBackground() {

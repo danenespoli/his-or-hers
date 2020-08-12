@@ -3,7 +3,7 @@ import { Button, TextInput, Select } from 'evergreen-ui';
 import './scoreboard.css';
 
 export default function Scoreboard(props) {
-  const { topScores } = props;
+  const { scores } = props;
 
   return (
     <div className="scoreboard">
@@ -11,22 +11,16 @@ export default function Scoreboard(props) {
         <tbody>
           <ScoreHeader />
           {
-            topScores.map((scoreData, index) => (
+            scores.map((scoreData, index) => (
               <ScoreTile
                 key={`scoretile-${scoreData.id}`}
-                rank={index + 1}
+                rank={scoreData.rank}
                 name={scoreData.name}
                 score={scoreData.score}
                 greyed={index % 2 !== 0}
               />
             ))
           }
-          <ScoreTile
-            rank={10}
-            name="Dane Nespoli"
-            score={20}
-            isOwnScore={true}
-          />
         </tbody>
       </table>
     </div>
@@ -49,15 +43,11 @@ function ScoreTile(props) {
     name,
     score,
     greyed,
-    isOwnScore,
   } = props;
 
   const classes = [];
   if (greyed) {
     classes.push('scoretile-greyed');
-  }
-  if (isOwnScore) {
-    classes.push('scoreboard-ownscore');
   }
 
   return (
