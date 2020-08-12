@@ -21,6 +21,12 @@ export default function Scoreboard(props) {
               />
             ))
           }
+          <ScoreTile
+            rank={10}
+            name="Dane Nespoli"
+            score={20}
+            isOwnScore={true}
+          />
         </tbody>
       </table>
     </div>
@@ -30,7 +36,7 @@ export default function Scoreboard(props) {
 function ScoreHeader() {
   return (
     <tr className="scoreheader">
-      <th className="scoreheader-rank">RANK</th>
+      <th>RANK</th>
       <th>NAME</th>
       <th>SCORE</th>
     </tr>
@@ -42,12 +48,21 @@ function ScoreTile(props) {
     rank,
     name,
     score,
-    greyed
+    greyed,
+    isOwnScore,
   } = props;
 
+  const classes = [];
+  if (greyed) {
+    classes.push('scoretile-greyed');
+  }
+  if (isOwnScore) {
+    classes.push('scoreboard-ownscore');
+  }
+
   return (
-    <tr className={`scoretile ${greyed ? 'scoretile-greyed' : ''}`}>
-      <td className="scoretile-rank">{rank}</td>
+    <tr className={`scoretile ${classes.join(' ')}`}>
+      <td>{rank}</td>
       <td>{name}</td>
       <td>{score}</td>
     </tr>
