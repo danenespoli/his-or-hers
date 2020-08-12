@@ -7,16 +7,19 @@ export default function Scoreboard(props) {
 
   return (
     <div className="scoreboard">
-      <ScoreHeader />
-      {
-        topScores.map((scoreData, index) => (
-          <ScoreTile
-            rank={index + 1}
-            name={scoreData.name}
-            score={scoreData.score}
-          />
-        ))
-      }
+      <table>
+        <ScoreHeader />
+        {
+          topScores.map((scoreData, index) => (
+            <ScoreTile
+              key={`scoretile-${scoreData.id}`}
+              rank={index + 1}
+              name={scoreData.name}
+              score={scoreData.score}
+            />
+          ))
+        }
+      </table>
     </div>
   );
 }
@@ -31,4 +34,8 @@ function ScoreHeader() {
 
 function ScoreTile(props) {
   const { rank, name, score } = props;
+
+  return (
+    <tr></tr>
+  )
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Spinner } from 'evergreen-ui';
 import Timer from './Timer';
+import Scoreboard from './Scoreboard';
 import './game.css';
 
 const NUM_BACKGROUNDS = 6;
@@ -123,10 +124,12 @@ class Game extends Component {
   }
 
   renderScoresView() {
+    const { theme } = this.props;
+
     return (
       <div className={`game-background game-background-${theme}`}>
         <Scoreboard
-          scores={[
+          topScores={[
             {
               id: '12345',
               name: 'Jess',
