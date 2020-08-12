@@ -30,8 +30,9 @@ const initialAppState = {
   guess: null,
   time: 30,
   score: 0,
-  theme: 4,
   topScores: null,
+  finalScore: null,
+  theme: 4,
 };
 
 
@@ -89,6 +90,13 @@ export default class App extends Component {
       });
     });
 
+    socket.on('final-score', finalScore => {
+      console.log('Game has ended!');
+      this.setState({
+        finalScore,
+      });
+    });
+
     socket.on('end-game', () => {
       console.log('Ending game!');
       // Reset to initial state.
@@ -125,8 +133,9 @@ export default class App extends Component {
       time,
       ended,
       score,
-      theme,
       topScores,
+      finalScore,
+      theme,
     } = this.state;
 
     return (

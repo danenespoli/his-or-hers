@@ -176,27 +176,41 @@ const gameManager = {
 
   _computeAndEmitScores() {
     const playerEntries = Object.entries(players);
-    const scores = [];
+    const scores = {};
 
     // Tally scores for all players.
     for (let i = 0; i < playerEntries.length; i++) {
       const [socketId, player] = playerEntries[i];
       const score = this._getScoreForPlayer(player);
 
-      scores.push({
+      scores[socketId] = {
         id: socketId,
         name: player.name,
         score,
-      });
+      };
     }
 
-    // Get top 5 scores.
-    const topScores = Object.values(scores).sort((a, b) => (
+    // Sort scores.
+    const sortedScores = Object.values(scores).sort((a, b) => (
       a.score > b.score
-    )).slice(0, 5);
+    ));
 
-    // Emit own score and top 5 scores to each player.
+    // Augment score objects with rank.
+    for (let i = 0; i < sortedScores.length; i++) {
+      sortedScores[i].rank = i + 1;
+    }
+
+    // Emit top 5 scores to everyone.
+    const topScores = sortedScores.slice(0, 5);
     io.emit('top-scores', topScores);
+
+    // Emit own score with rank to each player.
+    for (let i = 0; i < playerEntries.length; i++) {
+      const [socketId, player] = playerEntries[i];
+      const finalScore = scores[socketId];
+      io.to(socketId).emit('final-score', finalScore);
+    }
+
     this._sendIndividualScores();
   },
 
