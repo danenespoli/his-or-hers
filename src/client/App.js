@@ -23,7 +23,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const initialAppState = {
   joined: false,
-  name: null,
   question: null,
   questionNum: 1,
   questionTotal: 1,
@@ -39,6 +38,7 @@ const initialAppState = {
 export default class App extends Component {
   state = {
     ...initialAppState,
+    name: null,
   };
 
   constructor() {
@@ -100,6 +100,7 @@ export default class App extends Component {
 
   joinGame(name) {
     socket.emit('join', name);
+    console.log(`Setting name to ${name}!`);
     this.setState({
       name,
     });
