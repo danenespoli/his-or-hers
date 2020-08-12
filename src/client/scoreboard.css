@@ -47,7 +47,6 @@
 /* SCORE HEADER */
 .scoreheader {
   height: 32px;
-  background-color: #679FE1;
 }
 
 .scoreheader th {
@@ -62,4 +61,25 @@
 }
 .scoreheader th:nth-last-child(1) {
   width: 130px;
+}
+
+/* THEME DEPENDENT PROPERTIES */
+
+.scoreheader-0 {
+  background-color: #E9CF48;
+}
+.scoreheader-1 {
+  background-color: #AE62D2;
+}
+.scoreheader-2 {
+  background-color: #DB6565;
+}
+.scoreheader-3 {
+  background-color: #95CA7C;
+}
+.scoreheader-4 {
+  background-color: #679FE1;
+}
+.scoreheader-5 {
+  background-color: #7780CB;
 }

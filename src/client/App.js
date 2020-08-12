@@ -162,6 +162,7 @@ export default class App extends Component {
               questionNum={questionNum}
               questionTotal={questionTotal}
               topScores={topScores}
+              finalScore={finalScore}
               makeGuess={(g, n) => this.makeGuess(g, n)}
             />
           </Route>
