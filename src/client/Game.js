@@ -145,6 +145,16 @@ class Game extends Component {
               name: 'Myla',
               score: '5',
             },
+            {
+              id: '12348',
+              name: 'Alice',
+              score: '3',
+            },
+            {
+              id: '12349',
+              name: 'Bob',
+              score: '2',
+            },
           ]}
         />
       </div>

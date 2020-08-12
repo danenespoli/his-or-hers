@@ -7,18 +7,21 @@ export default function Scoreboard(props) {
 
   return (
     <div className="scoreboard">
-      <table>
-        <ScoreHeader />
-        {
-          topScores.map((scoreData, index) => (
-            <ScoreTile
-              key={`scoretile-${scoreData.id}`}
-              rank={index + 1}
-              name={scoreData.name}
-              score={scoreData.score}
-            />
-          ))
-        }
+      <table className="scoreboard-table" rules="none">
+        <tbody>
+          <ScoreHeader />
+          {
+            topScores.map((scoreData, index) => (
+              <ScoreTile
+                key={`scoretile-${scoreData.id}`}
+                rank={index + 1}
+                name={scoreData.name}
+                score={scoreData.score}
+                greyed={index % 2 !== 0}
+              />
+            ))
+          }
+        </tbody>
       </table>
     </div>
   );
@@ -26,16 +29,22 @@ export default function Scoreboard(props) {
 
 function ScoreHeader() {
   return (
-    <div>
-      Hello
-    </div>
+    <tr className="scoreheader">
+      <th>RANK</th>
+      <th>NAME</th>
+      <th>SCORE</th>
+    </tr>
   );
 }
 
 function ScoreTile(props) {
-  const { rank, name, score } = props;
+  const { rank, name, score, greyed } = props;
 
   return (
-    <tr></tr>
+    <tr className={`scoretile ${greyed ? 'scoretile-greyed' : ''}`}>
+      <td>{rank}</td>
+      <td>{name}</td>
+      <td>{score}</td>
+    </tr>
   )
 }
