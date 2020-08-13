@@ -136,7 +136,7 @@ class Game extends Component {
           Thanks for playing!
         </div>
         <div className="game-block game-scoreboard-text">
-          Final Scores
+          Top Scores
         </div>
         <div className="game-block game-scoreboard">
           <Scoreboard
