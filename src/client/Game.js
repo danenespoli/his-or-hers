@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Spinner } from 'evergreen-ui';
 import Timer from './Timer';
+import Scoreboard from './Scoreboard';
 import './game.css';
 
 const NUM_BACKGROUNDS = 6;
@@ -124,21 +125,66 @@ class Game extends Component {
 
   renderScoresView() {
     const {
-      scores,
+      topScores,
+      finalScore,
+      theme
     } = this.props;
 
-    const scoreList = scores.topScores.map(s => (
-      <div>
-        {s.name}  {s.score}
-      </div>
-    ));
-
     return (
-      <div>
-        <div>
-          Your score: {scores.ownScore.score}
+      <div className={`game-background game-background-${theme}`}>
+        <div className={`game-block game-thanks-text game-question-text-${theme}`}>
+          Thanks for playing!
         </div>
-        {scoreList}
+        <div className="game-block game-scoreboard-text">
+          Top Scores
+        </div>
+        <div className="game-block game-scoreboard">
+          <Scoreboard
+            scores={topScores}
+            // scores={[
+            //   {
+            //     id: '12345',
+            //     name: 'Jess',
+            //     score: '10',
+            //   },
+            //   {
+            //     id: '12346',
+            //     name: 'Dane Nespoli',
+            //     score: '7',
+            //   },
+            //   {
+            //     id: '12347',
+            //     name: 'Myla Boneses Bognar',
+            //     score: '5',
+            //   },
+            //   {
+            //     id: '12348',
+            //     name: 'Alice',
+            //     score: '3',
+            //   },
+            //   {
+            //     id: '12349',
+            //     name: 'Bob',
+            //     score: '2',
+            //   },
+            // ]}
+          />
+        </div>
+        <div className="game-block game-scoreboard-text game-scoreboard-text-small">
+          Your Score
+        </div>
+        <div className="game-block game-scoreboard">
+          <Scoreboard
+            scores={[finalScore]}
+            // scores={[
+            //   {
+            //     id: 0,
+            //     name,
+            //     score,
+            //   },
+            // ]}
+          />
+        </div>
       </div>
     );
   }
@@ -148,10 +194,14 @@ class Game extends Component {
       joined,
       question,
       answer,
-      scores,
+      topScores,
+      finalScore,
     } = this.props;
 
-    if (scores) {
+    // TODO: remove this line!
+    // return this.renderScoresView();
+
+    if (topScores && finalScore) {
       return this.renderScoresView();
     }
 

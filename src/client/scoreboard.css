@@ -1,0 +1,85 @@
+/* SCOREBOARD */
+.scoreboard {
+  width: 720px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+.scoreboard-table {
+  width: 100%;
+}
+
+.scoreboard-ownscore {
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+
+
+/* SCORE TILE */
+.scoretile {
+  height: 56px;
+  background-color: #FFFFFF;
+}
+
+.scoretile-greyed {
+  background-color: #EEEEEE;
+}
+
+.scoretile td {
+  color: #000000;
+  border: none;
+  padding: 0 20px 0;
+
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+
+  margin-bottom: 20px;
+}
+
+.scoretile td:nth-child(1) {
+  width: 80px;
+}
+.scoretile td:nth-last-child(1) {
+  width: 130px;
+}
+
+
+/* SCORE HEADER */
+.scoreheader {
+  height: 32px;
+}
+
+.scoreheader th {
+  padding: 0 20px 0;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.scoreheader th:nth-child(1) {
+  width: 80px;
+}
+.scoreheader th:nth-last-child(1) {
+  width: 130px;
+}
+
+/* THEME DEPENDENT PROPERTIES */
+
+.scoreheader-0 {
+  background-color: #E9CF48;
+}
+.scoreheader-1 {
+  background-color: #AE62D2;
+}
+.scoreheader-2 {
+  background-color: #DB6565;
+}
+.scoreheader-3 {
+  background-color: #95CA7C;
+}
+.scoreheader-4 {
+  background-color: #679FE1;
+}
+.scoreheader-5 {
+  background-color: #7780CB;
+}

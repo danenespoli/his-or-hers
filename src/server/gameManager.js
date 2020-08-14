@@ -190,13 +190,35 @@ const gameManager = {
       };
     }
 
-    // Get top 5 scores.
-    const topScores = Object.values(scores).sort((a, b) => (
-      a.score > b.score
-    )).slice(0, 5);
+    console.log('COMPUTING AND EMITTING SCORES');
+    console.log('SCORES', scores);
 
-    // Emit own score and top 5 scores to each player.
+    // Sort scores.
+    const sortedScores = Object.values(scores).sort((a, b) => {
+      if (a.score < b.score) return 1;
+      if (a.score > b.score) return -1;
+      return 0;
+    });
+    console.log('SORTED SCORES', sortedScores);
+
+    // Augment score objects with rank.
+    for (let i = 0; i < sortedScores.length; i++) {
+      sortedScores[i].rank = i + 1;
+    }
+    console.log('AUGMENTED SORTED SCORES', sortedScores);
+
+    // Emit top 5 scores to everyone.
+    const topScores = sortedScores.slice(0, 5);
     io.emit('top-scores', topScores);
+    console.log('TOP 5 SCORES', topScores);
+
+    // Emit own score with rank to each player.
+    for (let i = 0; i < playerEntries.length; i++) {
+      const [socketId, player] = playerEntries[i];
+      const finalScore = scores[socketId];
+      io.to(socketId).emit('final-score', finalScore);
+    }
+
     this._sendIndividualScores();
   },
 

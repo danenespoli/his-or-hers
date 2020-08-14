@@ -23,7 +23,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const initialAppState = {
   joined: false,
-  name: null,
   question: null,
   questionNum: 1,
   questionTotal: 1,
@@ -31,14 +30,16 @@ const initialAppState = {
   guess: null,
   time: 30,
   score: 0,
-  theme: 4,
   topScores: null,
+  finalScore: null,
+  theme: 4,
 };
 
 
 export default class App extends Component {
   state = {
     ...initialAppState,
+    name: null,
   };
 
   constructor() {
@@ -89,6 +90,13 @@ export default class App extends Component {
       });
     });
 
+    socket.on('final-score', finalScore => {
+      console.log('Game has ended!');
+      this.setState({
+        finalScore,
+      });
+    });
+
     socket.on('end-game', () => {
       console.log('Ending game!');
       // Reset to initial state.
@@ -100,6 +108,7 @@ export default class App extends Component {
 
   joinGame(name) {
     socket.emit('join', name);
+    console.log(`Setting name to ${name}!`);
     this.setState({
       name,
     });
@@ -124,8 +133,9 @@ export default class App extends Component {
       time,
       ended,
       score,
-      theme,
       topScores,
+      finalScore,
+      theme,
     } = this.state;
 
     return (
@@ -152,6 +162,7 @@ export default class App extends Component {
               questionNum={questionNum}
               questionTotal={questionTotal}
               topScores={topScores}
+              finalScore={finalScore}
               makeGuess={(g, n) => this.makeGuess(g, n)}
             />
           </Route>
