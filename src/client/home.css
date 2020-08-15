@@ -125,6 +125,14 @@
   user-select: none;
 }
 
+.home-welcometext {
+  margin: 20px auto auto;
+  font-size: 30px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  text-align: center;
+}
+
 
 /*
   Background Animations!

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { TextInput, Button } from 'evergreen-ui';
 import './home.css';
 
-class Home extends Component {
+class HomePlaceholder extends Component {
   state = {
     name: '',
     errorMsg: null,
@@ -19,10 +17,6 @@ class Home extends Component {
     this.setState({
       interval,
     });
-  }
-
-  componentDidMount() {
-    this.textInput.focus();
   }
 
   componentWillUnmount() {
@@ -87,12 +81,12 @@ class Home extends Component {
         <div className="home-text-container">
           <div className={`home-text home-text-${backgroundNum}`}>Steph or Dustin</div>
         </div>
-        <div className="welcomeMsg">
-
+        <div className="home-welcometext">
+          Welcome! Please check back on the day of the shower to play the game!
         </div>
       </div>
     );
   }
 }
 
-export default withRouter(Home);
+export default HomePlaceholder;

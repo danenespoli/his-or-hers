@@ -9,6 +9,7 @@ import './app.css';
 import Home from './Home';
 import Dashboard from './Dashboard';
 import Game from './Game';
+import HomePlaceholder from './HomePlaceholder';
 
 const io = require('socket.io-client');
 
@@ -34,6 +35,13 @@ const initialAppState = {
   finalScore: null,
   theme: 4,
 };
+
+/*
+ * This variable controls whether the home page should display the name input
+ * and Join button (if false), or a message to come check back later to play
+ * the game (if true).
+ */
+const USE_HOME_PLACEHOLDER = true;
 
 
 export default class App extends Component {
@@ -138,6 +146,14 @@ export default class App extends Component {
       theme,
     } = this.state;
 
+    const homeComponent = USE_HOME_PLACEHOLDER ? (
+      <HomePlaceholder />
+    ) : (
+      <Home
+        joinGame={(n) => this.joinGame(n)}
+      />
+    );
+
     return (
       <Router>
         <Switch>
@@ -167,9 +183,7 @@ export default class App extends Component {
             />
           </Route>
           <Route path="/">
-            <Home
-              joinGame={(n) => this.joinGame(n)}
-            />
+            {homeComponent}
           </Route>
         </Switch>
       </Router>
