@@ -129,7 +129,7 @@
   Home Placeholder
 */
 .home-welcometext {
-  margin: 20px auto auto;
+  margin: auto auto 20px;
   font-size: 30px;
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
   max-width: 600px;
@@ -137,10 +137,19 @@
 }
 
 .home-images {
+  margin: auto auto 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+}
+
+.home-image-his {
+  width: 130px;
+  height: 130px;
+}
+.home-image-hers {
+  width: 130px;
+  height: calc(1.5 * 130px);
 }
 
 
