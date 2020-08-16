@@ -33,7 +33,7 @@ export default function Timer(props) {
           </div>
         )}
         {!correct && (
-          <div className="timer-text timer-answer-text timer-answer-text-wrong">
+          <div className="timer-text timer-answer-text timer-answer-text-incorrect">
             Incorrect
           </div>
         )}

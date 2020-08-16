@@ -108,7 +108,7 @@
   /* background: radial-gradient(#54D954, #009E00); */
   opacity: 1;
 }
-.game-guess-button-wrong {
+.game-guess-button-incorrect {
   /* background-color: #DB6565; */
   background: radial-gradient(#FF6363, #D90000);
   /* background: radial-gradient(#FF6363, #FF0000); */
@@ -181,7 +181,7 @@
   font-family: 'Red Rose', sans-serif;
   letter-spacing: -0.04em;
 }
-.game-button-0:not(.game-guess-button-correct):not(.game-guess-button-wrong) {
+.game-button-0:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
   background-color: #E9CF48;
 }
 
@@ -193,7 +193,7 @@
   font-family: 'Redressed', sans-serif;
   letter-spacing: -0.06em;
 }
-.game-button-1:not(.game-guess-button-correct):not(.game-guess-button-wrong) {
+.game-button-1:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
   background-color: #AE62D2;
 }
 
@@ -204,7 +204,7 @@
   top: 2px;
   font-family: 'Recursive', sans-serif;
 }
-.game-button-2:not(.game-guess-button-correct):not(.game-guess-button-wrong) {
+.game-button-2:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
   background-color: #DB6565;
 }
 
@@ -215,7 +215,7 @@
   top: 0;
   font-family: 'Indie Flower', sans-serif;
 }
-.game-button-3:not(.game-guess-button-correct):not(.game-guess-button-wrong) {
+.game-button-3:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
   background-color: #95CA7C;
 }
 
@@ -226,7 +226,7 @@
   top: 0;
   font-family: 'Fjalla One', sans-serif;
 }
-.game-button-4:not(.game-guess-button-correct):not(.game-guess-button-wrong) {
+.game-button-4:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
   background-color: #679FE1;
 }
 
@@ -237,7 +237,7 @@
   top: 11px;
   font-family: 'Great Vibes', sans-serif;
 }
-.game-button-5:not(.game-guess-button-correct):not(.game-guess-button-wrong) {
+.game-button-5:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
   background-color: #7780CB;
 }
 

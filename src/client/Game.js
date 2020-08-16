@@ -25,9 +25,9 @@ class Game extends Component {
 
     if (answer === 'his') {
       hisButtonClasses.push('game-guess-button-correct');
-      hersButtonClasses.push('game-guess-button-wrong');
+      hersButtonClasses.push('game-guess-button-incorrect');
     } else if (answer === 'hers') {
-      hisButtonClasses.push('game-guess-button-wrong');
+      hisButtonClasses.push('game-guess-button-incorrect');
       hersButtonClasses.push('game-guess-button-correct');
     }
 
