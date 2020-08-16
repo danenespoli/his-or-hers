@@ -103,14 +103,18 @@
 
 .game-guess-button-correct {
   /* background-color: #95CA7C; */
+  background: radial-gradient(#83EA83, #3DCD3D); 
   background: radial-gradient(#54D954, #00AD00);
+
   /* background: radial-gradient(#54D954, #00CC00); */
   /* background: radial-gradient(#54D954, #009E00); */
   opacity: 1;
 }
 .game-guess-button-incorrect {
   /* background-color: #DB6565; */
-  background: radial-gradient(#FF6363, #D90000);
+  background: radial-gradient(#FF4C4C, #FF8F8F);
+  /* background: radial-gradient(#FF6363, #D90000); */
+
   /* background: radial-gradient(#FF6363, #FF0000); */
   /* background: radial-gradient(#FF6363, #C50000); */
   opacity: 1;
@@ -186,7 +190,7 @@
 }
 
 .game-background-1 {
-  background-color: #D274FF;
+  background-color: #DD5CA5;
 }
 .game-question-text-1 {
   top: 3px;
@@ -194,7 +198,7 @@
   letter-spacing: -0.06em;
 }
 .game-button-1:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
-  background-color: #AE62D2;
+  background-color: #CE3D8F;
 }
 
 .game-background-2 {
