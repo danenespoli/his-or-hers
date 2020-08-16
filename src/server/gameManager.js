@@ -114,10 +114,19 @@ const gameManager = {
     if (timer) {
       clearInterval(timer);
     }
+
+    // The server will wait `allPlayersAnswerSeconds` after everyone has
+    // answered to send the answer data, instead of sending it right away.
+    let allPlayersAnswerSeconds = 2;
+
     timer = setInterval(() => {
       io.emit('timer', gameState.time--);
 
-      if (gameState.time < 0 || this._allPlayersAnswered()) {
+      if (this._allPlayersAnswered()) {
+        allPlayersAnswerSeconds--;
+      }
+
+      if (gameState.time < 0 || allPlayersAnswerSeconds === 0) {
         clearInterval(timer);
         // Send answer for question.
         io.emit('answer', q.answer);
@@ -128,16 +137,14 @@ const gameManager = {
   },
 
   _allPlayersAnswered() {
-    // TODO: revert this if we want to stop early when all players have answered.
-    return false;
-    // const playerValues = Object.values(players);
-    // for (let i = 0; i < playerValues.length; i++) {
-    //   const player = playerValues[i];
-    //   if (!player.didGuess[gameState.question]) {
-    //     return false;
-    //   }
-    // }
-    // return true;
+    const playerValues = Object.values(players);
+    for (let i = 0; i < playerValues.length; i++) {
+      const player = playerValues[i];
+      if (!player.didGuess[gameState.question]) {
+        return false;
+      }
+    }
+    return true;
   },
 
   // This function will randomly select a theme for each question, but will also

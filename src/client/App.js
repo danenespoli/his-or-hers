@@ -123,6 +123,10 @@ export default class App extends Component {
   }
 
   makeGuess(guess, name) {
+    const { answer } = this.state;
+    // Don't allow guessing on the client side if the answer has already been revealed.
+    if (answer !== null) return;
+
     socket.emit('guess', guess, name);
     this.setState({
       guess,
