@@ -9,13 +9,38 @@ const MIN_SIZE = 60;
 const MAX_TIME = 30;
 
 export default function Timer(props) {
-  const { time, theme } = props;
+  const {
+    time,
+    theme,
+    correct,
+    wrong
+  } = props;
+
   const size = (MAX_SIZE - MIN_SIZE) * (time / MAX_TIME) + MIN_SIZE;
 
   const dangerClass = time <= 5 ? 'timer-danger' : '';
 
-  return (
-    <div className="timer">
+  // If the answer has been revealed.
+  let timerContents;
+  if (correct || wrong) {
+    timerContents = (
+      <div
+        className={`timer-circle timer-circle-${theme} timer-answer`}
+      >
+        {correct && (
+          <div className="timer-text timer-answer-text timer-answer-text-correct">
+            Correct!
+          </div>
+        )}
+        {!correct && (
+          <div className="timer-text timer-answer-text timer-answer-text-wrong">
+            Incorrect
+          </div>
+        )}
+      </div>
+    );
+  } else {
+    timerContents = (
       <div
         className={`timer-circle timer-circle-${theme}`}
         style={{
@@ -27,6 +52,12 @@ export default function Timer(props) {
           {time}
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className="timer">
+      {timerContents}
     </div>
   );
 }

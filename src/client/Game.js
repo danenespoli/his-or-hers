@@ -90,9 +90,6 @@ class Game extends Component {
 
     return (
       <div className={`game-background game-background-${theme}`}>
-        <div className="game-block game-correct-text">
-          {(guess === answer && guess !== null) ? 'Correct!' : ''}
-        </div>
         <div className="game-block game-guess-buttons">
           <div className={`game-button game-guess-button game-button-${theme} ${hersButtonClasses.join(' ')}`} onClick={() => this.submitGuess('hers')}>
             <div className="game-button-text game-guess-button-text">
@@ -117,6 +114,8 @@ class Game extends Component {
           <div className="game-block game-timer">
             <Timer
               time={time}
+              correct={answer !== null && guess === answer}
+              wrong={answer !== null && guess !== answer}
               theme={theme}
             />
           </div>

@@ -12,7 +12,7 @@
   justify-content: center;
   border-radius: 50%;
 
-  transition: height 300ms ease-in-out, width 300ms ease-in-out;
+  transition: height 350ms ease-in-out, width 350ms ease-in-out, border-radius 350ms ease-in-out;
 }
 
 .timer-text {
@@ -26,6 +26,27 @@
 .timer-danger {
   color: #FF7474;
 }
+
+/* ON ANSWER REVEAL */
+.timer-answer {
+  width: 250px;
+  height: 125px;
+  border-radius: 10px;
+}
+
+.timer-answer-text {
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.timer-answer-text-correct {
+
+}
+.timer-answer-text-wrong {
+
+}
+
 
 /* THEME DEPENDENT PROPERTIES */
 .timer-circle-0 {
