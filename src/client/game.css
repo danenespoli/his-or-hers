@@ -42,16 +42,20 @@
   top: 2px;
 
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   margin: 25px;
   width: 153px;
   height: 42px;
-  border-radius: 4px;
+  border-radius: 100px;
   box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.25);
   cursor: url('img/cursor-pointer.png'), pointer;
   opacity: 0.8;
   transition: background-color 500ms ease-out, opacity 200ms ease;
+}
+
+.game-button-center {
+  align-items: center;
 }
 
 .game-button-text {
@@ -90,8 +94,8 @@
 }
 
 .game-guess-button {
-  width: 200px;
-  height: 75px;
+  width: 165px;
+  height: 165px;
 }
 
 :not(.game-guess-button-active).game-button:hover {
@@ -244,6 +248,20 @@
 
 /* UNUSED CURRENTLY */
 .game-face {
+  cursor: url('img/cursor-pointer.png'), pointer;
+}
+
+.game-face-his {
+  width: 150px;
+  height: 150px;
+}
+
+.game-face-hers {
+  width: 150px;
+  height: calc(1.5 * 150px);
+}
+
+/* .game-face {
   display: flex;
   align-items: center;
   margin: 19px auto auto 27px;
@@ -259,4 +277,4 @@
 }
 
 .game-face:active {
-}
+} */

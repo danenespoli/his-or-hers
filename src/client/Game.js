@@ -95,10 +95,14 @@ class Game extends Component {
         </div>
         <div className="game-block game-guess-buttons">
           <div className={`game-button game-guess-button game-button-${theme} ${hersButtonClasses.join(' ')}`} onClick={() => this.submitGuess('hers')}>
-            <div className="game-button-text game-guess-button-text">Steph</div>
+            <div className="game-button-text game-guess-button-text">
+              <img className="game-face game-face-hers" src={require('./img/her-faces-02-pix.png')} />
+            </div>
           </div>
-          <div className={`game-button game-guess-button game-button-${theme} ${hisButtonClasses.join(' ')}`} onClick={() => this.submitGuess('his')}>
-            <div className="game-button-text game-guess-button-text">Dustin</div>
+          <div className={`game-button game-button-center game-guess-button game-button-${theme} ${hisButtonClasses.join(' ')}`} onClick={() => this.submitGuess('his')}>
+            <div className="game-button-text game-guess-button-text">
+              <img className="game-face game-face-his" src={require('./img/his-faces-05-pix.png')} />
+            </div>
           </div>
         </div>
         <div className={`game-question-text game-question-text-${theme}`}>
