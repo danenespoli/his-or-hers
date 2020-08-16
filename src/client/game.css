@@ -94,8 +94,8 @@
 }
 
 .game-guess-button {
-  width: 165px;
-  height: 165px;
+  width: 164px;
+  height: 164px;
 }
 
 :not(.game-guess-button-active).game-button:hover {
@@ -110,11 +110,17 @@
 }
 
 .game-guess-button-correct {
-  background-color: #95CA7C;
+  /* background-color: #95CA7C; */
+  background: radial-gradient(#54D954, #00AD00);
+  /* background: radial-gradient(#54D954, #00CC00); */
+  /* background: radial-gradient(#54D954, #009E00); */
   opacity: 1;
 }
 .game-guess-button-wrong {
-  background-color: #DB6565;
+  /* background-color: #DB6565; */
+  background: radial-gradient(#FF6363, #D90000);
+  /* background: radial-gradient(#FF6363, #FF0000); */
+  /* background: radial-gradient(#FF6363, #C50000); */
   opacity: 1;
 }
 
