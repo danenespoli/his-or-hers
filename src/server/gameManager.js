@@ -128,14 +128,16 @@ const gameManager = {
   },
 
   _allPlayersAnswered() {
-    const playerValues = Object.values(players);
-    for (let i = 0; i < playerValues.length; i++) {
-      const player = playerValues[i];
-      if (!player.didGuess[gameState.question]) {
-        return false;
-      }
-    }
-    return true;
+    // TODO: revert this if we want to stop early when all players have answered.
+    return false;
+    // const playerValues = Object.values(players);
+    // for (let i = 0; i < playerValues.length; i++) {
+    //   const player = playerValues[i];
+    //   if (!player.didGuess[gameState.question]) {
+    //     return false;
+    //   }
+    // }
+    // return true;
   },
 
   // This function will randomly select a theme for each question, but will also
