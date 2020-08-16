@@ -101,7 +101,9 @@ class Game extends Component {
           </div>
           <div className={`game-button game-button-center game-guess-button game-button-${theme} ${hisButtonClasses.join(' ')}`} onClick={() => this.submitGuess('his')}>
             <div className="game-button-text game-guess-button-text">
-              <img className="game-face game-face-his" src={require('./img/his-faces-05-pix.png')} />
+              <img className="game-face game-face-his" src={require('./img/his-faces-05-pix17.png')} />
+              {/* I felt the below image was not pixelated enough compared to hers, so I replaced it with the above */}
+              {/* <img className="game-face game-face-his" src={require('./img/his-faces-05-pix.png')} /> */}
             </div>
           </div>
         </div>
