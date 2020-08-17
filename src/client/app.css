@@ -22,7 +22,16 @@
   /* --correct: var(--t3-alt);
   --incorrect: var(--t2-alt); */
   --correct: #3FAB39;
+  --correct-light: #62C65D;
+  --correct-extralight: #91DD8D;
+  --correct-dark: #25921F;
+  --correct-exp: #359830;
+
   --incorrect: #D1464A;
+  --incorrect-light: #F37275;
+  --incorrect-extralight: #FDA2A4;
+  --incorrect-dark: #B3262A;
+  --incorrect-exp: #BA3A3D;
 
   /* Lighter Contrast : Very Light Pastel */
   /* --t0-bg: #FFD38F;
