@@ -37,7 +37,7 @@ class Game extends Component {
       hersButtonClasses.push('game-guess-button-active');
     }
 
-    return [hisButtonClasses, hersButtonClasses];
+    return [hisButtonClasses.join(' '), hersButtonClasses.join(' ')];
   }
 
   renderNotJoined() {
@@ -91,17 +91,13 @@ class Game extends Component {
     return (
       <div className={`game-background theme-bg-${theme}`}>
         <div className="game-block game-guess-buttons">
-          <div className={`game-button game-guess-button theme-alt-${theme} ${hersButtonClasses.join(' ')}`} onClick={() => this.submitGuess('hers')}>
-            <div className="game-button-text game-guess-button-text">
+          <div className={`game-button game-guess-button theme-alt-${theme} ${hersButtonClasses}`} onClick={() => this.submitGuess('hers')}>
               <img className="game-face game-face-hers" src={require('./img/her-faces-02-pix.png')} />
-            </div>
           </div>
-          <div className={`game-button game-button-center game-guess-button theme-alt-${theme} ${hisButtonClasses.join(' ')}`} onClick={() => this.submitGuess('his')}>
-            <div className="game-button-text game-guess-button-text">
+          <div className={`game-button game-button-center game-guess-button theme-alt-${theme} ${hisButtonClasses}`} onClick={() => this.submitGuess('his')}>
               <img className="game-face game-face-his" src={require('./img/his-faces-05-pix17.png')} />
               {/* I felt the below image was not pixelated enough compared to hers, so I replaced it with the above */}
               {/* <img className="game-face game-face-his" src={require('./img/his-faces-05-pix.png')} /> */}
-            </div>
           </div>
         </div>
         <div className={`game-question-text theme-font-${theme} game-question-text-${theme}`}>
