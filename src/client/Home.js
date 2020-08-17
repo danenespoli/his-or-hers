@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { TextInput, Button } from 'evergreen-ui';
 import './home.css';
+import './app.css';
 
 class Home extends Component {
   state = {
@@ -83,7 +84,7 @@ class Home extends Component {
     const { name, errorMsg, backgroundNum } = this.state;
 
     return (
-      <div className={`home-background home-background-${backgroundNum}`}>
+      <div className={`home-background theme-bg-${backgroundNum}`}>
         <div className="home-images">
           {/* <img className="home-image-hers" src={require('./img/her-faces-02-pix.png')} /> */}
           {/* <img className="home-image-his" src={require('./img/tego-faces-01-pix.png')} /> */}
@@ -104,7 +105,7 @@ class Home extends Component {
             />
           </div>
           <div
-            className={`home-controls-join home-controls-join-${backgroundNum}`}
+            className={`home-controls-join theme-alt-${backgroundNum}`}
             onClick={() => this.submitName()}
           >
             <div className="home-controls-join-text">

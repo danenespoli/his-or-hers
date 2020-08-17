@@ -177,74 +177,24 @@
 
 
 /* THEME-DEPENDENT PROPERTIES */
-.game-background-0 {
-  background-color: #FFE974;
-}
 .game-question-text-0 {
   top: 2px;
-  font-family: 'Red Rose', sans-serif;
-  letter-spacing: -0.04em;
-}
-.game-button-0:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
-  background-color: #E9CF48;
-}
-
-.game-background-1 {
-  background-color: #DD5CA5;
 }
 .game-question-text-1 {
   top: 3px;
-  font-family: 'Redressed', sans-serif;
-  letter-spacing: -0.06em;
-}
-.game-button-1:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
-  background-color: #CE3D8F;
-}
-
-.game-background-2 {
-  background-color: #FF7474;
 }
 .game-question-text-2 {
   top: 2px;
-  font-family: 'Recursive', sans-serif;
-}
-.game-button-2:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
-  background-color: #DB6565;
-}
-
-.game-background-3 {
-  background-color: #ACEF8C;
 }
 .game-question-text-3 {
   top: 0;
-  font-family: 'Indie Flower', sans-serif;
-}
-.game-button-3:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
-  background-color: #95CA7C;
-}
-
-.game-background-4 {
-  background-color: #74B4FF;
 }
 .game-question-text-4 {
   top: 0;
-  font-family: 'Fjalla One', sans-serif;
-}
-.game-button-4:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
-  background-color: #679FE1;
-}
-
-.game-background-5 {
-  background-color: #8C96EF;
 }
 .game-question-text-5 {
   top: 11px;
-  font-family: 'Great Vibes', sans-serif;
 }
-.game-button-5:not(.game-guess-button-correct):not(.game-guess-button-incorrect) {
-  background-color: #7780CB;
-}
-
 
 
 

@@ -2,4 +2,79 @@
   color: #FFFFFF;
   cursor: url('img/cursor-auto.png'), pointer;
   font-family: 'Recursive', sans-serif;
+
+  --t0-bg: #FFE974;
+  --t0-alt: #E9CF48;
+  --t1-bg: #DD5CA5;
+  --t1-alt: #CE3D8F;
+  --t2-bg: #FF7474;
+  --t2-alt: #DB6565;
+  --t3-bg: #ACEF8C;
+  --t3-alt: #95CA7C;
+  --t4-bg: #74B4FF;
+  --t4-alt: #679FE1;
+  --t5-bg: #8C96EF;
+  --t5-alt: #7780CB;
+}
+
+.theme-bg-0 {
+  background-color: var(--t0-bg);
+}
+.theme-alt-0 {
+  background-color: var(--t0-alt);
+}
+.theme-font-0 {
+  font-family: 'Red Rose', sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.theme-bg-1 {
+  background-color: var(--t1-bg);
+}
+.theme-alt-1 {
+  background-color: var(--t1-alt);
+}
+.theme-font-1 {
+  font-family: 'Redressed', sans-serif;
+  letter-spacing: -0.06em;
+}
+
+.theme-bg-2 {
+  background-color: var(--t2-bg);
+}
+.theme-alt-2 {
+  background-color: var(--t2-alt);
+}
+.theme-font-2 {
+  font-family: 'Recursive', sans-serif;
+}
+
+.theme-bg-3 {
+  background-color: var(--t3-bg);
+}
+.theme-alt-3 {
+  background-color: var(--t3-alt);
+}
+.theme-font-3 {
+  font-family: 'Indie Flower', sans-serif;
+}
+
+.theme-bg-4 {
+  background-color: var(--t4-bg);
+}
+.theme-alt-4 {
+  background-color: var(--t4-alt);
+}
+.theme-font-4 {
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.theme-bg-5 {
+  background-color: var(--t5-bg);
+}
+.theme-alt-5 {
+  background-color: var(--t5-alt);
+}
+.theme-font-5 {
+  font-family: 'Great Vibes', sans-serif;
 }

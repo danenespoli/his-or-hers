@@ -44,12 +44,12 @@ class Game extends Component {
     const { theme } = this.props;
 
     return (
-      <div className={`game-background game-background-${theme}`}>
+      <div className={`game-background theme-bg-${theme}`}>
         <div className="game-msg-text">
           Failed to join :(
         </div>
         <div className="game-button-container">
-          <div className={`game-button game-button-${theme}`} onClick={() => this._navigateHome()}>
+          <div className={`game-button theme-alt-${theme}`} onClick={() => this._navigateHome()}>
             <div className="game-button-text">Try again?</div>
           </div>
         </div>
@@ -61,7 +61,7 @@ class Game extends Component {
     const { theme } = this.props;
 
     return (
-      <div className={`game-background game-background-${theme}`}>
+      <div className={`game-background theme-bg-${theme}`}>
         <div className="game-msg-text">
           You're in!
         </div>
@@ -89,14 +89,14 @@ class Game extends Component {
     const [hisButtonClasses, hersButtonClasses] = this._getGuessButtonClasses(guess, answer);
 
     return (
-      <div className={`game-background game-background-${theme}`}>
+      <div className={`game-background theme-bg-${theme}`}>
         <div className="game-block game-guess-buttons">
-          <div className={`game-button game-guess-button game-button-${theme} ${hersButtonClasses.join(' ')}`} onClick={() => this.submitGuess('hers')}>
+          <div className={`game-button game-guess-button theme-alt-${theme} ${hersButtonClasses.join(' ')}`} onClick={() => this.submitGuess('hers')}>
             <div className="game-button-text game-guess-button-text">
               <img className="game-face game-face-hers" src={require('./img/her-faces-02-pix.png')} />
             </div>
           </div>
-          <div className={`game-button game-button-center game-guess-button game-button-${theme} ${hisButtonClasses.join(' ')}`} onClick={() => this.submitGuess('his')}>
+          <div className={`game-button game-button-center game-guess-button theme-alt-${theme} ${hisButtonClasses.join(' ')}`} onClick={() => this.submitGuess('his')}>
             <div className="game-button-text game-guess-button-text">
               <img className="game-face game-face-his" src={require('./img/his-faces-05-pix17.png')} />
               {/* I felt the below image was not pixelated enough compared to hers, so I replaced it with the above */}
@@ -104,7 +104,7 @@ class Game extends Component {
             </div>
           </div>
         </div>
-        <div className={`game-question-text game-question-text-${theme}`}>
+        <div className={`game-question-text theme-font-${theme} game-question-text-${theme}`}>
           {question}
         </div>
         <div className="game-block game-hud">
@@ -136,8 +136,8 @@ class Game extends Component {
     } = this.props;
 
     return (
-      <div className={`game-background game-background-${theme}`}>
-        <div className={`game-block game-thanks-text game-question-text-${theme}`}>
+      <div className={`game-background theme-bg-${theme}`}>
+        <div className={`game-block game-thanks-text theme-font-${theme} game-question-text-${theme}`}>
           Thanks for playing!
         </div>
         <div className="game-block game-scoreboard-text">

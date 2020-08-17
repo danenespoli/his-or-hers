@@ -156,70 +156,21 @@
 /*
   Background Animations!
 */
-.home-background-0 {
-  background-color: #FFE974;
-}
 .home-text-0 {
   top: 2px;
-  font-family: 'Red Rose', sans-serif;
-  letter-spacing: -0.04em;
-}
-.home-controls-join-0 {
-  background-color: #E9CF48;
-}
-
-.home-background-1 {
-  background-color: #D274FF;
 }
 .home-text-1 {
   top: 3px;
-  font-family: 'Redressed', sans-serif;
-  letter-spacing: -0.06em;
-}
-.home-controls-join-1 {
-  background-color: #AE62D2;
-}
-
-.home-background-2 {
-  background-color: #FF7474;
 }
 .home-text-2 {
   top: 2px;
-  font-family: 'Recursive', sans-serif;
-}
-.home-controls-join-2 {
-  background-color: #DB6565;
-}
-
-.home-background-3 {
-  background-color: #ACEF8C;
 }
 .home-text-3 {
   top: 0;
-  font-family: 'Indie Flower', sans-serif;
-}
-.home-controls-join-3 {
-  background-color: #95CA7C;
-}
-
-.home-background-4 {
-  background-color: #74B4FF;
 }
 .home-text-4 {
   top: 0;
-  font-family: 'Fjalla One', sans-serif;
-}
-.home-controls-join-4 {
-  background-color: #679FE1;
-}
-
-.home-background-5 {
-  background-color: #8C96EF;
 }
 .home-text-5 {
   top: 11px;
-  font-family: 'Great Vibes', sans-serif;
-}
-.home-controls-join-5 {
-  background-color: #7780CB;
 }

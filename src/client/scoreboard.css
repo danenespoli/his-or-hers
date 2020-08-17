@@ -66,20 +66,20 @@
 /* THEME DEPENDENT PROPERTIES */
 
 .scoreheader-0 {
-  background-color: #E9CF48;
+  background-color: var(--t0-dark);
 }
 .scoreheader-1 {
-  background-color: #AE62D2;
+  background-color: var(--t1-dark);
 }
 .scoreheader-2 {
-  background-color: #DB6565;
+  background-color: var(--t2-dark);
 }
 .scoreheader-3 {
-  background-color: #95CA7C;
+  background-color: var(--t3-dark);
 }
 .scoreheader-4 {
-  background-color: #679FE1;
+  background-color: var(--t4-dark);
 }
 .scoreheader-5 {
-  background-color: #7780CB;
+  background-color: var(--t5-dark);
 }
