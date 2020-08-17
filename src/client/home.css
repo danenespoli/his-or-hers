@@ -174,3 +174,44 @@
 .home-text-5 {
   top: 11px;
 }
+
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+  .home-background {
+    font-size: 50px;
+  }
+
+  .game-msg-text {
+    font-size: 24px;
+  }
+
+  .game-msg-text-small {
+    font-size: 15px;
+  }
+
+  .home-controls {
+    flex-direction: column;
+  }
+
+  .home-text-container {
+    min-height: 100px;
+  }
+
+  .home-controls-name {
+    margin: auto;
+    width: 300px;
+  }
+
+  .home-controls-name-input {
+    height: 77px;
+    width: 260px;
+  }
+
+  .home-controls-join {
+    margin: 20px auto auto;
+  }
+}
