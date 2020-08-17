@@ -91,7 +91,7 @@ class Home extends Component {
           {/* <img className="home-image-his" src={require('./img/his-faces-05-pix.png')} /> */}
         </div>
         <div className="home-text-container">
-          <div className={`home-text home-text-${backgroundNum}`}>Steph or Dustin</div>
+          <div className={`home-text theme-font-${backgroundNum} home-text-${backgroundNum}`}>Steph or Dustin</div>
         </div>
         <div className="home-controls">
           <div className="home-controls-name">

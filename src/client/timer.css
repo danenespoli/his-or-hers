@@ -46,24 +46,3 @@
 .timer-answer-text-incorrect {
 
 }
-
-
-/* THEME DEPENDENT PROPERTIES */
-.timer-circle-0 {
-  background-color: #E9CF48;
-}
-.timer-circle-1 {
-  background-color: #CE3D8F;
-}
-.timer-circle-2 {
-  background-color: #DB6565;
-}
-.timer-circle-3 {
-  background-color: #95CA7C;
-}
-.timer-circle-4 {
-  background-color: #679FE1;
-}
-.timer-circle-5 {
-  background-color: #7780CB;
-}
