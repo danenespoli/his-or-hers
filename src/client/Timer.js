@@ -25,15 +25,15 @@ export default function Timer(props) {
   if (correct || wrong) {
     timerContents = (
       <div
-        className={`timer-circle theme-alt-${theme} timer-answer`}
+        className={`timer-circle theme-alt-${theme} timer-answer timer-answer-${correct ? 'correct' : 'incorrect'}`}
       >
         {correct && (
-          <div className="timer-text timer-answer-text timer-answer-text-correct">
+          <div className="timer-text timer-answer-text">
             Correct!
           </div>
         )}
         {!correct && (
-          <div className="timer-text timer-answer-text timer-answer-text-incorrect">
+          <div className="timer-text timer-answer-text">
             Incorrect
           </div>
         )}

@@ -40,9 +40,11 @@
   font-size: 36px;
 }
 
-.timer-answer-text-correct {
-
+/* Personally, I think the green and red look kind of ugly so I won't change the timer colour for now. */
+/* .timer-answer-correct {
+  background-color: var(--correct);
 }
-.timer-answer-text-incorrect {
 
-}
+.timer-answer-incorrect {
+  background-color: var(--correct);
+} */

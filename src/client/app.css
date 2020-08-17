@@ -17,6 +17,9 @@
   --t5-bg: #8C96EF;
   --t5-alt: #7780CB;
 
+  --correct: var(--t3-alt);
+  --incorrect: var(--t1-alt);
+
   /* Lighter Contrast : Very Light Pastel */
   /* --t0-bg: #FFD38F;
   --t0-alt: #FFC46B;
