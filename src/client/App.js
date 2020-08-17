@@ -41,7 +41,7 @@ const initialAppState = {
  * and Join button (if false), or a message to come check back later to play
  * the game (if true).
  */
-const USE_HOME_PLACEHOLDER = false;
+const USE_HOME_PLACEHOLDER = true;
 
 
 export default class App extends Component {
