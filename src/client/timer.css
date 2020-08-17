@@ -54,6 +54,17 @@
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
 
+  .timer {
+    height: 150px;
+    width: 150px;
+  }
+
+  .timer-text {
+    color: #FFFFFF;
+    font-family: 'Recursive', sans-serif;
+    font-size: 36px;
+  }
+
   .timer-answer {
     width: 140px;
     height: 70px;

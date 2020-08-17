@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { Button, TextInput, Select } from 'evergreen-ui';
-import axios from 'axios';
+import { useMediaQuery } from 'react-responsive';
 import './timer.css';
 
-const MAX_SIZE = 200;
-const MIN_SIZE = 60;
 // *** IF THIS VALUE CHANGES, MUST UPDATE GAMEMANAGER.JS ***
 const MAX_TIME = 30;
 
@@ -15,6 +12,10 @@ export default function Timer(props) {
     correct,
     wrong
   } = props;
+
+  const isMobile = useMediaQuery({ query: 'only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)' });
+  const MAX_SIZE = isMobile ? 100 : 200;
+  const MIN_SIZE = isMobile ? 30 : 60;
 
   const size = (MAX_SIZE - MIN_SIZE) * (time / MAX_TIME) + MIN_SIZE;
 
