@@ -156,9 +156,14 @@ const gameManager = {
     ));
 
     // Already used all options, so reset the history.
+    // However, keep the current theme in history, so that we don't
+    // get the same theme twice in a row.
     if (currentOptions.length === 0) {
-      currentOptions = allOptions;
+      currentOptions = allOptions.filter(o => (
+        o !== theme
+      ));
       themeHistory.clear();
+      themeHistory.add(theme);
     }
 
     // Random number out of available numbers.
