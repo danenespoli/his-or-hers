@@ -27,10 +27,9 @@ const gameManager = {
     io = require('socket.io')(httpServer);
 
     io.on('connection', socket => {
-      console.log('User connected!');
+      // TODO: add connection to player array now!
 
       socket.on('join', name => {
-        console.log(`User "${name}" joining.`);
         this.addPlayer(socket.id, name);
         socket.emit('join-success');
       });
@@ -51,6 +50,8 @@ const gameManager = {
   */
 
   addPlayer(id, name) {
+    console.log('* PLAYER JOINED *');
+
     const guesses = [];
     const didGuess = [];
     for (let i = 0; i < questionData.length; i++) {
@@ -64,13 +65,16 @@ const gameManager = {
       didGuess,
     };
 
-    console.log(players);
+    console.log(name);
+    // console.log(Object.values(players).map(p => p.name));
   },
 
   removePlayer(id) {
-    delete players[id];
+    if (!players[id]) return;
 
-    console.log(players);
+    console.log('* PLAYER LEFT *');
+    console.log(players[id].name);
+    delete players[id];
   },
 
   async startGame() {
@@ -189,6 +193,7 @@ const gameManager = {
   },
 
   _computeAndEmitScores() {
+    console.log('* SENDING FINAL SCORES *');
     const playerEntries = Object.entries(players);
     const scores = {};
 
@@ -237,6 +242,8 @@ const gameManager = {
   },
 
   acceptGuess(id, guess, name) {
+    console.log('* PLAYER GUESSED *');
+
     // Make sure user can still guess.
     if (gameState.time <= 0) {
       console.log('No time left to guess!');
@@ -261,7 +268,7 @@ const gameManager = {
     player.guesses[gameState.question] = score;
     player.didGuess[gameState.question] = true;
 
-    console.log(players);
+    console.log(player);
   },
 
   getGameState() {
@@ -269,7 +276,7 @@ const gameManager = {
   },
 
   async endGame() {
-    console.log('Ending game!');
+    console.log('* ENDING GAME *');
     io.emit('end-game');
 
     await this._resetGame();

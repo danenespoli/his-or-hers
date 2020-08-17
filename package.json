@@ -10,7 +10,8 @@
     "start": "npm run build && node src/server/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test-sock": "node src/test/socketTest.js"
   },
   "engines": {
     "node": "14.6.0"
@@ -24,6 +25,7 @@
     "body-parser": "^1.19.0",
     "evergreen-ui": "^4.29.1",
     "express": "^4.16.3",
+    "prompt-sync": "^4.2.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-responsive": "^8.1.0",
