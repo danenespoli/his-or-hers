@@ -83,3 +83,28 @@
 .scoreheader-5 {
   background-color: var(--t5-dark);
 }
+
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+  .scoreboard {
+    width: 375px;
+  }
+
+  .scoretile {
+    height: 48px;
+  }
+  .scoreheader {
+    height: 32px;
+  }
+
+  .scoretile td {
+    font-size: 22px;
+  }
+  .scoreheader th {
+    font-size: 16px;
+  }
+}
