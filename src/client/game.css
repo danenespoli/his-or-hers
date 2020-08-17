@@ -102,7 +102,7 @@
 .game-guess-button-correct {
   /* border: 2px solid var(--correct);
   box-sizing: border-box; */
-  background-color: var(--correct-exp);
+  background-color: var(--correct);
   /* background: radial-gradient(var(--correct-light), var(--correct)); */
 
   /* width: 170px;
@@ -121,7 +121,7 @@
 .game-guess-button-incorrect {
   /* border: 2px solid var(--incorrect);
   box-sizing: border-box; */
-  background-color: var(--incorrect-exp);
+  background-color: var(--incorrect);
   /* background: radial-gradient(var(--incorrect-light), var(--incorrect)); */
 
   /* width: 150px;
