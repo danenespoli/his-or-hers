@@ -19,8 +19,10 @@
 
   /* --correct: #09B000;
   --incorrect: #D70006; */
-  --correct: var(--t3-alt);
-  --incorrect: var(--t2-alt);
+  /* --correct: var(--t3-alt);
+  --incorrect: var(--t2-alt); */
+  --correct: #3FAB39;
+  --incorrect: #D1464A;
 
   /* Lighter Contrast : Very Light Pastel */
   /* --t0-bg: #FFD38F;
