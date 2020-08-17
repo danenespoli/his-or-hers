@@ -60,9 +60,8 @@
   }
 
   .timer-text {
-    color: #FFFFFF;
-    font-family: 'Recursive', sans-serif;
     font-size: 36px;
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.15);
   }
 
   .timer-answer {
