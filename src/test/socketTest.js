@@ -16,30 +16,55 @@ class TestSocket {
   }
 }
 
+
 class SocketTester {
   constructor(numSockets) {
-    this.sockets = [];
+    this.players = [];
     for (let i = 0; i < numSockets; i++) {
-      this.sockets.push(new TestSocket());
+      this.players.push(new TestSocket());
     }
   }
 
-  joinAll() {
-    this._forAllSockets((socket, idx) => {
-      socket.joinGame(`Player ${idx}`);
+  quit() {
+    this._forAllPlayers((player, idx) => {
+      player.socket.disconnect();
     });
   }
 
-  _forAllSockets(fn) {
-    for (let i = 0; i < this.sockets.length; i++) {
-      fn(this.sockets[i], i);
+  joinAll() {
+    this._forAllPlayers((player, idx) => {
+      player.joinGame(`Player ${idx}`);
+    });
+  }
+
+  _forAllPlayers(fn) {
+    for (let i = 0; i < this.players.length; i++) {
+      fn(this.players[i], i);
     }
   }
 }
 
+
 function repl() {
-  console.log('Starting...');
-  const tester = new SocketTester(10);
-  tester.joinAll();
-  console.log('Done.');
+  const players = prompt('Number of players to start: ');
+  const tester = new SocketTester(players);
+
+  while (true) {
+    const cmd = prompt('Command: ');
+    switch (cmd) {
+      case 'help':
+        console.log(`
+          joinAll: Joins with all sockets
+        `);
+        break;
+      case 'joinAll':
+        tester.joinAll();
+        break;
+      default:
+        tester.quit();
+        return;
+    }
+  }
 }
+
+repl();
