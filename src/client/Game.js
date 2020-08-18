@@ -92,10 +92,10 @@ class Game extends Component {
       <div className={`game-background theme-bg-${theme}`}>
         <div className="game-block game-guess-buttons">
           <div className={`game-button game-guess-button theme-alt-${theme} ${hersButtonClasses}`} onClick={() => this.submitGuess('hers')}>
-              <img className="game-face game-face-hers" src={require('./img/her-faces-pix20.png')} />
+              <img className="game-face game-face-hers" src={require('./img/her-faces-gpix.png')} />
           </div>
           <div className={`game-button game-button-center game-guess-button theme-alt-${theme} ${hisButtonClasses}`} onClick={() => this.submitGuess('his')}>
-              <img className="game-face game-face-his" src={require('./img/his-faces-pix20.png')} />
+              <img className="game-face game-face-his" src={require('./img/his-faces-gpix.png')} />
               {/* I felt the below image was not pixelated enough compared to hers, so I replaced it with the above */}
               {/* <img className="game-face game-face-his" src={require('./img/his-faces-05-pix.png')} /> */}
           </div>

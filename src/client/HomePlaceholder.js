@@ -79,9 +79,9 @@ class HomePlaceholder extends Component {
     return (
       <div className={`home-background home-background-${backgroundNum}`}>
         <div className="home-images">
-          <img className="home-image-hers" src={require('./img/her-faces-02-pix.png')} />
+          {/* <img className="home-image-hers" src={require('./img/her-faces-02-pix.png')} /> */}
           {/* <img className="home-image-his" src={require('./img/tego-faces-01-pix.png')} /> */}
-          <img className="home-image-his" src={require('./img/his-faces-05-pix17.png')} />
+          {/* <img className="home-image-his" src={require('./img/his-faces-05-pix17.png')} /> */}
         </div>
         <div className="home-text-container">
           <div className={`home-text home-text-${backgroundNum}`}>Steph or Dustin</div>

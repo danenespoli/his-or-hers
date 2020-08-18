@@ -95,8 +95,9 @@
   width: 164px;
   height: 164px;
 
-  border: 5px solid rgba(0, 0, 0, 0.08);
+  border: 4px solid rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
+  transition: border 200ms ease-in-out, opacity 200ms ease-in-out;
 
   /* margin: 0 calc((200px - 164px) / 2) auto; */
   /* transition: width 300ms ease-in-out, height 300ms ease-in-out, margin 300ms ease-in-out; */
@@ -106,6 +107,7 @@
   /* border: 2px solid var(--correct);
   box-sizing: border-box; */
   /* background-color: var(--correct); */
+  border: 50px solid rgba(0, 0, 0, 0.03);
   /* background: radial-gradient(var(--correct-light), var(--correct)); */
 
   /* width: 170px;
@@ -119,6 +121,10 @@
   /* background: radial-gradient(#54D954, #00CC00); */
   /* background: radial-gradient(#54D954, #009E00); */
   opacity: 1;
+}
+
+.game-guess-button-correct .game-face-hers {
+  margin-top: -46px;
 }
 
 .game-guess-button-incorrect {
@@ -137,7 +143,7 @@
 
   /* background: radial-gradient(#FF6363, #FF0000); */
   /* background: radial-gradient(#FF6363, #C50000); */
-  opacity: 0.6;
+  opacity: 0.3;
 }
 
 :not(.game-guess-button-active):not(.game-guess-button-incorrect).game-button:hover {
@@ -246,6 +252,7 @@
 .game-face-hers {
   width: 150px;
   height: calc(1.5 * 150px);
+  transition: margin-top 200ms ease-in-out;
 }
 
 
