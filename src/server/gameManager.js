@@ -3,6 +3,8 @@ const AWS = require('aws-sdk');
 // * CONSTANTS *
 // *** IF THIS VALUE CHANGES, MUST UPDATE TIMER.JS ***
 const MAX_TIME = 30;
+// If true, will automatically go to next question after answer has been revealed.
+const AUTO_NEXT = true;
 
 // * GLOBALS *
 // These variables are kept in process memory
@@ -136,6 +138,14 @@ const gameManager = {
         io.emit('answer', q.answer);
         // Send each player their updated score.
         this._sendIndividualScores();
+
+        if (AUTO_NEXT) {
+          setTimeout(() => {
+            if (gameState.question < questionData.length - 1) {
+              this.nextQuestion();
+            }
+          }, 5000);
+        }
       }
     }, 1000);
   },
