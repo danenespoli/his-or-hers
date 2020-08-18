@@ -95,6 +95,9 @@
   width: 164px;
   height: 164px;
 
+  border: 5px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+
   /* margin: 0 calc((200px - 164px) / 2) auto; */
   /* transition: width 300ms ease-in-out, height 300ms ease-in-out, margin 300ms ease-in-out; */
 }
@@ -102,7 +105,7 @@
 .game-guess-button-correct {
   /* border: 2px solid var(--correct);
   box-sizing: border-box; */
-  background-color: var(--correct);
+  /* background-color: var(--correct); */
   /* background: radial-gradient(var(--correct-light), var(--correct)); */
 
   /* width: 170px;
@@ -121,7 +124,7 @@
 .game-guess-button-incorrect {
   /* border: 2px solid var(--incorrect);
   box-sizing: border-box; */
-  background-color: var(--incorrect);
+  /* background-color: var(--incorrect); */
   /* background: radial-gradient(var(--incorrect-light), var(--incorrect)); */
 
   /* width: 150px;
