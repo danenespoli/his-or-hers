@@ -143,7 +143,7 @@
 
   /* background: radial-gradient(#FF6363, #FF0000); */
   /* background: radial-gradient(#FF6363, #C50000); */
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 :not(.game-guess-button-active):not(.game-guess-button-incorrect).game-button:hover {
