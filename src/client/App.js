@@ -167,6 +167,16 @@ export default class App extends Component {
               question={question}
               answer={answer}
               time={time}
+              rawState={{
+                question,
+                questionNum,
+                questionTotal,
+                answer,
+                time,
+                score,
+                topScores,
+                finalScore,
+              }}
             />
           </Route>
           <Route path="/game">

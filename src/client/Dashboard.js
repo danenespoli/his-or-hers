@@ -138,14 +138,11 @@ export default class Dashboard extends Component {
   renderDefaultControls() {
     return (
       <div className="dash-background">
-        <span className="dash-element">
-          Wait until you're sure everyone has joined before starting the game. They won't be able to join once it's started!
-        </span>
         <div className="dash-element">
-          <Button onClick={() => this.startGame()}>
+          <Button className="dash-element" onClick={() => this.startGame()}>
             Start Game!
           </Button>
-          <Button onClick={() => this.enterEditQuestionMode()}>
+          <Button className="dash-element" onClick={() => this.enterEditQuestionMode()}>
             Edit Questions
           </Button>
         </div>
@@ -226,14 +223,29 @@ export default class Dashboard extends Component {
   }
 
   renderDuringGame() {
+    const { rawState } = this.props;
+
+    const stateInfo = Object.entries(rawState).map(([key, value]) => (
+      <tr>
+        <td className="dash-table-key">{key}:</td>
+        <td className="dash-table-value">{value}</td>
+      </tr>
+    ));
     return (
       <div className="dash-background">
-        <Button onClick={() => this.endGame()}>
-          End Game
-        </Button>
-        <Button onClick={() => this.nextQuestion()}>
-          Next Question
-        </Button>
+        <div className="dash-element">
+          <Button onClick={() => this.endGame()}>
+            End Game
+          </Button>
+          <Button onClick={() => this.nextQuestion()}>
+            Next Question
+          </Button>
+        </div>
+        <div className="dash-element">
+          <table className="dash-table">
+            {stateInfo}
+          </table>
+        </div>
       </div>
     );
   }

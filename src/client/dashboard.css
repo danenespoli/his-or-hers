@@ -23,3 +23,15 @@
   margin: 20px;
 }
 
+.dash-table {
+  text-align: left;
+}
+
+.dash-table-key {
+  text-align: right;
+}
+
+.dash-table-value {
+  text-align: left;
+}
+
