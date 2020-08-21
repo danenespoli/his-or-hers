@@ -216,7 +216,7 @@
 }
 
 .game-scorefaces {
-  height: 125px;
+  height: 150px;
   align-items: start;
 }
 
@@ -277,8 +277,8 @@
   visibility: hidden;
 }
 .game-face-tego-sm {
-  width: 125px;
-  height: 125px;
+  width: 150px;
+  height: 150px;
 }
 
 
