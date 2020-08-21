@@ -198,7 +198,8 @@
 .game-thanks-text {
   font-size: 76px;
   text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin: auto 50px auto;
+  /* align-self: center; */
 }
 
 .game-scoreboard {
@@ -215,8 +216,7 @@
 }
 
 .game-scorefaces {
-  /* height: calc(1.5 * 150px); */
-  margin: 0;
+  height: 125px;
   align-items: start;
 }
 
@@ -268,11 +268,13 @@
   width: 100px;
   height: 100px;
   top: 8px;
+  visibility: hidden;
 }
 .game-face-hers-sm {
   width: 100px;
   height: calc(1.5 * 100px);
   transition: margin-top 200ms ease-in-out;
+  visibility: hidden;
 }
 .game-face-tego-sm {
   width: 125px;
