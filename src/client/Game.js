@@ -134,6 +134,11 @@ class Game extends Component {
         <div className={`game-block game-thanks-text theme-font-${theme} game-question-text-${theme}`}>
           Thanks for playing!
         </div>
+        <div className="game-block game-scorefaces">
+          <img className="game-face-hers-sm" src={require('./img/her-faces-lowtrace.png')} />
+          <img className="game-face-tego-sm" src={require('./img/tego-faces-lowtrace.png')} />
+          <img className="game-face-his-sm" src={require('./img/his-faces-lowtrace.png')} />
+        </div>
         <div className="game-block game-scoreboard-text">
           Top Scores
         </div>
