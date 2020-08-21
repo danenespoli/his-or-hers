@@ -40,22 +40,22 @@ class Game extends Component {
     return [hisButtonClasses.join(' '), hersButtonClasses.join(' ')];
   }
 
-  renderNotJoined() {
-    const { theme } = this.props;
+  // renderNotJoined() {
+  //   const { theme } = this.props;
 
-    return (
-      <div className={`game-background theme-bg-${theme}`}>
-        <div className="game-msg-text">
-          Failed to join :(
-        </div>
-        <div className="game-button-container">
-          <div className={`game-button theme-alt-${theme}`} onClick={() => this._navigateHome()}>
-            <div className="game-button-text">Try again?</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  //   return (
+  //     <div className={`game-background theme-bg-${theme}`}>
+  //       <div className="game-msg-text">
+  //         Failed to join :(
+  //       </div>
+  //       <div className="game-button-container">
+  //         <div className={`game-button theme-alt-${theme}`} onClick={() => this._navigateHome()}>
+  //           <div className="game-button-text">Try again?</div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   renderWaitingToStart() {
     const { theme } = this.props;
@@ -203,19 +203,14 @@ class Game extends Component {
       finalScore,
     } = this.props;
 
-    // TODO: remove this line!
-    // return this.renderScoresView();
-
     if (topScores && finalScore) {
       return this.renderScoresView();
     }
 
     // Failed to join.
-    // TODO: simply show the game but don't allow the user to play.
-    // TODO: uncomment
-    // if (!joined) {
-    //   return this.renderNotJoined();
-    // }
+    if (!joined) {
+      this._navigateHome();
+    }
 
     // Waiting to start game.
     if (question === null) {

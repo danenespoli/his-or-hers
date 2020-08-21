@@ -55,10 +55,10 @@ export default class App extends Component {
 
     socket.on('join-success', () => {
       console.log('Joined game!');
-      this.setState({
-        ...initialAppState,
-        joined: true,
-      });
+      // this.setState({
+      //   ...initialAppState,
+      //   joined: true,
+      // });
     });
 
     socket.on('question', (question, questionNum, questionTotal, theme) => {
@@ -119,6 +119,7 @@ export default class App extends Component {
     console.log(`Setting name to ${name}!`);
     this.setState({
       name,
+      joined: true,
     });
   }
 
