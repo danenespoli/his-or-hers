@@ -12,7 +12,7 @@
   justify-content: center;
   border-radius: 50%;
 
-  transition: height 350ms ease-in-out, width 350ms ease-in-out, border-radius 350ms ease-in-out;
+  transition: height 200ms ease-in-out, width 200ms ease-in-out, border-radius 200ms ease-in-out;
 }
 
 .timer-text {
