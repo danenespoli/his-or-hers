@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import './timer.css';
 
 // *** IF THIS VALUE CHANGES, MUST UPDATE GAMEMANAGER.JS ***
-const MAX_TIME = 15;
+const MAX_TIME = 30;
 
 export default function Timer(props) {
   const {

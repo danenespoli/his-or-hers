@@ -2,7 +2,7 @@ const AWS = require('aws-sdk');
 
 // * CONSTANTS *
 // *** IF THIS VALUE CHANGES, MUST UPDATE TIMER.JS ***
-const MAX_TIME = 15;
+const MAX_TIME = 30;
 // If true, will automatically go to next question after answer has been revealed.
 const AUTO_NEXT = false;
 
