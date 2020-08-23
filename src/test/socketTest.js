@@ -3,10 +3,25 @@ const prompt = require('prompt-sync')();
 
 class TestSocket {
   constructor() {
-    this.socket = io('http://localhost:8081');
+    this.socket = io('http://steph-or-dustin-staging.herokuapp.com/');
+
+    this.socket.on('question', (question, questionNum, questionTotal, theme) => {
+      // Answer after a few seconds.
+      this.makeGuessAfterTime();
+    });
+  }
+
+  makeGuessAfterTime() {
+    const timeToWait = Math.random() * (15000 - 1000) + 1000;
+    const guess = Math.random() > 0.5 ? 'his' : 'hers';
+
+    setTimeout(() => {
+      this.socket.emit('guess', 'his', this.name);
+    }, timeToWait);
   }
 
   joinGame(name) {
+    this.name = name;
     console.log(`Joining with name: ${name}`);
     this.socket.emit('join', name);
   }
@@ -44,7 +59,8 @@ class SocketTester {
   }
 }
 
-
+// Repl is currently broken because prompt-sync waits and the
+// websockets on this process can't function in the meantime.
 function repl() {
   const players = prompt('Number of players to start: ');
   const tester = new SocketTester(players);
@@ -67,4 +83,14 @@ function repl() {
   }
 }
 
-repl();
+function runTest() {
+  const players = 50;
+  const tester = new SocketTester(players);
+
+  tester.joinAll();
+
+  // tester.quit();
+}
+
+// repl();
+runTest();
