@@ -281,13 +281,13 @@
   width: 100px;
   height: 100px;
   top: 8px;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 .game-face-hers-sm {
   width: 100px;
   height: calc(1.5 * 100px);
   transition: margin-top 200ms ease-in-out;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 .game-face-tego-sm {
   width: 150px;
@@ -338,7 +338,19 @@
 
   /* Scoreboard */
   .game-thanks-text {
-    font-size: 56px;
+    font-size: 36px;
+    margin: auto;
+    /* min-width: 50%; */
+  }
+
+  .game-scorefaces {
+    height: 100px;
+    align-items: start;
+  }
+
+  .game-face-tego-sm {
+    width: 90px;
+    height: 90px;
   }
 
   .game-scoreboard-text {
