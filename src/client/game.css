@@ -65,8 +65,10 @@
   cursor: url('img/cursor-pointer.png'), pointer;
 }
 
-.game-button:hover:not(.game-guess-button-incorrect) {
-  opacity: 1;
+@media(hover: hover) and (pointer: fine) {
+  .game-button:hover:not(.game-guess-button-incorrect) {
+    opacity: 1;
+  }
 }
 
 
@@ -147,9 +149,11 @@
   opacity: 0.2;
 }
 
-:not(.game-guess-button-active):not(.game-guess-button-incorrect).game-button:hover {
-  top: 0;
-  box-shadow: 0px 10px 0px rgba(0, 0, 0, 0.25);
+@media(hover: hover) and (pointer: fine) {
+  :not(.game-guess-button-active):not(.game-guess-button-incorrect).game-button:hover {
+    top: 0;
+    box-shadow: 0px 10px 0px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .game-guess-button-active {
@@ -253,6 +257,12 @@
 /* UNUSED CURRENTLY */
 .game-face {
   cursor: url('img/cursor-pointer.png'), pointer;
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .game-face-his {
@@ -271,13 +281,13 @@
   width: 100px;
   height: 100px;
   top: 8px;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 .game-face-hers-sm {
   width: 100px;
   height: calc(1.5 * 100px);
   transition: margin-top 200ms ease-in-out;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 .game-face-tego-sm {
   width: 150px;
@@ -328,7 +338,19 @@
 
   /* Scoreboard */
   .game-thanks-text {
-    font-size: 56px;
+    font-size: 36px;
+    margin: auto;
+    /* min-width: 50%; */
+  }
+
+  .game-scorefaces {
+    height: 100px;
+    align-items: start;
+  }
+
+  .game-face-tego-sm {
+    width: 90px;
+    height: 90px;
   }
 
   .game-scoreboard-text {

@@ -132,13 +132,13 @@ class Game extends Component {
     return (
       <div className={`game-background theme-bg-${theme}`}>
         <div className="game-block game-scorefaces">
-          <img className="game-face-hers-sm" src={require('./img/her-faces-lowtrace.png')} />
+          {/* <img className="game-face-hers-sm" src={require('./img/her-faces-lowtrace.png')} /> */}
           <img className="game-face-tego-sm" src={require('./img/tego-faces-lowtrace.png')} />
           <div className={`game-thanks-text theme-font-${theme} game-question-text-${theme}`}>
             Thanks for playing!
           </div>
           <img className="game-face-tego-sm" src={require('./img/tego-faces-lowtrace.png')} />
-          <img className="game-face-his-sm" src={require('./img/his-faces-lowtrace.png')} />
+          {/* <img className="game-face-his-sm" src={require('./img/his-faces-lowtrace.png')} /> */}
         </div>
         <div className="game-block game-scoreboard-text">
           Top Scores
@@ -149,26 +149,31 @@ class Game extends Component {
             // scores={[
             //   {
             //     id: '12345',
+            //     rank: 1,
             //     name: 'Jess',
             //     score: '10',
             //   },
             //   {
             //     id: '12346',
+            //     rank: 2,
             //     name: 'Dane Nespoli',
             //     score: '7',
             //   },
             //   {
             //     id: '12347',
+            //     rank: 3,
             //     name: 'Myla Boneses Bognar',
             //     score: '5',
             //   },
             //   {
             //     id: '12348',
+            //     rank: 4,
             //     name: 'Alice',
             //     score: '3',
             //   },
             //   {
             //     id: '12349',
+            //     rank: 5,
             //     name: 'Bob',
             //     score: '2',
             //   },

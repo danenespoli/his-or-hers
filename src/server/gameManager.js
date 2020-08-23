@@ -29,7 +29,8 @@ const gameManager = {
     io = require('socket.io')(httpServer);
 
     io.on('connection', socket => {
-      // TODO: add connection to player array now!
+      // TODO: add connection to player array now? Caused issues with dashboard user being in game,
+      // or even just tabs on the home screen.
 
       socket.on('join', name => {
         this.addPlayer(socket.id, name);
@@ -41,7 +42,6 @@ const gameManager = {
       });
 
       socket.on('disconnect', () => {
-        console.log('User disconnected');
         this.removePlayer(socket.id);
       });
     });
@@ -52,8 +52,6 @@ const gameManager = {
   */
 
   addPlayer(id, name) {
-    console.log('* PLAYER JOINED *');
-
     const guesses = [];
     const didGuess = [];
     for (let i = 0; i < questionData.length; i++) {
@@ -67,15 +65,14 @@ const gameManager = {
       didGuess,
     };
 
-    console.log(name);
+    console.log(`* PLAYER JOINED * \t ${id}, ${name}`);
     // console.log(Object.values(players).map(p => p.name));
   },
 
   removePlayer(id) {
     if (!players[id]) return;
 
-    console.log('* PLAYER LEFT *');
-    console.log(players[id].name);
+    console.log(`* PLAYER LEFT * \t ${players[id].name}`);
     delete players[id];
   },
 
@@ -261,11 +258,11 @@ const gameManager = {
     }
 
     const q = questionData[gameState.question];
-    const player = players[id];
-    if (!player) {
+    if (!players[id]) {
       // Handle error - add the player anyways, with a bunch of 0s for their previous guesses!
       this.addPlayer(id, name);
     }
+    const player = players[id];
 
     // Update name if this websocket changed theirs.
     if (player.name !== name) {
@@ -302,7 +299,8 @@ const gameManager = {
       Key: 'questions.json',
     }).promise();
     questionData = JSON.parse(data.Body);
-    console.log(questionData);
+    console.log('* FETCHED QUESTION DATA *');
+    // console.log(questionData);
     return questionData;
   },
 
@@ -314,6 +312,7 @@ const gameManager = {
       Body: JSON.stringify(body),
     }).promise();
     questionData = body;
+    console.log('* UPDATED QUESTION DATA: *');
     console.log(questionData);
   },
 
