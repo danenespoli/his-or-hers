@@ -149,26 +149,31 @@ class Game extends Component {
             // scores={[
             //   {
             //     id: '12345',
+            //     rank: 1,
             //     name: 'Jess',
             //     score: '10',
             //   },
             //   {
             //     id: '12346',
+            //     rank: 2,
             //     name: 'Dane Nespoli',
             //     score: '7',
             //   },
             //   {
             //     id: '12347',
+            //     rank: 3,
             //     name: 'Myla Boneses Bognar',
             //     score: '5',
             //   },
             //   {
             //     id: '12348',
+            //     rank: 4,
             //     name: 'Alice',
             //     score: '3',
             //   },
             //   {
             //     id: '12349',
+            //     rank: 5,
             //     name: 'Bob',
             //     score: '2',
             //   },
