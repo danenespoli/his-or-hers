@@ -52,8 +52,6 @@ const gameManager = {
   */
 
   addPlayer(id, name) {
-    console.log('* PLAYER JOINED *');
-
     const guesses = [];
     const didGuess = [];
     for (let i = 0; i < questionData.length; i++) {
@@ -67,15 +65,14 @@ const gameManager = {
       didGuess,
     };
 
-    console.log(name);
+    console.log(`* PLAYER JOINED * \t ${id}, ${name}`);
     // console.log(Object.values(players).map(p => p.name));
   },
 
   removePlayer(id) {
     if (!players[id]) return;
 
-    console.log('* PLAYER LEFT *');
-    console.log(players[id].name);
+    console.log(`* PLAYER LEFT * \t ${players[id].name}`);
     delete players[id];
   },
 
@@ -303,7 +300,7 @@ const gameManager = {
     }).promise();
     questionData = JSON.parse(data.Body);
     console.log('* FETCHED QUESTION DATA: *');
-    console.log(questionData);
+    // console.log(questionData);
     return questionData;
   },
 
