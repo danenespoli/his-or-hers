@@ -299,7 +299,7 @@ const gameManager = {
       Key: 'questions.json',
     }).promise();
     questionData = JSON.parse(data.Body);
-    console.log('* FETCHED QUESTION DATA: *');
+    console.log('* FETCHED QUESTION DATA *');
     // console.log(questionData);
     return questionData;
   },
