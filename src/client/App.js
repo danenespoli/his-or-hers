@@ -173,9 +173,7 @@ export default class App extends Component {
                 questionTotal,
                 answer,
                 time,
-                score,
-                topScores,
-                finalScore,
+                scoresShowing: (topScores || finalScore) ? 'Yes!' : 'No',
               }}
             />
           </Route>
