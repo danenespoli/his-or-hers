@@ -29,7 +29,8 @@ const gameManager = {
     io = require('socket.io')(httpServer);
 
     io.on('connection', socket => {
-      // TODO: add connection to player array now!
+      // TODO: add connection to player array now? Caused issues with dashboard user being in game,
+      // or even just tabs on the home screen.
 
       socket.on('join', name => {
         this.addPlayer(socket.id, name);
@@ -41,7 +42,6 @@ const gameManager = {
       });
 
       socket.on('disconnect', () => {
-        console.log('User disconnected');
         this.removePlayer(socket.id);
       });
     });
