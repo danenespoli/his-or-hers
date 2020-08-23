@@ -261,11 +261,11 @@ const gameManager = {
     }
 
     const q = questionData[gameState.question];
-    const player = players[id];
-    if (!player) {
+    if (!players[id]) {
       // Handle error - add the player anyways, with a bunch of 0s for their previous guesses!
       this.addPlayer(id, name);
     }
+    const player = players[id];
 
     // Update name if this websocket changed theirs.
     if (player.name !== name) {
@@ -302,6 +302,7 @@ const gameManager = {
       Key: 'questions.json',
     }).promise();
     questionData = JSON.parse(data.Body);
+    console.log('* FETCHED QUESTION DATA: *');
     console.log(questionData);
     return questionData;
   },
@@ -314,6 +315,7 @@ const gameManager = {
       Body: JSON.stringify(body),
     }).promise();
     questionData = body;
+    console.log('* UPDATED QUESTION DATA: *');
     console.log(questionData);
   },
 
