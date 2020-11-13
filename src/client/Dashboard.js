@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { Component } from 'react';
 import {
   Button,
@@ -9,6 +10,8 @@ import {
 } from 'evergreen-ui';
 import axios from 'axios';
 import './dashboard.css';
+import { useRecoilValue } from 'recoil';
+import { scoresShowingSelector } from './GameState';
 
 export default class Dashboard extends Component {
   state = {
@@ -223,8 +226,10 @@ export default class Dashboard extends Component {
   }
 
   renderDuringGame() {
-    const { rawState } = this.props;
+    const gameState = useRecoilValue(gameState);
+    const scoresShowing = useRecoilValue(scoresShowingSelector);
 
+    const rawState = { ...gameState, scoresShowing };
     const stateInfo = Object.entries(rawState).map(([key, value]) => (
       <tr>
         <td className="dash-table-key">{key}:</td>

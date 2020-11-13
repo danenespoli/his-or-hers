@@ -4,13 +4,19 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import {
+  RecoilRoot,
+  useRecoilState,
+  useSetRecoilState,
+  useRecoilValue,
+} from 'recoil';
 import './app.css';
 
 import Home from './Home';
 import Dashboard from './Dashboard';
 import Game from './Game';
 import HomePlaceholder from './HomePlaceholder';
+import { gameState, defaultGameState } from './GameState';
 
 const io = require('socket.io-client');
 
@@ -35,6 +41,8 @@ export default class App extends Component {
   constructor() {
     super();
 
+    const [{ name }, setGameState] = useRecoilState(gameState);
+
     socket.on('join-success', () => {
       console.log('Joined game!');
       // this.setState({
@@ -45,7 +53,7 @@ export default class App extends Component {
 
     socket.on('question', (question, questionNum, questionTotal, theme) => {
       console.log(question);
-      this.setState({
+      setGameState({
         question,
         questionNum,
         questionTotal,
@@ -56,33 +64,33 @@ export default class App extends Component {
     });
 
     socket.on('answer', (answer) => {
-      this.setState({
+      setGameState({
         answer,
       });
     });
 
     socket.on('score', (score) => {
-      this.setState({
+      setGameState({
         score,
       });
     });
 
     socket.on('timer', (time) => {
-      this.setState({
+      setGameState({
         time,
       });
     });
 
     socket.on('top-scores', topScores => {
       console.log('Game has ended!');
-      this.setState({
+      setGameState({
         topScores,
       });
     });
 
     socket.on('final-score', finalScore => {
       console.log('Game has ended!');
-      this.setState({
+      setGameState({
         finalScore,
       });
     });
@@ -90,8 +98,9 @@ export default class App extends Component {
     socket.on('end-game', () => {
       console.log('Ending game!');
       // Reset to initial state.
-      this.setState({
-        ...initialAppState,
+      setGameState({
+        ...defaultGameState,
+        name,
       });
     });
   }
@@ -99,38 +108,26 @@ export default class App extends Component {
   joinGame(name) {
     socket.emit('join', name);
     console.log(`Setting name to ${name}!`);
-    this.setState({
+    const setGameState = useSetRecoilState(gameState);
+
+    setGameState({
       name,
       joined: true,
     });
   }
 
   makeGuess(guess, name) {
-    const { answer } = this.state;
+    const [{ answer }, setGameState] = useRecoilState(gameState);
     // Don't allow guessing on the client side if the answer has already been revealed.
     if (answer !== null) return;
 
     socket.emit('guess', guess, name);
-    this.setState({
+    setGameState({
       guess,
     });
   }
 
   render() {
-    const joined = useRecoilValue(joined);
-    const name = useRecoilValue(name);
-    const question = useRecoilValue(question);
-    const questionNum = useRecoilValue(questionNum);
-    const questionTotal = useRecoilValue(questionTotal);
-    const answer = useRecoilValue(answer);
-    const guess = useRecoilValue(guess);
-    const time = useRecoilValue(time);
-    const ended = useRecoilValue(ended);
-    const score = useRecoilValue(score);
-    const topScores = useRecoilValue(topScores);
-    const finalScore = useRecoilValue(finalScore);
-    const theme = useRecoilValue(theme);
-
     const homeComponent = USE_HOME_PLACEHOLDER ? (
       <HomePlaceholder />
     ) : (

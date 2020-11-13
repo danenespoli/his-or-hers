@@ -1,6 +1,6 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
-export default atom({
+export const defaultGameState = {
   joined: false,
   question: null,
   questionNum: 1,
@@ -13,4 +13,17 @@ export default atom({
   finalScore: null,
   theme: 4,
   name: null,
+};
+
+export const gameState = atom({
+  key: 'gameState',
+  default: { ...defaultGameState },
+});
+
+export const scoresShowingSelector = selector({
+  key: 'scoresShowing',
+  get: ({ get }) => {
+    const { topScores, finalScore } = get(gameState);
+    return (topScores || finalScore) ? 'Yes!' : 'No';
+  }
 });

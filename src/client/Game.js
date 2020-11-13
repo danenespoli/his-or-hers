@@ -4,7 +4,7 @@ import { Spinner } from 'evergreen-ui';
 import { useRecoilValue } from 'recoil';
 import Timer from './Timer';
 import Scoreboard from './Scoreboard';
-import gameState from './GameState';
+import { gameState } from './GameState';
 import './game.css';
 
 const NUM_BACKGROUNDS = 6;
