@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import './app.css';
 
 import Home from './Home';
@@ -178,22 +179,24 @@ export default class App extends Component {
             />
           </Route>
           <Route path="/game">
-            <Game
-              joined={joined}
-              name={name}
-              question={question}
-              answer={answer}
-              guess={guess}
-              time={time}
-              ended={ended}
-              score={score}
-              theme={theme}
-              questionNum={questionNum}
-              questionTotal={questionTotal}
-              topScores={topScores}
-              finalScore={finalScore}
-              makeGuess={(g, n) => this.makeGuess(g, n)}
-            />
+            <RecoilRoot>
+              <Game
+                joined={joined}
+                name={name}
+                question={question}
+                answer={answer}
+                guess={guess}
+                time={time}
+                ended={ended}
+                score={score}
+                theme={theme}
+                questionNum={questionNum}
+                questionTotal={questionTotal}
+                topScores={topScores}
+                finalScore={finalScore}
+                makeGuess={(g, n) => this.makeGuess(g, n)}
+              />
+            </RecoilRoot>
           </Route>
           <Route path="/">
             {homeComponent}
