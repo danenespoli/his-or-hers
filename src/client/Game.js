@@ -1,31 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Spinner } from 'evergreen-ui';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import Timer from './Timer';
 import Scoreboard from './Scoreboard';
 import './game.css';
-import {
-  joinedState,
-  questionState,
-  questionNumState,
-  questionTotalState,
-  answerState,
-  guessState,
-  timeState,
-  scoreState,
-  topScoresState,
-  finalScoreState,
-  themeState,
-  nameState,
-} from './GameState';
 
 const NUM_BACKGROUNDS = 6;
 
 class Game extends Component {
   submitGuess(guess) {
-    const { makeGuess } = this.props;
-    const name = useRecoilValue(name);
+    const { makeGuess, name } = this.props;
     makeGuess(guess, name);
   }
 
@@ -74,7 +58,7 @@ class Game extends Component {
   // }
 
   renderWaitingToStart() {
-    const theme = useRecoilValue(themeState);
+    const { theme } = this.props;
 
     return (
       <div className={`game-background theme-bg-${theme}`}>
@@ -90,14 +74,17 @@ class Game extends Component {
   }
 
   renderGameView() {
-    const question = useRecoilValue(questionState);
-    const answer = useRecoilValue(answerState);
-    const time = useRecoilValue(timeState);
-    const guess = useRecoilValue(guessState);
-    const score = useRecoilValue(scoreState);
-    const questionNum = useRecoilValue(questionNumState);
-    const questionTotal = useRecoilValue(questionTotalState);
-    const theme = useRecoilValue(themeState);
+    const {
+      question,
+      answer,
+      time,
+      guess,
+      score,
+      questionNum,
+      questionTotal,
+      theme,
+    } = this.props;
+
 
     const [hisButtonClasses, hersButtonClasses] = this._getGuessButtonClasses(guess, answer);
 
@@ -136,9 +123,11 @@ class Game extends Component {
   }
 
   renderScoresView() {
-    const topScores = useRecoilValue(topScoresState);
-    const finalScore = useRecoilValue(finalScoreState);
-    const theme = useRecoilValue(themeState);
+    const {
+      topScores,
+      finalScore,
+      theme
+    } = this.props;
 
     return (
       <div className={`game-background theme-bg-${theme}`}>
@@ -211,10 +200,13 @@ class Game extends Component {
   }
 
   render() {
-    const joined = useRecoilValue(joinedState);
-    const question = useRecoilValue(questionState);
-    const topScores = useRecoilValue(topScoresState);
-    const finalScore = useRecoilValue(finalScoreState);
+    const {
+      joined,
+      question,
+      answer,
+      topScores,
+      finalScore,
+    } = this.props;
 
     if (topScores && finalScore) {
       return this.renderScoresView();
