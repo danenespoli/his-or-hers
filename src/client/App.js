@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useRecoilValue } from 'recoil';
 import './app.css';
 
 import Home from './Home';
@@ -23,20 +23,6 @@ if (process.env.NODE_ENV === 'production') {
   socket = io('localhost:8081');
 }
 
-const initialAppState = {
-  joined: false,
-  question: null,
-  questionNum: 1,
-  questionTotal: 1,
-  answer: null,
-  guess: null,
-  time: 30,
-  score: 0,
-  topScores: null,
-  finalScore: null,
-  theme: 4,
-};
-
 /*
  * This variable controls whether the home page should display the name input
  * and Join button (if false), or a message to come check back later to play
@@ -46,11 +32,6 @@ const USE_HOME_PLACEHOLDER = false;
 
 
 export default class App extends Component {
-  state = {
-    ...initialAppState,
-    name: null,
-  };
-
   constructor() {
     super();
 
@@ -136,21 +117,19 @@ export default class App extends Component {
   }
 
   render() {
-    const {
-      joined,
-      name,
-      question,
-      questionNum,
-      questionTotal,
-      answer,
-      guess,
-      time,
-      ended,
-      score,
-      topScores,
-      finalScore,
-      theme,
-    } = this.state;
+    const joined = useRecoilValue(joined);
+    const name = useRecoilValue(name);
+    const question = useRecoilValue(question);
+    const questionNum = useRecoilValue(questionNum);
+    const questionTotal = useRecoilValue(questionTotal);
+    const answer = useRecoilValue(answer);
+    const guess = useRecoilValue(guess);
+    const time = useRecoilValue(time);
+    const ended = useRecoilValue(ended);
+    const score = useRecoilValue(score);
+    const topScores = useRecoilValue(topScores);
+    const finalScore = useRecoilValue(finalScore);
+    const theme = useRecoilValue(theme);
 
     const homeComponent = USE_HOME_PLACEHOLDER ? (
       <HomePlaceholder />
