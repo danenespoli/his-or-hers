@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Spinner } from 'evergreen-ui';
+import { useRecoilValue } from 'recoil';
 import Timer from './Timer';
 import Scoreboard from './Scoreboard';
+import gameState from './GameState';
 import './game.css';
 
 const NUM_BACKGROUNDS = 6;
 
 class Game extends Component {
   submitGuess(guess) {
-    const { makeGuess, name } = this.props;
+    const { makeGuess } = this.props;
+    const { name } = useRecoilValue(gameState);
     makeGuess(guess, name);
   }
 
@@ -58,7 +61,7 @@ class Game extends Component {
   // }
 
   renderWaitingToStart() {
-    const { theme } = this.props;
+    const { theme } = useRecoilValue(gameState);
 
     return (
       <div className={`game-background theme-bg-${theme}`}>
@@ -83,7 +86,7 @@ class Game extends Component {
       questionNum,
       questionTotal,
       theme,
-    } = this.props;
+    } = useRecoilValue(gameState);
 
 
     const [hisButtonClasses, hersButtonClasses] = this._getGuessButtonClasses(guess, answer);
@@ -127,7 +130,7 @@ class Game extends Component {
       topScores,
       finalScore,
       theme
-    } = this.props;
+    } = useRecoilValue(gameState);
 
     return (
       <div className={`game-background theme-bg-${theme}`}>
@@ -206,7 +209,7 @@ class Game extends Component {
       answer,
       topScores,
       finalScore,
-    } = this.props;
+    } = useRecoilValue(gameState);
 
     if (topScores && finalScore) {
       return this.renderScoresView();
