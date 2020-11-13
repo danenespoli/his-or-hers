@@ -140,19 +140,7 @@ export default class App extends Component {
       <Router>
         <Switch>
           <Route path="/dashboard">
-            <Dashboard
-              question={question}
-              answer={answer}
-              time={time}
-              rawState={{
-                question,
-                questionNum,
-                questionTotal,
-                answer,
-                time,
-                scoresShowing: (topScores || finalScore) ? 'Yes!' : 'No',
-              }}
-            />
+            <Dashboard />
           </Route>
           <Route path="/game">
             <RecoilRoot>

@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 import './dashboard.css';
 import { useRecoilValue } from 'recoil';
-import { scoresShowingSelector } from './GameState';
+import { gameState, scoresShowingSelector } from './GameState';
 
 export default class Dashboard extends Component {
   state = {
@@ -256,7 +256,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { question } = this.props;
+    const { question } = useRecoilValue(gameState);
 
     // If the game has started, show End Game options.
     if (question !== null) {
