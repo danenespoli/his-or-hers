@@ -145,19 +145,6 @@ export default class App extends Component {
           <Route path="/game">
             <RecoilRoot>
               <Game
-                joined={joined}
-                name={name}
-                question={question}
-                answer={answer}
-                guess={guess}
-                time={time}
-                ended={ended}
-                score={score}
-                theme={theme}
-                questionNum={questionNum}
-                questionTotal={questionTotal}
-                topScores={topScores}
-                finalScore={finalScore}
                 makeGuess={(g, n) => this.makeGuess(g, n)}
               />
             </RecoilRoot>
