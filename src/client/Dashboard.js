@@ -13,263 +13,217 @@ import './dashboard.css';
 import { useRecoilValue } from 'recoil';
 import { gameState, scoresShowingSelector } from './GameState';
 
-export default class Dashboard extends Component {
-  state = {
-    editQuestionMode: false,
-    questionData: null,
-    modified: false,
-  }
+export default function Dashboard() {
+  const [editQuestionMode, setEditQuestionMode] = useState(false);
+  const [questionData, setQuestionData] = useState(null);
+  const [modified, setModified] = useState(false);
 
-  componentDidMount() {
+  // TODO: needs to only happen on componentDidMount?
+  useEffect(() => {
     this.fetchQuestionData();
-  }
+  });
 
-  startGame() {
-    axios.post('/api/startGame');
-  }
+  render() {
+    const gameState = useRecoilValue(gameState);
+    const scoresShowing = useRecoilValue(scoresShowingSelector);
 
-  nextQuestion() {
-    axios.post('/api/nextQuestion');
-  }
+    const {question} = gameState;
 
-  endGame() {
-    axios.post('/api/endGame');
-  }
-
-  editQuestion(index, question, answer) {
-    const { questionData } = this.state;
-
-    questionData[index] = {
-      question,
-      answer,
-    };
-
-    this.setState({
-      questionData,
-      modified: true,
-    });
-  }
-
-  removeQuestion(index) {
-    const { questionData } = this.state;
-
-    questionData.splice(index, 1);
-
-    this.setState({
-      questionData,
-      modified: true,
-    });
-  }
-
-  addQuestion() {
-    const { questionData } = this.state;
-
-    questionData.push({
-      question: '',
-      answer: 'his',
-    });
-
-    this.setState({
-      questionData,
-      modified: true,
-    });
-  }
-
-  _swap(arr, i, j) {
-    const temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-  }
-
-  moveQuestionUp(index) {
-    const { questionData } = this.state;
-
-    if (index === 0) {
-      return;
+    // If the game has started, show End Game options.
+    if (question !== null) {
+      return <DashboardDuringGame
+        rawState={{...gameState, scoresShowing}}
+      />;
     }
 
-    this._swap(questionData, index, index - 1);
-
-    this.setState({
-      questionData,
-      modified: true,
-    });
-  }
-
-  moveQuestionDown(index) {
-    const { questionData } = this.state;
-
-    if (index === questionData.length - 1) {
-      return;
+    // Before the game starts.
+    if (editQuestionMode) {
+      return <DashboardEditQuestions
+        questionData={questionData}
+        modified={modified}
+        setEditQuestionMode={setEditQuestionMode}
+      />;
     }
 
-    this._swap(questionData, index, index + 1);
-
-    this.setState({
-      questionData,
-      modified: true,
-    });
-  }
-
-  saveQuestions() {
-    const { questionData } = this.state;
-    console.log('Saving questions...');
-    axios.post('/api/questionData', questionData).then(() => {
-      console.log('Saved.');
-      this.setState({
-        modified: false,
-      });
-    });
-  }
-
-  fetchQuestionData() {
-    console.log('Fetching question data...');
-    axios.get('/api/questionData').then(({ data: questionData }) => {
-      this.setState({
-        questionData,
-        modified: false,
-      });
-    });
-  }
-
-  enterEditQuestionMode() {
-    this.setState({
-      editQuestionMode: true,
-    });
-  }
-
-  renderDefaultControls() {
     return (
       <div className="dash-background">
         <div className="dash-element">
-          <Button className="dash-element" onClick={() => this.startGame()}>
+          <Button className="dash-element" onClick={() => axios.post('/api/startGame')}>
             Start Game!
           </Button>
-          <Button className="dash-element" onClick={() => this.enterEditQuestionMode()}>
+          <Button className="dash-element" onClick={() => setEditQuestionMode(true)}>
             Edit Questions
           </Button>
         </div>
       </div>
     );
   }
+}
 
-  renderEditQuestionMode() {
-    const { questionData, modified } = this.state;
+function arraySwap(arr, i, j) {
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
 
-    let questionRows;
-    if (!questionData) {
-      questionRows = (
-        <div>
-          Loading questions...
-        </div>
-      );
-    } else {
-      questionRows = questionData.map((q, index) => (
-        <div>
-          <TextInput
-            value={q.question}
-            onChange={e => this.editQuestion(index, e.target.value, q.answer)}
-          />
-          <Select
-            value={q.answer}
-            onChange={e => this.editQuestion(index, q.question, e.target.value)}
-          >
-            <option value="his">Dustin</option>
-            <option value="hers">Steph</option>
-          </Select>
-          <Button onClick={() => this.removeQuestion(index)}>
-            Remove
-          </Button>
-          <IconButton
-            style={{ display: 'inline-block' }}
-            icon={ArrowUpIcon}
-            onClick={() => this.moveQuestionUp(index)}
-            disabled={index === 0}
-          />
-          <IconButton
-            style={{ display: 'inline-block' }}
-            icon={ArrowDownIcon}
-            onClick={() => this.moveQuestionDown(index)}
-            disabled={index === questionData.length - 1}
-          />
-        </div>
-      ));
-    }
 
-    return (
-      <div className="dash-background">
-        <Button onClick={() => this.setState({ editQuestionMode: false })}>
-          Back
+function DashboardEditQuestions(props) {
+  const { questionData, modified, setEditQuestionMode } = this.props;
+
+  function editQuestion(index, question, answer) {
+    questionData[index] = {
+      question,
+      answer,
+    };
+
+    setQuestionData(questionData);
+    setModified(true);
+  }
+
+  function removeQuestion(index) {
+    questionData.splice(index, 1);
+
+    setQuestionData(questionData);
+    setModified(true);
+  }
+
+  function addQuestion() {
+    questionData.push({
+      question: '',
+      answer: 'his',
+    });
+
+    setQuestionData(questionData);
+    setModified(true);
+  }
+
+  function moveQuestionUp(index) {
+    if (index === 0) return;
+    arraySwap(questionData, index, index - 1);
+
+    setQuestionData(questionData);
+    setModified(true);
+  }
+
+  function moveQuestionDown(index) {
+    if (index === questionData.length - 1) return;
+    arraySwap(questionData, index, index + 1);
+
+    setQuestionData(questionData);
+    setModified(true);
+  }
+
+  function saveQuestions() {
+    console.log('Saving questions...');
+    axios.post('/api/questionData', questionData).then(() => {
+      console.log('Saved.');
+      setModified(false);
+    });
+  }
+
+  function fetchQuestionData() {
+    console.log('Fetching question data...');
+    axios.get('/api/questionData').then(({ data: questionData }) => {
+      setQuestionData(questionData);
+      setModified(false);
+    });
+  }
+
+  let questionRows;
+  if (!questionData) {
+    questionRows = (
+      <div>
+        Loading questions...
+      </div>
+    );
+  } else {
+    questionRows = questionData.map((q, index) => (
+      <div>
+        <TextInput
+          value={q.question}
+          onChange={e => editQuestion(index, e.target.value, q.answer)}
+        />
+        <Select
+          value={q.answer}
+          onChange={e => editQuestion(index, q.question, e.target.value)}
+        >
+          <option value="his">Dustin</option>
+          <option value="hers">Steph</option>
+        </Select>
+        <Button onClick={() => removeQuestion(index)}>
+          Remove
         </Button>
-        <div>
-          {questionRows}
-        </div>
-        <div>
-          <Button onClick={() => this.addQuestion()}>
-            Add question
-          </Button>
-        </div>
-        <div className="dash-element">
-          {modified && (
-            <>
-              <Button onClick={() => this.fetchQuestionData()}>
-                Cancel
-              </Button>
-              <Button onClick={() => this.saveQuestions()}>
-                Save
-              </Button>
-            </>
-          )}
-        </div>
+        <IconButton
+          style={{ display: 'inline-block' }}
+          icon={ArrowUpIcon}
+          onClick={() => moveQuestionUp(index)}
+          disabled={index === 0}
+        />
+        <IconButton
+          style={{ display: 'inline-block' }}
+          icon={ArrowDownIcon}
+          onClick={() => moveQuestionDown(index)}
+          disabled={index === questionData.length - 1}
+        />
       </div>
-    );
-  }
-
-  renderDuringGame() {
-    const gameState = useRecoilValue(gameState);
-    const scoresShowing = useRecoilValue(scoresShowingSelector);
-
-    const rawState = { ...gameState, scoresShowing };
-    const stateInfo = Object.entries(rawState).map(([key, value]) => (
-      <tr>
-        <td className="dash-table-key">{key}:</td>
-        <td className="dash-table-value">{value}</td>
-      </tr>
     ));
-    return (
-      <div className="dash-background">
-        <div className="dash-element">
-          <Button onClick={() => this.endGame()}>
-            End Game
-          </Button>
-          <Button onClick={() => this.nextQuestion()}>
-            Next Question
-          </Button>
-        </div>
-        <div className="dash-element">
-          <table className="dash-table">
-            {stateInfo}
-          </table>
-        </div>
+  }
+
+  return (
+    <div className="dash-background">
+      <Button onClick={() => setEditQuestionMode(false)}>
+        Back
+      </Button>
+      <div>
+        {questionRows}
       </div>
-    );
-  }
+      <div>
+        <Button onClick={() => addQuestion()}>
+          Add question
+        </Button>
+      </div>
+      <div className="dash-element">
+        {modified && (
+          <>
+            <Button onClick={() => fetchQuestionData()}>
+              Cancel
+            </Button>
+            <Button onClick={() => saveQuestions()}>
+              Save
+            </Button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
 
-  render() {
-    const { question } = useRecoilValue(gameState);
 
-    // If the game has started, show End Game options.
-    if (question !== null) {
-      return this.renderDuringGame();
-    }
+function DashboardDuringGame(props) {
+  const {rawState} = props;
 
-    const { editQuestionMode } = this.state;
+  const stateInfo = Object.entries(rawState).map(([key, value]) => (
+    <tr>
+      <td className="dash-table-key">{key}:</td>
+      <td className="dash-table-value">{value}</td>
+    </tr>
+  ));
 
-    // Before the game starts.
-    if (editQuestionMode) {
-      return this.renderEditQuestionMode();
-    }
-
-    return this.renderDefaultControls();
-  }
+  return (
+    <div className="dash-background">
+      <div className="dash-element">
+        <Button onClick={() => axios.post('/api/endGame')}>
+          End Game
+        </Button>
+        <Button onClick={() => axios.post('/api/nextQuestion')}>
+          Next Question
+        </Button>
+      </div>
+      <div className="dash-element">
+        <table className="dash-table">
+          {stateInfo}
+        </table>
+      </div>
+    </div>
+  );
 }
